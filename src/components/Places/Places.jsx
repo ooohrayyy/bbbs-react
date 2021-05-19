@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Filter from '../Filter/Filter.jsx';
-import Place from '../Place/Place.jsx';
-import Rubric from '../Rubric/Rubric.jsx';
+import Filter from '../Filter/Filter';
+import Place from '../Place/Place';
+import Rubric from '../Rubric/Rubric';
 
 function Places() {
   // Заготовка для карточек мест
@@ -37,17 +37,17 @@ function Places() {
   ];
 
   return (
-    <main class="main">
-      <section class="lead page__section">
-        <h1 class="main-title">Куда пойти</h1>
+    <main className="main">
+      <section className="lead page__section">
+        <h1 className="main-title">Куда пойти</h1>
         <Filter />
       </section>
 
-      <section class="main-card page__section">
+      <section className="main-card page__section">
         <Rubric />
       </section>
 
-      <section class="cards-grid page__section">
+      <section className="cards-grid page__section">
         {initialCard.map((item, i) => (
           <Place item={item} id={i} />
         ))}

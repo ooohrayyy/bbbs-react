@@ -26,7 +26,7 @@ function Video() {
             src={videoImg}
             alt="Превью видео"
             className="video__img video__img_position_main-video"
-          ></img>
+          />
         </a>
       </div>
     </article>

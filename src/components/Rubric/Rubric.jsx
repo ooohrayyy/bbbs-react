@@ -21,11 +21,7 @@ function Rubric() {
           href="./place.html"
           className="card__link-wrap card__link-wrap_content_article-img"
         >
-          <img
-            src={rubricImg}
-            alt="Сплав на байдарках"
-            className="card__img"
-          ></img>
+          <img src={rubricImg} alt="Сплав на байдарках" className="card__img" />
         </a>
         <a href="#" className="link card__link">
           перейти на сайт

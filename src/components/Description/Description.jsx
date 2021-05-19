@@ -4,18 +4,18 @@ import stubLogo from '../../images/svg/calendar_logo.svg';
 
 function Description() {
   return (
-    <article class="card card_color_green stub">
-      <div class="stub__upper-element">
+    <article className="card card_color_green stub">
+      <div className="stub__upper-element">
         <a href="./index.html">
           <img
             src={stubLogo}
             alt="Логотип Старшие Братья Старшие Сестры России"
-            class="stub__logo"
-          ></img>
+            className="stub__logo"
+          />
         </a>
       </div>
-      <div class="stub__content">
-        <h2 class="section-title stub__text">
+      <div className="stub__content">
+        <h2 className="section-title stub__text">
           Наставники.про – цифоровая информационная платформа огрганизации
           «Старшие Братья Старшие Сестры». Созданная для поддержки наставников
           программы.
