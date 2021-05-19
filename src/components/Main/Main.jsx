@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import mock from '../../utils/mock';
+import api from '../../utils/api';
 
 import Description from '../Description/Description';
 import Quote from '../Quote/Quote';
@@ -10,17 +12,32 @@ import Question from '../Question/Question';
 import Facebook from '../Facebook/Facebook';
 
 function Main() {
+  const [answer, setAnswer] = useState({});
+  function isMockEnabled() {
+    return process.env.REACT_APP_MOCK_ENABLED === 'true';
+  }
+
+  useEffect(() => {
+    if (isMockEnabled()) {
+      mock.initializeAxiosMockAdapter(api.instance);
+    }
+    api
+      .getMain()
+      .then((res) => setAnswer(res.data))
+      .catch((err) => console.log(err.message));
+  }, []);
+
   return (
     <main className="main">
       <section className="lead page__section">
         <article className="card-container card-container_type_identical">
           <Description />
-          <Stories />
+          <Stories history={answer.history} />
         </article>
       </section>
 
       <section className="main-section page__section">
-        <Rubric />
+        <Rubric place={answer.place} />
       </section>
 
       <section className="main-section page__section">

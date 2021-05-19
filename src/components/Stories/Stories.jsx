@@ -1,17 +1,16 @@
 import React from 'react';
 
-import storImg from '../../images/stories/DG7B0561(1).jpg';
-
-function Stories() {
+function Stories({ history }) {
+  console.log(history);
   return (
     <article className="card card_content_media">
       <img
-        src={storImg}
-        alt="История Марины и Алины"
+        src={history.imageUrl}
+        alt={history.title}
         className="card__media-img"
       />
       <a href="./stories.html" className="card__media-link section-title">
-        История Марины и Алины
+        {history.title}
       </a>
     </article>
   );
