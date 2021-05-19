@@ -6,7 +6,6 @@ import Video from '../Video/Video.jsx';
 import Film from '../Film/Film.jsx';
 import Question from '../Question/Question.jsx';
 import Facebook from '../Facebook/Facebook.jsx';
-import Article from '../Article/Article.jsx';
 
 function Main() {
   return (
@@ -23,7 +22,12 @@ function Main() {
       </section>
 
       <section className="main-section page__section">
-        <Quote />
+        <Quote
+          content="Развитие детей-сирот отличается от развития детей, живущих в семьях.
+          Все этапы развития у детей-сирот проходят с искажениями и имеют ряд
+          негативных особенностей."
+          colorStyle="card_color_blue"
+        />
       </section>
 
       <section className="main-section page__section cards-grid cards-grid_content_small-cards">
@@ -49,7 +53,12 @@ function Main() {
       </section>
 
       <section className="main-section page__section">
-        <Article />
+        <Quote
+          content="У таких детей возникает ощущение отверженности. Оно приводит к
+          напряженности и недоверию к людям и, как итог, к реальному неприятию
+          себя и окружающих."
+          colorStyle="card_color_green"
+        />
       </section>
     </main>
   );

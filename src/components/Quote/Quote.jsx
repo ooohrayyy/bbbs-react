@@ -1,11 +1,11 @@
-function Quote() {
+function Quote(props) {
+  const className = `card ${props.colorStyle} card_content_quote`;
+
   return (
-    <article className="card card_color_blue card_content_quote">
+    <article className={className}>
       <a href="./articles.html" className="card__link-wrap">
         <h3 className="chapter-title card__quote">
-          Развитие детей-сирот отличается от развития детей, живущих в семьях.
-          Все этапы развития у детей-сирот проходят с искажениями и имеют ряд
-          негативных особенностей.
+          {props.content}
         </h3>
       </a>
       <a href="./articles.html" className="link card__link">
