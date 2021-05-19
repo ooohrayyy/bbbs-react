@@ -7,7 +7,7 @@ function Film() {
     <article className="card card_content_video card-pagination_page_main">
       <div className="video">
         <a href="./films.html" className="card__link-wrap">
-          <img src={filmImg} alt="Превью видео" className="video__img"></img>
+          <img src={filmImg} alt="Превью видео" className="video__img" />
           <ul className="video__rubric-list">
             <li>
               <p className="rubric video__rubric">рубрика</p>

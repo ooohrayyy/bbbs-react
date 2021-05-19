@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FilterTag from '../FilterTag/FilterTag.jsx';
+import FilterTag from '../FilterTag/FilterTag';
 
 function Filter() {
   const initialItem = [
@@ -47,21 +47,17 @@ function Filter() {
   ];
 
   return (
-    <div class="tags">
-      <ul class="tags__list">
+    <div className="tags">
+      <ul className="tags__list">
         {initialItem.map((item, i) => (
-          <FilterTag
-            tagName={item.name}
-            tagActive={item.active}
-            id={i}
-          ></FilterTag>
+          <FilterTag tagName={item.name} tagActive={item.active} id={i} />
         ))}
         <li className="tags__list-item">
           <button className="button tags__button" type="button">
             Выбор наставников
           </button>
         </li>
-        <li class="tags__list-item">
+        <li className="tags__list-item">
           <button className="button tags__button" type="button">
             Музеи
           </button>

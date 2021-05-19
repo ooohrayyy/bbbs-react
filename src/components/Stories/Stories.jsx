@@ -9,7 +9,7 @@ function Stories() {
         src={storImg}
         alt="История Марины и Алины"
         className="card__media-img"
-      ></img>
+      />
       <a href="./stories.html" className="card__media-link section-title">
         История Марины и Алины
       </a>
