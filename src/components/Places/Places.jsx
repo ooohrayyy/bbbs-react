@@ -1,4 +1,3 @@
-import React from 'react';
 import Filter from '../Filter/Filter.jsx';
 import Place from '../Place/Place.jsx';
 import Rubric from '../Rubric/Rubric.jsx';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Quote() {
   return (
     <article className="card card_color_blue card_content_quote">

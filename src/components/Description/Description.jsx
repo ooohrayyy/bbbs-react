@@ -1,4 +1,3 @@
-import React from 'react';
 import stubLogo from '../../images/svg/calendar_logo.svg';
 
 function Description() {

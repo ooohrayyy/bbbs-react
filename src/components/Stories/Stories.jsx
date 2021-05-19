@@ -1,4 +1,3 @@
-import React from 'react';
 import storImg from '../../images/stories/DG7B0561(1).jpg';
 
 function Stories() {

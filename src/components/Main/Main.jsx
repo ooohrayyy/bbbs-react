@@ -1,4 +1,3 @@
-import React from 'react';
 import Description from '../Description/Description.jsx';
 import Quote from '../Quote/Quote.jsx';
 import Rubric from '../Rubric/Rubric.jsx';

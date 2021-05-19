@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Question() {
   return (
     <article className="question main-questions__item">

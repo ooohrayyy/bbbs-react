@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Article() {
   return (
     <article className="card card_color_green card_content_quote">

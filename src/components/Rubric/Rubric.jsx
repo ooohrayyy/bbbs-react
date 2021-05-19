@@ -1,4 +1,3 @@
-import React from 'react';
 import rubricImg from '../../images/where-to-go/img-xl.jpg';
 
 function Rubric() {

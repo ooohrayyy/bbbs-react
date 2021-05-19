@@ -1,4 +1,3 @@
-import React from 'react';
 import videoImg from '../../images/video/video-main.jpg';
 
 function Video() {
