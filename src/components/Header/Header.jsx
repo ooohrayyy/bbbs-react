@@ -1,76 +1,73 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
     <header className="header page__section">
       <nav className="menu">
-        <a className="menu__logo" href="./index.html" target="_self">
+        <NavLink className="menu__logo" to="/">
           наставники.про
-        </a>
+        </NavLink>
         <div className="menu__lists-wrap menu__lists-wrap_hidden">
           <ul className="menu__list">
             <li className="menu__list-item">
-              <a className="menu__link" href="./calendar.html">
+              <NavLink className="menu__link" to="/">
                 Календарь
-              </a>
+              </NavLink>
             </li>
             <li className="menu__list-item">
-              <a className="menu__link" href="./place.html">
+              <NavLink className="menu__link" to="/">
                 Куда пойти
-              </a>
+              </NavLink>
             </li>
             <li className="menu__list-item">
-              <a className="menu__link" href="./questions.html">
+              <NavLink className="menu__link" to="/">
                 Вопросы
-              </a>
+              </NavLink>
             </li>
             <li className="menu__list-item menu__dropdown-item">
-              <a className="menu__link" href="./read-watch-main.html">
+              <NavLink className="menu__link" to="/">
                 Читать и смотреть
-              </a>
+              </NavLink>
               <ul className="menu__dropdown-list">
                 <li className="menu__dropdown-list-item">
-                  <a className="link menu__dropdown-link" href="./catalog.html">
+                  <NavLink className="link menu__dropdown-link" to="/">
                     Справочник
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <a className="link menu__dropdown-link" href="./video.html">
+                  <NavLink className="link menu__dropdown-link" to="/">
                     Видео
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <a
-                    className="link menu__dropdown-link"
-                    href="./articles.html"
-                  >
+                  <NavLink className="link menu__dropdown-link" to="/">
                     Статьи
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <a className="link menu__dropdown-link" href="./films.html">
+                  <NavLink className="link menu__dropdown-link" to="/">
                     Фильмы
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="menu__dropdown-list-item">
-                  <a className="link menu__dropdown-link" href="./books.html">
+                  <NavLink className="link menu__dropdown-link" to="/">
                     Книги
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>
             <li className="menu__list-item">
-              <a className="menu__link" href="./rights.html">
+              <NavLink className="menu__link" to="/">
                 Права детей
-              </a>
+              </NavLink>
             </li>
             <li className="menu__list-item">
-              <a className="menu__link" href="./stories.html">
+              <NavLink className="menu__link" to="/">
                 Истории
-              </a>
+              </NavLink>
             </li>
           </ul>
-
           <ul className="menu__list menu__list_type_social menu__list_hidden">
             <li className="menu__list-item">
               <a
@@ -114,13 +111,11 @@ function Header() {
             </li>
           </ul>
         </div>
-
         <button className="menu__burger" type="button">
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
         </button>
-
         <ul className="menu__button-list">
           <li className="menu__button-item">
             <form className="search" name="search-form">
@@ -139,49 +134,49 @@ function Header() {
                 />
                 <ul className="search__option-list">
                   <li className="search__option-item">
-                    <a
+                    <NavLink
                       className="search__title-link section-title section-title_clickable"
-                      href="./article.html"
+                      to="/"
                     >
                       Причины подростковой агрессии
-                    </a>
-                    <a className="link search__link" href="./article.html">
+                    </NavLink>
+                    <a className="link search__link" to="/">
                       статьи
                     </a>
                   </li>
                   <li className="search__option-item">
-                    <a
+                    <NavLink
                       className="search__title-link section-title section-title_clickable"
-                      href="./video.html"
+                      to="/"
                     >
                       Агрессивное поведение детей-сирот
-                    </a>
-                    <a className="link search__link" href="./video.html">
+                    </NavLink>
+                    <NavLink className="link search__link" to="/">
                       видео
-                    </a>
+                    </NavLink>
                   </li>
                   <li className="search__option-item">
-                    <a
+                    <NavLink
                       className="search__title-link section-title section-title_clickable"
-                      href="./questions.html"
+                      to="/"
                     >
                       Что делать если ваш младший агрессивно себя ведет, решил
                       закрыть пару?
-                    </a>
-                    <a className="link search__link" href="./questions.html">
+                    </NavLink>
+                    <NavLink className="link search__link" to="/">
                       вопросы
-                    </a>
+                    </NavLink>
                   </li>
                   <li className="search__option-item">
-                    <a
+                    <NavLink
                       className="search__title-link section-title section-title_clickable"
-                      href="./books.html"
+                      to="/"
                     >
                       Как реагировать на агрессивное поведения ребенка
-                    </a>
-                    <a className="link search__link" href="./books.html">
+                    </NavLink>
+                    <NavLink className="link search__link" to="/">
                       книги
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
