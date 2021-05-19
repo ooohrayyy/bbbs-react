@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterTag from '../FilterTag/FilterTag';
+import FilterTag from '../FilterTag/FilterTag.jsx';
 
 function Filter() {
   const initialItem = [

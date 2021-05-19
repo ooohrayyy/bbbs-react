@@ -1,13 +1,13 @@
 import React from 'react';
-import Description from '../Description/Description';
-import Quote from '../Quote/Quote';
-import Rubric from '../Rubric/Rubric';
-import Stories from '../Stories/Stories';
-import Video from '../Video/Video';
-import Film from '../Film/Film';
-import Question from '../Question/Question';
-import Facebook from '../Facebook/Facebook';
-import Article from '../Article/Article';
+import Description from '../Description/Description.jsx';
+import Quote from '../Quote/Quote.jsx';
+import Rubric from '../Rubric/Rubric.jsx';
+import Stories from '../Stories/Stories.jsx';
+import Video from '../Video/Video.jsx';
+import Film from '../Film/Film.jsx';
+import Question from '../Question/Question.jsx';
+import Facebook from '../Facebook/Facebook.jsx';
+import Article from '../Article/Article.jsx';
 
 function Main() {
   return (
