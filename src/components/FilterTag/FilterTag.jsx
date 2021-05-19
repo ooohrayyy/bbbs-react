@@ -1,8 +1,8 @@
 import React from 'react';
 
-function FilterTag({ tagName, tagActiv, id }) {
+function FilterTag({ tagName, tagActive, id }) {
   let classButton = '';
-  if (tagActiv) {
+  if (tagActive) {
     classButton = 'button tags__button tags__button_active';
   } else {
     classButton = 'button tags__button';

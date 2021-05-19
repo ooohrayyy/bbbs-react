@@ -5,43 +5,43 @@ function Filter() {
   const initialItem = [
     {
       name: 'Все',
-      activ: true,
+      active: true,
     },
     {
       name: 'Выбор наставников',
-      activ: false,
+      active: false,
     },
     {
       name: 'Музеи',
-      activ: false,
+      active: false,
     },
     {
       name: 'Парки',
-      activ: false,
+      active: false,
     },
     {
       name: 'Театры',
-      activ: false,
+      active: false,
     },
     {
       name: 'Спорт',
-      activ: false,
+      active: false,
     },
     {
       name: 'Экскурсии',
-      activ: false,
+      active: false,
     },
     {
       name: 'Секции',
-      activ: false,
+      active: false,
     },
     {
       name: '8-10 лет',
-      activ: false,
+      active: false,
     },
     {
       name: '11-13 лет',
-      activ: false,
+      active: false,
     },
   ];
 
@@ -51,7 +51,7 @@ function Filter() {
         {initialItem.map((item, i) => (
           <FilterTag
             tagName={item.name}
-            tagActiv={item.activ}
+            tagActive={item.active}
             id={i}
           ></FilterTag>
         ))}
