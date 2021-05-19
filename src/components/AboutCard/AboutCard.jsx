@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function AboutCard(props) {
-  const {
-    title, text, path, link,
-  } = props;
+  const { title, text, path, link } = props;
 
   return (
     <article className="card-container about__card-container">

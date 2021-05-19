@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../images/svg/calendar_logo.svg';
 
-import AboutCard from '../AboutCard/AboutCard.jsx';
+import AboutCard from '../AboutCard/AboutCard';
 
 function AboutUs() {
   return (
