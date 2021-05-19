@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Quote(props) {
   const className = `card ${props.colorStyle} card_content_quote`;
 

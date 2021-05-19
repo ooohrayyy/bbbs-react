@@ -1,3 +1,5 @@
+import React from 'react';
+
 import filmImg from '../../images/video/video-prev.png';
 
 function Film() {

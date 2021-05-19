@@ -1,3 +1,5 @@
+import React from 'react';
+
 function FilterTag({ tagName, tagActive, id }) {
   let classButton = '';
   if (tagActive) {

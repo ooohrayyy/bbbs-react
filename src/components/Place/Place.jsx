@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Place({ item, id }) {
   return (
     <article class="card-container card-container_type_article" id={id}>

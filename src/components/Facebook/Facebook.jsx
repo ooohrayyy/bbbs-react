@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Facebook() {
   return (
     <div className="card card_color_blue card_content_media">
