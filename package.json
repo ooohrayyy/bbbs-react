@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.1",
+    "axios-mock-adapter": "^1.19.0",
     "eslint": "^7.26.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
