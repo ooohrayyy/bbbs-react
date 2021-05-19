@@ -11,10 +11,7 @@
   justify-content: center;
   align-items: center;
   list-style-type: none;
-
-  &_type_long {
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
 }
 
 .tags__list-item {
