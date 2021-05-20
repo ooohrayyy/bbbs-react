@@ -10,15 +10,20 @@ import Video from '../Video/Video';
 import Film from '../Film/Film';
 import Question from '../Question/Question';
 import Facebook from '../Facebook/Facebook';
+import Preloader from '../Preloader/Preloader';
 
 function Main() {
   const [answer, setAnswer] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   mock.initializeAxiosMockAdapter(api.instance);
 
   useEffect(() => {
     api
       .getMain()
-      .then((res) => setAnswer(res.data))
+      .then((res) => {
+        setAnswer(res.data);
+        setIsLoading(false);
+      })
       .catch((err) => console.log(err.message));
   }, []);
 
@@ -27,26 +32,28 @@ function Main() {
       <section className="lead page__section">
         <article className="card-container card-container_type_identical">
           <Description />
-          <Stories history={answer.history} />
+          {!isLoading ? <Preloader /> : <Stories history={answer.history} />}
         </article>
       </section>
 
       <section className="main-section page__section">
-        <Rubric place={answer.place} />
+        {isLoading ? <Preloader /> : <Rubric place={answer.place} />}
       </section>
 
       <section className="main-section page__section">
-        <Quote article={answer.articles[0]} />
+        {isLoading ? <Preloader /> : <Quote article={answer.articles[0]} />}
       </section>
 
       <section className="main-section page__section cards-grid cards-grid_content_small-cards">
-        {answer.movies.map((item) => (
-          <Film item={item} />
-        ))}
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          answer.movies.map((item) => <Film item={item} />)
+        )}
       </section>
 
       <section className="main-section page__section">
-        <Video video={answer.video} />
+        {isLoading ? <Preloader /> : <Video video={answer.video} />}
       </section>
 
       <section className="main-section page__section">
@@ -61,7 +68,7 @@ function Main() {
       </section>
 
       <section className="main-section page__section">
-        <Quote article={answer.articles[1]} />
+        {isLoading ? <Preloader /> : <Quote article={answer.articles[1]} />}
       </section>
     </main>
   );
