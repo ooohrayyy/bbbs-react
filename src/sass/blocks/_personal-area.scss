@@ -12,9 +12,14 @@
   text-decoration: none;
   color: $lightGray;
   margin-left: 30px;
+  background: none;
+  border: none;
 
-  &:first-of-type {
+  &:first-child {
     margin-left: 0;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
 
