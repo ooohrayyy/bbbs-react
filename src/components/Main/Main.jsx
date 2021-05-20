@@ -52,7 +52,7 @@ function Main() {
       </section>
 
       <section className="main-section page__section">
-        <Video />
+        <Video video={answer.video} />
       </section>
 
       <section className="main-section page__section">
