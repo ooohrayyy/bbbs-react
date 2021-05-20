@@ -3,7 +3,7 @@ import CalendarEvent from '../CalendarEvent/CalendarEvent';
 import mock from '../../utils/mock';
 import api from '../../utils/api';
 
-export default function Calendar() {
+function Calendar() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -24,3 +24,5 @@ export default function Calendar() {
     </section>
   );
 }
+
+export default Calendar;

@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import parsedDate from '../../utils/calendarUtils';
 
-export default function CalendarEvent({ event }) {
+function CalendarEvent({ event }) {
   const { address, contact, title, startAt, endAt, booked, seats, takenSeats } =
     event;
 
@@ -71,3 +72,17 @@ export default function CalendarEvent({ event }) {
     </article>
   );
 }
+
+CalendarEvent.propTypes = {
+  event: PropTypes.shape({
+    address: PropTypes.string,
+    contact: PropTypes.string,
+    title: PropTypes.string,
+    startAt: PropTypes.string,
+    booked: PropTypes.bool,
+    seats: PropTypes.number,
+    takenSeats: PropTypes.number,
+  }),
+};
+
+export default CalendarEvent;
