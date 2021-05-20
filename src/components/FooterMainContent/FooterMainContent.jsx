@@ -20,7 +20,7 @@ function FooterMainContent() {
         <p className="footer__brand">&copy; Старшие Братья Старшие Сёстры</p>
         <div className="footer__copyright">
           <p className="footer__authors">
-            Разработка – студенты
+            Разработка – студенты&nbsp;
             <a
               className="footer__production"
               href="https://praktikum.yandex.ru/"
@@ -31,7 +31,7 @@ function FooterMainContent() {
             </a>
           </p>
           <p className="footer__design">
-            Концепция и дизайн –
+            Концепция и дизайн –&nbsp;
             <a
               className="footer__production"
               href="https://krkr.design/"
