@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import HeaderLinks from '../HeaderLinks/HeaderLinks';
+import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from '../HeaderButtons/HeaderButtons';
 
 function Header() {
@@ -53,15 +54,10 @@ function Header() {
           menuListsWrapClass={menuListsWrapClass}
           menuListSocialClass={menuListSocialClass}
         />
-        <button
-          className={burgerMenuClass}
-          type="button"
-          onClick={toggleBurgerMenu}
-        >
-          <span className="menu__burger-line" />
-          <span className="menu__burger-line" />
-          <span className="menu__burger-line" />
-        </button>
+        <HeaderBurgerMenu
+          burgerMenuClass={burgerMenuClass}
+          toggleBurgerMenu={toggleBurgerMenu}
+        />
         <HeaderButtons
           toggleSearchMenu={toggleSearchMenu}
           searchOptionsClass={searchOptionsClass}
