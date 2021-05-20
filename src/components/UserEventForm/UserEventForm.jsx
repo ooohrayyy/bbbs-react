@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import mock from '../../utils/mock';
+import api from '../../utils/api';
 // import PropTypes from 'prop-types';
 
 function UserEventForm() {
-  const [place, setPlace] = React.useState('');
-  const [date, setDate] = React.useState('');
-  const [story, setStory] = React.useState('');
+  mock.initializeAxiosMockAdapter(api.instance);
+
+  const [place, setPlace] = useState('');
+  const [date, setDate] = useState('');
+  const [story, setStory] = useState('');
+  const [file, setFile] = useState('');
+  // const [photo, setPhoto] = useState(null);
 
   function handlePlaceChange(e) {
     setPlace(e.target.value);
@@ -18,10 +24,38 @@ function UserEventForm() {
     setStory(e.target.value);
   }
 
+  function handleFileChange(e) {
+    setFile(e.target.files[0]);
+  }
+
+  function onFileUpload() {
+    const formData = new FormData();
+    formData.append('userPhoto', file, file.name);
+    // console.log(file);
+
+    api
+      .addPhoto(formData)
+      .then((res) => {
+        // setPhoto(res.config.data.get('userPhoto'));
+        console.log(res.config.data.get('userPhoto'));
+      })
+      .catch((err) => console.log(err.message));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
     <article className="card-container card-container_type_personal-area">
       <div className="card personal-area__card personal-area__card_type_add-photo">
+        <input
+          type="file"
+          onChange={handleFileChange}
+          style={{ opacity: 1, cursor: 'pointer' }}
+        />
         <button
+          onClick={onFileUpload}
           aria-label="Add photo"
           className="personal-area__add-photo-button"
           type="button"
@@ -29,7 +63,12 @@ function UserEventForm() {
         <p className="caption personal-area__bottom-caption">Загрузить фото</p>
       </div>
       <div className="card personal-area__card personal-area__card_type_content">
-        <form action="" name="add-story-form" className="personal-area__form">
+        <form
+          action=""
+          name="add-story-form"
+          className="personal-area__form"
+          onSubmit={handleSubmit}
+        >
           <input
             id="place-input"
             value={place}

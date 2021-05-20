@@ -1,7 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-function UserEvent({ photo, place, story, date }) {
+function UserEvent({ meeting }) {
+  const { place, story, photo, date } = meeting;
+
   return (
     <article className="card-container card-container_type_personal-area">
       <div className="card card_content_media">
@@ -57,11 +59,11 @@ function UserEvent({ photo, place, story, date }) {
   );
 }
 
-UserEvent.propTypes = {
-  photo: PropTypes.string,
-  place: PropTypes.string,
-  story: PropTypes.string,
-  date: PropTypes.string,
-};
+// UserEvent.propTypes = {
+//   photo: PropTypes.string,
+//   place: PropTypes.string,
+//   story: PropTypes.string,
+//   date: PropTypes.string,
+// };
 
 export default UserEvent;

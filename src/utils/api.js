@@ -34,6 +34,14 @@ class Api {
   bookEvent() {
     return this.instance.post('/afisha/event-participants');
   }
+
+  addPhoto(data) {
+    return this.instance.post('/event-photo', data);
+  }
+
+  getMeetings() {
+    return this.instance.get('/meetings');
+  }
 }
 
 // Создание экземпляра класса Api
