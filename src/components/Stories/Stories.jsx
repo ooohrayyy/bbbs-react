@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Stories({ history }) {
-  console.log(history);
   return (
     <article className="card card_content_media">
       <img

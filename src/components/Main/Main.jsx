@@ -3,9 +3,9 @@ import mock from '../../utils/mock';
 import api from '../../utils/api';
 
 import Description from '../Description/Description';
+import Stories from '../Stories/Stories';
 import Quote from '../Quote/Quote';
 import Rubric from '../Rubric/Rubric';
-import Stories from '../Stories/Stories';
 import Video from '../Video/Video';
 import Film from '../Film/Film';
 import Question from '../Question/Question';
@@ -13,20 +13,15 @@ import Facebook from '../Facebook/Facebook';
 
 function Main() {
   const [answer, setAnswer] = useState({});
-  function isMockEnabled() {
-    return process.env.REACT_APP_MOCK_ENABLED === 'true';
-  }
+  mock.initializeAxiosMockAdapter(api.instance);
 
   useEffect(() => {
-    if (isMockEnabled()) {
-      mock.initializeAxiosMockAdapter(api.instance);
-    }
     api
       .getMain()
       .then((res) => setAnswer(res.data))
       .catch((err) => console.log(err.message));
   }, []);
-  console.log(answer);
+
   return (
     <main className="main">
       <section className="lead page__section">
