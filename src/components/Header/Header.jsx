@@ -2,9 +2,24 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 function Header() {
+  const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
+
+  function toggleSearchMenu() {
+    if (searchMenuIsOpen) {
+      setSearchMenuIsOpen(false);
+    } else {
+      setSearchMenuIsOpen(true);
+    }
+  }
+
+  const menuClass = searchMenuIsOpen ? 'menu menu_state_search' : 'menu';
+  const searchOptionsClass = searchMenuIsOpen
+    ? 'search__options search__options_visible menu__search-options'
+    : 'search__options menu__search-options';
+
   return (
     <header className="header page__section">
-      <nav className="menu">
+      <nav className={menuClass}>
         <NavLink className="menu__logo" to="/">
           наставники.про
         </NavLink>
@@ -121,11 +136,12 @@ function Header() {
             <form className="search" name="search-form">
               <button
                 className="menu__button menu__button_type_search search__button"
-                type="submit"
+                type="button"
                 aria-label="Поиск"
                 title="Поиск"
+                onClick={toggleSearchMenu}
               />
-              <div className="search__options menu__search-options">
+              <div className={searchOptionsClass}>
                 <input
                   className="search__input paragraph"
                   type="text"
