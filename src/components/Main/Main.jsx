@@ -45,10 +45,9 @@ function Main() {
       </section>
 
       <section className="main-section page__section cards-grid cards-grid_content_small-cards">
-        <Film />
-        <Film />
-        <Film />
-        <Film />
+        {answer.movies.map((item) => (
+          <Film item={item} />
+        ))}
       </section>
 
       <section className="main-section page__section">
