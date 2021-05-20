@@ -23,7 +23,7 @@ function FooterMainContent() {
             Разработка – студенты&nbsp;
             <a
               className="footer__production"
-              href="https://praktikum.yandex.ru/"
+              href="https://praktikum.yandex.ru"
               target="_blank"
               rel="noreferrer"
             >
@@ -34,7 +34,7 @@ function FooterMainContent() {
             Концепция и дизайн –&nbsp;
             <a
               className="footer__production"
-              href="https://krkr.design/"
+              href="https://krkr.design"
               target="_blank"
               rel="noreferrer"
             >
