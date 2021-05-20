@@ -32,7 +32,7 @@ function Main() {
       <section className="lead page__section">
         <article className="card-container card-container_type_identical">
           <Description />
-          {!isLoading ? <Preloader /> : <Stories history={answer.history} />}
+          {isLoading ? <Preloader /> : <Stories history={answer.history} />}
         </article>
       </section>
 
