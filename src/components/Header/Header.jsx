@@ -4,6 +4,29 @@ import { NavLink } from 'react-router-dom';
 import recentResults from '../../assets/dev-data/search-results'; // Временный массив с готовыми результатами поиска
 
 function Header() {
+  const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
+
+  function toggleBurgerMenu() {
+    if (burgerMenuisOpen) {
+      setBurgerMenuIsOpen(false);
+    } else {
+      setBurgerMenuIsOpen(true);
+    }
+  }
+
+  const headerClass = burgerMenuisOpen
+    ? 'header header_displayed page__section'
+    : 'header page__section';
+  const burgerMenuClass = burgerMenuisOpen
+    ? 'menu__burger menu__burger_active'
+    : 'menu__burger';
+  const menuListsWrapClass = burgerMenuisOpen
+    ? 'menu__lists-wrap'
+    : 'menu__lists-wrap menu__lists-wrap_hidden';
+  const menuListSocialClass = burgerMenuisOpen
+    ? 'menu__list menu__list_type_social'
+    : 'menu__list menu__list_type_social menu__list_hidden';
+
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
 
   function toggleSearchMenu() {
@@ -20,12 +43,12 @@ function Header() {
     : 'search__options menu__search-options';
 
   return (
-    <header className="header page__section">
+    <header className={headerClass}>
       <nav className={menuClass}>
         <NavLink className="menu__logo" to="/">
           наставники.про
         </NavLink>
-        <div className="menu__lists-wrap menu__lists-wrap_hidden">
+        <div className={menuListsWrapClass}>
           <ul className="menu__list">
             <li className="menu__list-item">
               <NavLink className="menu__link" to="/">
@@ -85,7 +108,7 @@ function Header() {
               </NavLink>
             </li>
           </ul>
-          <ul className="menu__list menu__list_type_social menu__list_hidden">
+          <ul className={menuListSocialClass}>
             <li className="menu__list-item">
               <a
                 className="menu__link"
@@ -128,7 +151,11 @@ function Header() {
             </li>
           </ul>
         </div>
-        <button className="menu__burger" type="button">
+        <button
+          className={burgerMenuClass}
+          type="button"
+          onClick={toggleBurgerMenu}
+        >
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
           <span className="menu__burger-line" />
