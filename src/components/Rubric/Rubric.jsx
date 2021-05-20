@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Rubric({ place }) {
-  console.log(place);
   return (
     <article className="card-container card-container_type_main-article">
       <div className="card card_type_main card_color_yellow">

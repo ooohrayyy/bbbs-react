@@ -26,7 +26,7 @@ function Main() {
       .then((res) => setAnswer(res.data))
       .catch((err) => console.log(err.message));
   }, []);
-
+  console.log(answer);
   return (
     <main className="main">
       <section className="lead page__section">
@@ -41,12 +41,7 @@ function Main() {
       </section>
 
       <section className="main-section page__section">
-        <Quote
-          content="Развитие детей-сирот отличается от развития детей, живущих в семьях.
-          Все этапы развития у детей-сирот проходят с искажениями и имеют ряд
-          негативных особенностей."
-          colorStyle="card_color_blue"
-        />
+        <Quote article={answer.articles[0]} />
       </section>
 
       <section className="main-section page__section cards-grid cards-grid_content_small-cards">
@@ -72,12 +67,7 @@ function Main() {
       </section>
 
       <section className="main-section page__section">
-        <Quote
-          content="У таких детей возникает ощущение отверженности. Оно приводит к
-          напряженности и недоверию к людям и, как итог, к реальному неприятию
-          себя и окружающих."
-          colorStyle="card_color_green"
-        />
+        <Quote article={answer.articles[1]} />
       </section>
     </main>
   );
