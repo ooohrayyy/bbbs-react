@@ -6,18 +6,18 @@ import logo from '../../images/svg/footer-logo.svg';
 export default function Footer() {
   return (
     <footer className="footer">
-      <a href="./index.html" className="footer__logo" target="_self">
+      <NavLink className="footer__logo" to="/">
         <img
           className="footer__logo-image"
           src={logo}
-          alt="Логотип Старшие Братья Старшие Сестры России"
+          alt="Логотип проекта «Старшие Братья Старшие Сёстры России»"
         />
-      </a>
+      </NavLink>
       <button className="button footer__button" type="button">
         Помочь деньгами
       </button>
       <div className="footer__column footer__column_content_concept">
-        <p className="footer__brand">&copy; Старшие Братья Старшие Сестры</p>
+        <p className="footer__brand">&copy; Старшие Братья Старшие Сёстры</p>
         <div className="footer__copyright">
           <p className="footer__authors">
             Разработка – студенты
@@ -46,38 +46,38 @@ export default function Footer() {
       <nav className="footer__column footer__column_content_info">
         <ul className="footer__column-list">
           <li className="footer__column-links">
-            <NavLink to="#" className="footer__column-link" target="_self">
-              о проекте
+            <NavLink to="/" className="footer__column-link">
+              О проекте
             </NavLink>
           </li>
           <li className="footer__column-links">
-            <NavLink to="#" className="footer__column-link" target="_self">
-              календарь
+            <NavLink to="/" className="footer__column-link">
+              Календарь
             </NavLink>
           </li>
           <li className="footer__column-links">
-            <NavLink to="#" className="footer__column-link" target="_self">
-              куда пойти
+            <NavLink to="/" className="footer__column-link">
+              Куда пойти
             </NavLink>
           </li>
           <li className="footer__column-links">
-            <NavLink to="#" className="footer__column-link" target="_self">
-              вопросы
+            <NavLink to="/" className="footer__column-link">
+              Вопросы
             </NavLink>
           </li>
           <li className="footer__column-links">
-            <NavLink to="#" className="footer__column-link" target="_self">
-              читать и смотреть
+            <NavLink to="/" className="footer__column-link">
+              Читать и смотреть
             </NavLink>
           </li>
           <li className="footer__column-links">
-            <NavLink to="#" className="footer__column-link" target="_self">
-              права детей
+            <NavLink to="/" className="footer__column-link">
+              Права детей
             </NavLink>
           </li>
           <li className="footer__column-links">
-            <NavLink to="#" className="footer__column-link" target="_self">
-              истории
+            <NavLink to="/" className="footer__column-link">
+              Истории
             </NavLink>
           </li>
         </ul>
@@ -91,7 +91,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
             >
-              facebook
+              Facebook
             </a>
           </li>
           <li className="footer__column-links">
@@ -101,7 +101,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
             >
-              vkontakte
+              Vkontakte
             </a>
           </li>
           <li className="footer__column-links">
@@ -111,7 +111,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
             >
-              instagram
+              Instagram
             </a>
           </li>
           <li className="footer__column-links">
@@ -121,7 +121,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
             >
-              youtube
+              YouTube
             </a>
           </li>
         </ul>
