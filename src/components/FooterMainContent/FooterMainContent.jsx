@@ -13,9 +13,14 @@ function FooterMainContent() {
           alt="Логотип проекта «Старшие Братья Старшие Сёстры России»"
         />
       </NavLink>
-      <button className="button footer__button" type="button">
+      <a
+        className="button footer__button"
+        href="https://www.nastavniki.org/campaign/pomoch-dengami"
+        target="_blank"
+        rel="noreferrer"
+      >
         Помочь деньгами
-      </button>
+      </a>
       <div className="footer__column footer__column_content_concept">
         <p className="footer__brand">&copy; Старшие Братья Старшие Сёстры</p>
         <div className="footer__copyright">
