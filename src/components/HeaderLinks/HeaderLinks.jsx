@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import HeaderSocialLinks from '../HeaderSocialLinks/HeaderSocialLinks';
+
 function HeaderLinks({ menuListsWrapClass, menuListSocialClass }) {
   return (
     <div className={menuListsWrapClass}>
@@ -63,48 +65,7 @@ function HeaderLinks({ menuListsWrapClass, menuListSocialClass }) {
           </NavLink>
         </li>
       </ul>
-      <ul className={menuListSocialClass}>
-        <li className="menu__list-item">
-          <a
-            className="menu__link"
-            href="https://www.facebook.com/BigBrothers.BigSisters.Russia/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            facebook
-          </a>
-        </li>
-        <li className="menu__list-item">
-          <a
-            className="menu__link"
-            href="https://vk.com/big.brothers.big.sisters"
-            target="_blank"
-            rel="noreferrer"
-          >
-            vkontakte
-          </a>
-        </li>
-        <li className="menu__list-item">
-          <a
-            className="menu__link"
-            href="https://www.instagram.com/nastavniki_org/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            instagram
-          </a>
-        </li>
-        <li className="menu__list-item">
-          <a
-            className="menu__link"
-            href="https://www.youtube.com/user/Nastavniki/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            youtube
-          </a>
-        </li>
-      </ul>
+      <HeaderSocialLinks menuListSocialClass={menuListSocialClass} />
     </div>
   );
 }
