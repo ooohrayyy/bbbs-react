@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import recentResults from '../../assets/dev-data/search-results'; // Временный массив с готовыми результатами поиска
+
 function Header() {
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
 
@@ -149,51 +151,19 @@ function Header() {
                   placeholder="Поиск"
                 />
                 <ul className="search__option-list">
-                  <li className="search__option-item">
-                    <NavLink
-                      className="search__title-link section-title section-title_clickable"
-                      to="/"
-                    >
-                      Причины подростковой агрессии
-                    </NavLink>
-                    <a className="link search__link" to="/">
-                      статьи
-                    </a>
-                  </li>
-                  <li className="search__option-item">
-                    <NavLink
-                      className="search__title-link section-title section-title_clickable"
-                      to="/"
-                    >
-                      Агрессивное поведение детей-сирот
-                    </NavLink>
-                    <NavLink className="link search__link" to="/">
-                      видео
-                    </NavLink>
-                  </li>
-                  <li className="search__option-item">
-                    <NavLink
-                      className="search__title-link section-title section-title_clickable"
-                      to="/"
-                    >
-                      Что делать если ваш младший агрессивно себя ведет, решил
-                      закрыть пару?
-                    </NavLink>
-                    <NavLink className="link search__link" to="/">
-                      вопросы
-                    </NavLink>
-                  </li>
-                  <li className="search__option-item">
-                    <NavLink
-                      className="search__title-link section-title section-title_clickable"
-                      to="/"
-                    >
-                      Как реагировать на агрессивное поведения ребенка
-                    </NavLink>
-                    <NavLink className="link search__link" to="/">
-                      книги
-                    </NavLink>
-                  </li>
+                  {recentResults.map((result, index) => (
+                    <li className="search__option-item" key={index}>
+                      <NavLink
+                        className="search__title-link section-title section-title_clickable"
+                        to={result.link}
+                      >
+                        {result.title}
+                      </NavLink>
+                      <NavLink className="link search__link" to="/">
+                        {result.label}
+                      </NavLink>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </form>
