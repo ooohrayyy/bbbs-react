@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import parsedDate from '../../utils/calendarUtils';
+
 function UserEvent({ meeting }) {
-  const { place, story, photo, date } = meeting;
+  const { place, description, photo, date } = meeting;
+  const { month, dayMonth, year } = parsedDate(date);
 
   return (
     <article className="card-container card-container_type_personal-area">
@@ -16,13 +19,11 @@ function UserEvent({ meeting }) {
       <div className="card personal-area__card personal-area__date-container">
         <div className="personal-area__text-wrap">
           <h2 className="section-title personal-area__card-title">{place}</h2>
-          <p className="paragraph">{story}</p>
+          <p className="paragraph">{description}</p>
         </div>
         <div className="personal-area__card-date">
-          <p className="personal-area__card-weekday">
-            {`${date.month}, ${date.year}`}
-          </p>
-          <p className="personal-area__card-day">{date.day}</p>
+          <p className="personal-area__card-weekday">{`${month}, ${year}`}</p>
+          <p className="personal-area__card-day">{dayMonth}</p>
         </div>
         <div className="personal-area__actions">
           <div className="personal-area__rating">
