@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import mock from '../../utils/mock';
 import api from '../../utils/api';
 // import PropTypes from 'prop-types';
+import UserMeetPhoto from '../UserMeetPhoto/UserMeetPhoto';
 
 function UserEventForm() {
+  const [photo, setPhoto] = useState('');
+  const [file, setFile] = useState(null);
+
+  const reader = new FileReader();
+
+  reader.addEventListener('load', () => {
+    setPhoto(reader.result);
+  });
+
   mock.initializeAxiosMockAdapter(api.instance);
 
   const [place, setPlace] = useState('');
   const [date, setDate] = useState('');
   const [story, setStory] = useState('');
-  const [file, setFile] = useState('');
-  // const [photo, setPhoto] = useState(null);
+
+  const [isUploadFile, setIsUploadFile] = useState(false);
+
+  useEffect(() => {}, [photo]);
 
   function handlePlaceChange(e) {
     setPlace(e.target.value);
@@ -28,6 +40,10 @@ function UserEventForm() {
     setFile(e.target.files[0]);
   }
 
+  function handleUploadFile() {
+    setIsUploadFile(true);
+  }
+
   function onFileUpload() {
     const formData = new FormData();
     formData.append('userPhoto', file, file.name);
@@ -38,6 +54,10 @@ function UserEventForm() {
       .then((res) => {
         // setPhoto(res.config.data.get('userPhoto'));
         console.log(res.config.data.get('userPhoto'));
+        // setPhoto(reader.readAsDataURL(res.config.data.get('userPhoto')));
+        setPhoto(res.config.data.get('userPhoto'));
+        reader.readAsDataURL(file);
+        handleUploadFile();
       })
       .catch((err) => console.log(err.message));
   }
@@ -48,20 +68,25 @@ function UserEventForm() {
 
   return (
     <article className="card-container card-container_type_personal-area">
-      <div className="card personal-area__card personal-area__card_type_add-photo">
-        <input
-          type="file"
-          onChange={handleFileChange}
-          style={{ opacity: 1, cursor: 'pointer' }}
-        />
-        <button
-          onClick={onFileUpload}
-          aria-label="Add photo"
-          className="personal-area__add-photo-button"
-          type="button"
-        />
-        <p className="caption personal-area__bottom-caption">Загрузить фото</p>
-      </div>
+      {!isUploadFile && (
+        <div className="card personal-area__card personal-area__card_type_add-photo">
+          <input
+            type="file"
+            onChange={handleFileChange}
+            style={{ opacity: 1, cursor: 'pointer' }}
+          />
+          <button
+            onClick={onFileUpload}
+            aria-label="Add photo"
+            className="personal-area__add-photo-button"
+            type="button"
+          />
+          <p className="caption personal-area__bottom-caption">
+            Загрузить фото
+          </p>
+        </div>
+      )}
+      {isUploadFile && <UserMeetPhoto photo={photo} />}
       <div className="card personal-area__card personal-area__card_type_content">
         <form
           action=""
