@@ -50,16 +50,16 @@ export const rubrics = [
 ];
 
 export const months = [
-  { name: 'Январь', active: false, value: 1 },
-  { name: 'Февраль', active: false, value: 2 },
-  { name: 'Март', active: false, value: 3 },
-  { name: 'Aпрель', active: false, value: 4 },
-  { name: 'Май', active: false, value: 5 },
-  { name: 'Июнь', active: false, value: 6 },
-  { name: 'Июль', active: false, value: 7 },
-  { name: 'Август', active: false, value: 8 },
-  { name: 'Сентябрь', active: false, value: 9 },
-  { name: 'Октябрь', active: false, value: 10 },
-  { name: 'Ноябрь', active: false, value: 11 },
-  { name: 'Декабрь', active: false, value: 12 },
+  { name: 'Январь', active: false, value: 'январь' },
+  { name: 'Февраль', active: false, value: 'февраль' },
+  { name: 'Март', active: false, value: 'март' },
+  { name: 'Aпрель', active: false, value: 'апрель' },
+  { name: 'Май', active: false, value: 'май' },
+  { name: 'Июнь', active: false, value: 'июнь' },
+  { name: 'Июль', active: false, value: 'июль' },
+  { name: 'Август', active: false, value: 'август' },
+  { name: 'Сентябрь', active: false, value: 'сентябрь' },
+  { name: 'Октябрь', active: false, value: 'октябрь' },
+  { name: 'Ноябрь', active: false, value: 'ноябрь' },
+  { name: 'Декабрь', active: false, value: 'декабрь' },
 ];
