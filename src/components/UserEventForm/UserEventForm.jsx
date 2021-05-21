@@ -1,39 +1,27 @@
 import { React, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import mock from '../../utils/mock';
 import api from '../../utils/api';
 import UserMeetPhoto from '../UserMeetPhoto/UserMeetPhoto';
 
 function UserEventForm() {
+  mock.initializeAxiosMockAdapter(api.instance);
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   const [photo, setPhoto] = useState('');
   const [file, setFile] = useState(null);
+  const [isUploadFile, setIsUploadFile] = useState(false);
 
+  // Использовать API FileReader чтобы переводить загруженные файлы в URL
   const reader = new FileReader();
 
   reader.addEventListener('load', () => {
     setPhoto(reader.result);
   });
 
-  mock.initializeAxiosMockAdapter(api.instance);
-
-  const [place, setPlace] = useState('');
-  const [date, setDate] = useState('');
-  const [story, setStory] = useState('');
-
-  const [isUploadFile, setIsUploadFile] = useState(false);
-
   useEffect(() => {}, [photo]);
-
-  function handlePlaceChange(e) {
-    setPlace(e.target.value);
-  }
-
-  function handleDateChange(e) {
-    setDate(e.target.value);
-  }
-
-  function handleStoryChange(e) {
-    setStory(e.target.value);
-  }
 
   function handleFileChange(e) {
     setFile(e.target.files[0]);
@@ -43,6 +31,8 @@ function UserEventForm() {
     setIsUploadFile(true);
   }
 
+  // Положить загруженную фотографию в экземпляр глобального класса FormData,
+  // отправить на сервер и преобразовать полученный файл в URL с помощью API FileReader
   function onFileUpload() {
     const formData = new FormData();
     formData.append('userPhoto', file, file.name);
@@ -55,10 +45,6 @@ function UserEventForm() {
         handleUploadFile();
       })
       .catch((err) => err.message);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
   }
 
   return (
@@ -87,38 +73,35 @@ function UserEventForm() {
           action=""
           name="add-story-form"
           className="personal-area__form"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <input
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...register('place', { required: true })}
             id="place-input"
-            value={place}
-            onChange={handlePlaceChange}
             type="text"
             name="place"
             placeholder="Место встречи"
-            required
             className="personal-area__form-input"
             minLength="2"
             maxLength="30"
           />
           <input
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...register('date', { required: true, valueAsDate: true })}
             id="date-input"
-            value={date}
-            onChange={handleDateChange}
             type="date"
             name="date"
             placeholder="Дата&emsp;"
-            required
             className="personal-area__form-input"
           />
           <textarea
-            value={story}
-            onChange={handleStoryChange}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...register('story', { required: true })}
             type="text"
             name="story"
             className="personal-area__form-input personal-area__form-input_type_textarea"
             placeholder="Опишите вашу встречу, какие чувства вы испытывали, что понравилось / не понравилось"
-            required
           />
 
           <div className="personal-area__rating">
@@ -146,7 +129,7 @@ function UserEventForm() {
             <button className="button personal-area__delete" type="button">
               Удалить
             </button>
-            <button className="button" type="submit" disabled>
+            <button className="button" type="submit">
               Добавить
             </button>
           </div>
