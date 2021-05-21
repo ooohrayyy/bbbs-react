@@ -1,56 +1,26 @@
-import React from 'react';
+import { React, useState } from 'react';
+import { months } from '../../utils/initialFlterStates';
 
 import FilterTag from '../FilterTag/FilterTag';
 
 function Filter() {
-  const initialItem = [
-    {
-      name: 'Все',
-      active: true,
-    },
-    {
-      name: 'Выбор наставников',
-      active: false,
-    },
-    {
-      name: 'Музеи',
-      active: false,
-    },
-    {
-      name: 'Парки',
-      active: false,
-    },
-    {
-      name: 'Театры',
-      active: false,
-    },
-    {
-      name: 'Спорт',
-      active: false,
-    },
-    {
-      name: 'Экскурсии',
-      active: false,
-    },
-    {
-      name: 'Секции',
-      active: false,
-    },
-    {
-      name: '8-10 лет',
-      active: false,
-    },
-    {
-      name: '11-13 лет',
-      active: false,
-    },
-  ];
+  const [selectedTag, setSelectedTag] = useState([]);
+
+  function handleSlectedTag(tag) {
+    setSelectedTag([tag, ...selectedTag]);
+  }
 
   return (
     <div className="tags">
       <ul className="tags__list">
-        {initialItem.map((item, i) => (
-          <FilterTag tagName={item.name} tagActive={item.active} id={i} />
+        {months.map((item, i) => (
+          <FilterTag
+            tagName={item.name}
+            tagActive={item.active}
+            tagValue={item.value}
+            id={i}
+            onSelectedTag={handleSlectedTag}
+          />
         ))}
         <li className="tags__list-item">
           <button className="button tags__button" type="button">
