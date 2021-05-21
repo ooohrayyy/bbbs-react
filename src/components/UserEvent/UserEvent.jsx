@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 function UserEvent({ meeting }) {
   const { place, story, photo, date } = meeting;
@@ -59,11 +59,8 @@ function UserEvent({ meeting }) {
   );
 }
 
-// UserEvent.propTypes = {
-//   photo: PropTypes.string,
-//   place: PropTypes.string,
-//   story: PropTypes.string,
-//   date: PropTypes.string,
-// };
+UserEvent.propTypes = {
+  meeting: PropTypes.instanceOf(Object),
+};
 
 export default UserEvent;

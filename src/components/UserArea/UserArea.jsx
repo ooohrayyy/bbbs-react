@@ -1,28 +1,12 @@
-// import { React, useState, useEffect } from 'react';
-import React from 'react';
+import { React, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-// import mock from '../../utils/mock';
-// import api from '../../utils/api';
-import UserEventForm from '../UserEventForm/UserEventForm';
+// import UserEventForm from '../UserEventForm/UserEventForm';
 import UserEvent from '../UserEvent/UserEvent';
 
-// import userPhoto from '../../images/personal-area/lk.png';
-// import PropTypes from 'prop-types';
-
-function UserArea(meetings) {
-  // const [meetings, setMeetings] = useState([]);
-  // function handleAddPhotoSubmit(photo) {
-
-  // }
-  // mock.initializeAxiosMockAdapter(api.instance);
-  // useEffect(() => {
-  //   api
-  //     .getMeetings()
-  //     // .then(({ data }) => console.log(data))
-  //     .then(({ res }) => setMeetings(res))
-  //     .catch((err) => console.log(err.message));
-  // }, []);
+function UserArea({ meetings = [] }) {
+  useEffect(() => {}, [meetings]);
 
   return (
     <section className="personal-area page__section">
@@ -45,14 +29,21 @@ function UserArea(meetings) {
           У вас нет записи на мероприятия
         </h2>
       </div>
-      <div className="personal-area__story">
+      {/* <div className="personal-area__story">
         <h2 className="section-title personal-area__title">
           Составьте историю вашей дружбы с младшим. Эта страница доступна только
           вам.
         </h2>
+      </div> */}
+      <div className="personal-area__add-meeting">
+        <button
+          type="button"
+          aria-label="Add meeting"
+          className="personal-area__add-meeting-button"
+        />
+        <p className="personal-area__add-meeting-caption">Добавить встречу</p>
       </div>
-      <UserEventForm />
-      {/* eslint-disable-next-line react/destructuring-assignment */}
+      {/* <UserEventForm /> */}
       {meetings.map((el) => (
         <UserEvent meeting={el} key={el.id} />
       ))}
@@ -60,6 +51,8 @@ function UserArea(meetings) {
   );
 }
 
-// UserArea.propTypes = {};
+UserArea.propTypes = {
+  meetings: PropTypes.instanceOf(Array),
+};
 
 export default UserArea;
