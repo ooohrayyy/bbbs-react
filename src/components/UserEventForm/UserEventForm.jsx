@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import mock from '../../utils/mock';
 import api from '../../utils/api';
-// import PropTypes from 'prop-types';
 import UserMeetPhoto from '../UserMeetPhoto/UserMeetPhoto';
 
 function UserEventForm() {
@@ -47,19 +46,15 @@ function UserEventForm() {
   function onFileUpload() {
     const formData = new FormData();
     formData.append('userPhoto', file, file.name);
-    // console.log(file);
 
     api
       .addPhoto(formData)
       .then((res) => {
-        // setPhoto(res.config.data.get('userPhoto'));
-        console.log(res.config.data.get('userPhoto'));
-        // setPhoto(reader.readAsDataURL(res.config.data.get('userPhoto')));
         setPhoto(res.config.data.get('userPhoto'));
         reader.readAsDataURL(file);
         handleUploadFile();
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => err.message);
   }
 
   function handleSubmit(e) {
@@ -70,11 +65,6 @@ function UserEventForm() {
     <article className="card-container card-container_type_personal-area">
       {!isUploadFile && (
         <div className="card personal-area__card personal-area__card_type_add-photo">
-          <input
-            type="file"
-            onChange={handleFileChange}
-            style={{ opacity: 1, cursor: 'pointer' }}
-          />
           <button
             onClick={onFileUpload}
             aria-label="Add photo"
@@ -84,6 +74,11 @@ function UserEventForm() {
           <p className="caption personal-area__bottom-caption">
             Загрузить фото
           </p>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="personal-area__input-photo"
+          />
         </div>
       )}
       {isUploadFile && <UserMeetPhoto photo={photo} />}
@@ -160,9 +155,5 @@ function UserEventForm() {
     </article>
   );
 }
-
-// UserEvent.propTypes = {
-
-// };
 
 export default UserEventForm;

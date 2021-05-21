@@ -1,10 +1,7 @@
 import { React, useEffect } from 'react';
-// import PropTypes from 'prop-types';
 
 function UserMeetPhoto({ photo }) {
-  useEffect(() => {
-    console.log('photo is ', photo);
-  }, [photo]);
+  useEffect(() => {}, [photo]);
 
   return (
     <div className="card card_content_media">
@@ -12,9 +9,5 @@ function UserMeetPhoto({ photo }) {
     </div>
   );
 }
-
-// UserMeetPhoto.propTypes = {
-
-// };
 
 export default UserMeetPhoto;
