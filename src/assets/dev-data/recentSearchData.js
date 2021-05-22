@@ -1,4 +1,4 @@
-const recentResults = [
+const recentSearchResults = [
   {
     title: 'Причины подростковой агрессии',
     link: '/',
@@ -22,4 +22,4 @@ const recentResults = [
   },
 ];
 
-export default recentResults;
+export default recentSearchResults;

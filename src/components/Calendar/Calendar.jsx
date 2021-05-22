@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import CalendarEvent from '../CalendarEvent/CalendarEvent';
 import Filter from '../Filter/Filter';
-import { months } from '../../utils/initialFilterStates';
+import filters from '../../assets/dev-data/filterTagsData';
 import {
   getRotatedMonth,
   getParsedEventsData,
@@ -23,7 +23,7 @@ function Calendar() {
       .getEvents()
       .then(({ data }) => {
         const parsedData = getParsedEventsData(data);
-        const initialTagValue = getRotatedMonth(months);
+        const initialTagValue = getRotatedMonth(filters.months);
         const filteredEvents = getFilteredData(
           initialTagValue,
           parsedData,
