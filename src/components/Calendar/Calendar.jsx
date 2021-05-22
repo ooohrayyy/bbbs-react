@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import CalendarEvent from '../CalendarEvent/CalendarEvent';
 import Filter from '../Filter/Filter';
-import { months } from '../../utils/initialFlterStates';
+import { months } from '../../utils/initialFilterStates';
 import {
   getRotatedMonth,
   getParsedEventsData,
