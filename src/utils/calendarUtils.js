@@ -26,17 +26,10 @@ export function sortEventsByDate(events) {
 
 export function getParsedEventsData(data) {
   return data.map((i) => {
-    const { month, dayWeek, time, dayMonth } = parsedDate(i.startAt);
-    const endTime = parsedDate(i.endAt).time;
-    const freeSeats = i.seats - i.takenSeats;
+    const { month } = parsedDate(i.startAt);
     return {
       ...i,
       startMonth: month,
-      startDayWeek: dayWeek,
-      startTime: time,
-      startDayMonth: dayMonth,
-      endTime,
-      freeSeats,
     };
   });
 }
