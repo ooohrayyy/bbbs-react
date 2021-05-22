@@ -2,7 +2,7 @@ import React from 'react';
 
 import Signin from '../Popups/Signin/Signin';
 
-function HeaderSignIn() {
+function HeaderAuthorize() {
   const [signInModalIsOpen, setSignInModalIsOpen] = React.useState(false);
 
   function handleSignInModal() {
@@ -33,4 +33,4 @@ function HeaderSignIn() {
   );
 }
 
-export default HeaderSignIn;
+export default HeaderAuthorize;

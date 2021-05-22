@@ -1,7 +1,7 @@
 import React from 'react';
 
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
-import HeaderSignIn from '../HeaderSignIn/HeaderSignIn';
+import HeaderAuthorize from '../HeaderAuthorize/HeaderAuthorize';
 
 function HeaderButtons({ toggleSearchMenu, searchOptionsClass }) {
   return (
@@ -14,7 +14,7 @@ function HeaderButtons({ toggleSearchMenu, searchOptionsClass }) {
           />
         </li>
         <li className="menu__button-item">
-          <HeaderSignIn />
+          <HeaderAuthorize />
         </li>
       </ul>
     </>
