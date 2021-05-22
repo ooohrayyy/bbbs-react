@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import parsedDate from '../../utils/calendarUtils';
+import { parsedDate } from '../../utils/calendarUtils';
 
 function CalendarEvent({ event }) {
   const { address, contact, title, startAt, endAt, booked, seats, takenSeats } =
     event;
 
   const { month, dayWeek, time, dayMonth } = parsedDate(startAt);
-  const endTime = parsedDate(endAt);
+  const endTime = parsedDate(endAt).time;
   const numberOfFreeSeats = seats - takenSeats;
   const hasFreeSeats = numberOfFreeSeats > 0;
 
@@ -27,7 +27,7 @@ function CalendarEvent({ event }) {
       <div className="calendar__meetup">
         <ul className="calendar__info-list">
           <li className="calendar__info-item">
-            <p className="calendar__time">{`${time}-${endTime.time}`}</p>
+            <p className="calendar__time">{`${time}-${endTime}`}</p>
           </li>
           <li className="calendar__info-item">
             <p className="calendar__place">{address}</p>
@@ -78,10 +78,13 @@ CalendarEvent.propTypes = {
     address: PropTypes.string,
     contact: PropTypes.string,
     title: PropTypes.string,
-    startAt: PropTypes.string,
     booked: PropTypes.bool,
-    seats: PropTypes.number,
-    takenSeats: PropTypes.number,
+    startMonth: PropTypes.string,
+    startDayWeek: PropTypes.string,
+    startTime: PropTypes.string,
+    startDayMonth: PropTypes.string,
+    endTime: PropTypes.string,
+    freeSeats: PropTypes.number,
   }),
 };
 
