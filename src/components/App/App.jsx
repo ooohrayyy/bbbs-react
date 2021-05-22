@@ -9,9 +9,12 @@ import Calendar from '../Calendar/Calendar';
 import AboutUs from '../AboutUs/AboutUs';
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
+  const [isAuthorized, setIsAuthorized] = React.useState(false);
+
   return (
     <>
-      <Header />
+      <Header isAuthorized={isAuthorized} />
       <Switch>
         <Route exact path="/main">
           <Main />

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Signin from '../Popups/Signin/Signin';
 
-function HeaderAuthorize() {
+function HeaderAuthorize({ isAuthorized }) {
   const [signInModalIsOpen, setSignInModalIsOpen] = React.useState(false);
 
   function handleSignInModal() {
@@ -19,10 +19,14 @@ function HeaderAuthorize() {
     console.log('Попытка входа!');
   }
 
+  const buttonStyle = isAuthorized
+    ? 'menu__button menu__button_type_active-user'
+    : 'menu__button menu__button_type_user';
+
   return (
     <>
       <button
-        className="menu__button menu__button_type_user"
+        className={buttonStyle}
         type="button"
         onClick={handleSignInModal}
         aria-label="Личный кабинет"

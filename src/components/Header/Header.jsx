@@ -5,7 +5,7 @@ import HeaderLinks from '../HeaderLinks/HeaderLinks';
 import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from '../HeaderButtons/HeaderButtons';
 
-function Header() {
+function Header({ isAuthorized }) {
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
 
   function toggleBurgerMenu() {
@@ -59,6 +59,7 @@ function Header() {
           toggleBurgerMenu={toggleBurgerMenu}
         />
         <HeaderButtons
+          isAuthorized={isAuthorized}
           toggleSearchMenu={toggleSearchMenu}
           searchOptionsClass={searchOptionsClass}
         />
