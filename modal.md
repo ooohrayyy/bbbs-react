@@ -5,6 +5,7 @@
 props 
   title: PropTypes.string, Надпись в окне
   isOpen: bool  собственно открыто или закрыто окно
+  handleClose: PropTypes.func, колбэк закрытия попапа
   handleConfirm: PropTypes.func, Колбэк при нажатии на согласие
   butConf: PropTypes.string, Надпись на кнопке согласия, необязательна, по умолчанию "Подтвердить запись"
   butEsc: PropTypes.string, Надпись на кнопке отказа, необязательна, по умолчанию "Отменить"
@@ -13,11 +14,13 @@ props
 props
     title: string Надпись в окне, первая строка с названием события и временем его проведения
     isOpen: bool Уже понятно
+  handleClose: PropTypes.func, колбэк закрытия попапа
 
 Авторизация Signin
 props
   isOpen: bool  собственно открыто или закрыто окно
   handleSignin: PropTypes.func, Колбэк при нажатии на Войти
+  handleClose: PropTypes.func, колбэк закрытия попапа
 
 Подробно о событии из календаря Meetup
 isOpen  - понятно

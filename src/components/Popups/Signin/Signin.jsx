@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Signin({ isOpen, handleSignin }) {
-  const [modalIsOpen, setIsOpen] = React.useState(isOpen);
+function Signin({ isOpen, handleSignin, handleClose }) {
   Modal.setAppElement(document.getElementById('page'));
 
   function closeModal() {
-    setIsOpen(false);
+    handleClose();
   }
   const customStyles = {
     content: {
@@ -38,11 +37,7 @@ function Signin({ isOpen, handleSignin }) {
     },
   };
   return (
-    <Modal
-      isOpen={modalIsOpen}
-      style={customStyles}
-      onRequestClose={closeModal}
-    >
+    <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
       <>
         <button
           onClick={closeModal}

@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Done({ title, isOpen }) {
-  const [modalIsOpen, setIsOpen] = React.useState(isOpen);
+function Done({ title, isOpen, handleClose }) {
   Modal.setAppElement(document.getElementById('page'));
 
   function closeModal() {
-    setIsOpen(false);
+    handleClose(false);
   }
   const customStyles = {
     content: {
@@ -37,11 +36,7 @@ function Done({ title, isOpen }) {
     },
   };
   return (
-    <Modal
-      isOpen={modalIsOpen}
-      style={customStyles}
-      onRequestClose={closeModal}
-    >
+    <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
       <>
         <div className="calendar__image-done" />
         <button
@@ -74,4 +69,5 @@ export default Done;
 Done.propTypes = {
   title: PropTypes.string,
   isOpen: PropTypes.bool,
+  handleClose: PropTypes.func,
 };
