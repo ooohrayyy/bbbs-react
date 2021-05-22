@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import recentResults from '../../assets/dev-data/recentSearchData'; // Временный массив с готовыми результатами поиска
 
@@ -23,15 +23,15 @@ function HeaderSearch({ toggleSearchMenu, searchOptionsClass }) {
         <ul className="search__option-list">
           {recentResults.map((result, index) => (
             <li className="search__option-item" key={index}>
-              <NavLink
+              <Link
                 className="search__title-link section-title section-title_clickable"
                 to={result.link}
               >
                 {result.title}
-              </NavLink>
-              <NavLink className="link search__link" to="/">
+              </Link>
+              <Link className="link search__link" to="/">
                 {result.label}
-              </NavLink>
+              </Link>
             </li>
           ))}
         </ul>

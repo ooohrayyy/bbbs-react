@@ -47,7 +47,7 @@ function Header() {
   return (
     <header className={headerClass}>
       <nav className={menuClass}>
-        <NavLink className="menu__logo" to="/">
+        <NavLink className="menu__logo" to="/main">
           наставники.про
         </NavLink>
         <HeaderLinks
