@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Done({ title, isOpen }) {
+function Signin({ isOpen, handleSignin }) {
   const [modalIsOpen, setIsOpen] = React.useState(isOpen);
   Modal.setAppElement(document.getElementById('page'));
 
@@ -23,8 +23,8 @@ function Done({ title, isOpen }) {
       maxHeight: '80vh',
       backgroundColor: '#ffffff',
       boxSizing: 'border-box',
-      height: '670px',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
+      height: '559px',
     },
     overlay: {
       position: 'fixed',
@@ -34,6 +34,7 @@ function Done({ title, isOpen }) {
       bottom: 0,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       display: 'flex',
+      backdropFilter: 'blur(7px)',
     },
   };
   return (
@@ -43,7 +44,6 @@ function Done({ title, isOpen }) {
       onRequestClose={closeModal}
     >
       <>
-        <div className="calendar__image-done" />
         <button
           onClick={closeModal}
           className="popup__close popup__cancel"
@@ -51,27 +51,43 @@ function Done({ title, isOpen }) {
         >
           <img alt="close" src={closeImage} />
         </button>
-        <p className="section-title calendar__title_type_popup calendar__title_type_popup-done ">
-          {title}
+        <h2 className="section-title popup__title_type_sign-in">Вход</h2>
+        <p className="paragraph popup__sign-in">
+          Вход в личный кабинет доступен наставникам программы «Старшие Братья
+          Старшие Сёстры».
         </p>
-        <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done">
-          Если у вас не получится прийти — отмените, пожалуйста, запись.
-        </h2>
+        <p className="paragraph popup__sign-in">
+          Пожалуйста, введите логин и пароль из письма. Если вам не приходило
+          письмо, свяжитесь с вашим куратором.
+        </p>
+        <input
+          type="text"
+          className="popup__input"
+          required
+          placeholder="Логин"
+        />
+        <input
+          type="password"
+          className="popup__input"
+          required
+          placeholder="Пароль"
+        />
+        <p className="popup__forgot-password ">Забыли пароль?</p>
         <button
-          onClick={closeModal}
-          className="button calendar__back popup__cancel"
+          onClick={handleSignin}
+          className="button button_theme_light popup__enter"
           type="button"
         >
-          Вернуться к календарю
+          Войти
         </button>
       </>
     </Modal>
   );
 }
 
-export default Done;
+export default Signin;
 
-Done.propTypes = {
-  title: PropTypes.string,
+Signin.propTypes = {
   isOpen: PropTypes.bool,
+  handleSignin: PropTypes.func,
 };
