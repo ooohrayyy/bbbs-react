@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import parsedDate from '../../utils/calendarUtils';
 
 function UserEvent({ meeting }) {
-  const { place, description, photo, date } = meeting;
+  const { place, description, photo, date, rateGood, rateNeutral, rateBad } =
+    meeting;
   const { month, dayMonth, year } = parsedDate(date);
 
   return (
@@ -27,14 +28,42 @@ function UserEvent({ meeting }) {
         </div>
         <div className="personal-area__actions">
           <div className="personal-area__rating">
-            <button
-              aria-label="Rate good"
-              className="personal-area__rate personal-area__rate_type_active-good"
-              type="button"
-            />
-            <p className="caption personal-area__rating-label personal-area__rating-label_type_good">
-              Было классно
-            </p>
+            {rateGood && (
+              <>
+                <button
+                  aria-label="Rate good"
+                  className="personal-area__rate personal-area__rate_type_active-good"
+                  type="button"
+                />
+                <p className="caption personal-area__rating-label personal-area__rating-label_type_good">
+                  Было классно
+                </p>
+              </>
+            )}
+            {rateNeutral && (
+              <>
+                <button
+                  aria-label="Rate neutral"
+                  className="personal-area__rate personal-area__rate_type_active-neutral"
+                  type="button"
+                />
+                <p className="caption personal-area__rating-label personal-area__rating-label_type_neutral">
+                  Нормально
+                </p>
+              </>
+            )}
+            {rateBad && (
+              <>
+                <button
+                  aria-label="Rate bad"
+                  className="personal-area__rate personal-area__rate_type_active-bad"
+                  type="button"
+                />
+                <p className="caption personal-area__rating-label personal-area__rating-label_type_bad">
+                  Что-то пошло не так
+                </p>
+              </>
+            )}
           </div>
 
           <div className="personal-area__action-elements">

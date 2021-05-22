@@ -4,15 +4,17 @@ import mock from '../../utils/mock';
 import api from '../../utils/api';
 import UserMeetPhoto from '../UserMeetPhoto/UserMeetPhoto';
 
-function UserEventForm() {
+function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
   mock.initializeAxiosMockAdapter(api.instance);
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
 
   const [photo, setPhoto] = useState('');
   const [file, setFile] = useState(null);
   const [isUploadFile, setIsUploadFile] = useState(false);
+  const [isRateGood, setIsRateGood] = useState(false);
+  const [isRateNeutral, setIsRateNeutral] = useState(false);
+  const [isRateBad, setIsRateBad] = useState(false);
 
   // Использовать API FileReader чтобы переводить загруженные файлы в URL
   const reader = new FileReader();
@@ -47,6 +49,47 @@ function UserEventForm() {
       .catch((err) => err.message);
   }
 
+  function onSubmit(data) {
+    // Временное решение для присвоения новой карточке уникального id
+    const min = 10;
+    const max = 50;
+    const num = Math.floor(Math.random() * (max - min) + min);
+    onAddMeeting({
+      id: num,
+      // eslint-disable-next-line object-shorthand
+      photo: photo,
+      rateGood: isRateGood,
+      rateNeutral: isRateNeutral,
+      rateBad: isRateBad,
+      ...data,
+    });
+    onAddMeetingClick();
+  }
+
+  function handleRateGood() {
+    if (!isRateGood) {
+      setIsRateGood(true);
+    } else {
+      setIsRateGood(false);
+    }
+  }
+
+  function handleRateNeutral() {
+    if (!isRateNeutral) {
+      setIsRateNeutral(true);
+    } else {
+      setIsRateNeutral(false);
+    }
+  }
+
+  function handleRateBad() {
+    if (!isRateBad) {
+      setIsRateBad(true);
+    } else {
+      setIsRateBad(false);
+    }
+  }
+
   return (
     <article className="card-container card-container_type_personal-area">
       {!isUploadFile && (
@@ -56,11 +99,13 @@ function UserEventForm() {
             aria-label="Add photo"
             className="personal-area__add-photo-button"
             type="button"
+            disabled={!file && true}
           />
           <p className="caption personal-area__bottom-caption">
             Загрузить фото
           </p>
           <input
+            id="photo-input"
             type="file"
             onChange={handleFileChange}
             className="personal-area__input-photo"
@@ -88,7 +133,10 @@ function UserEventForm() {
           />
           <input
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...register('date', { required: true, valueAsDate: true })}
+            {...register('date', {
+              required: true,
+              pattern: 'd{4}-d{2}-d{2}',
+            })}
             id="date-input"
             type="date"
             name="date"
@@ -97,27 +145,36 @@ function UserEventForm() {
           />
           <textarea
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...register('story', { required: true })}
+            {...register('description', { required: true })}
             type="text"
-            name="story"
+            name="description"
             className="personal-area__form-input personal-area__form-input_type_textarea"
             placeholder="Опишите вашу встречу, какие чувства вы испытывали, что понравилось / не понравилось"
           />
 
           <div className="personal-area__rating">
             <button
+              onClick={handleRateGood}
               aria-label="Rate good"
-              className="personal-area__rate personal-area__rate_type_good"
+              className={`personal-area__rate personal-area__rate_type_good ${
+                isRateGood && 'personal-area__rate_type_active-good'
+              }`}
               type="button"
             />
             <button
+              onClick={handleRateNeutral}
               aria-label="Rate neutral"
-              className="personal-area__rate personal-area__rate_type_neutral"
+              className={`personal-area__rate personal-area__rate_type_neutral ${
+                isRateNeutral && 'personal-area__rate_type_active-neutral'
+              }`}
               type="button"
             />
             <button
+              onClick={handleRateBad}
               aria-label="Rate bad"
-              className="personal-area__rate personal-area__rate_type_bad"
+              className={`personal-area__rate personal-area__rate_type_bad ${
+                isRateBad && 'personal-area__rate_type_active-bad'
+              }`}
               type="button"
             />
             <p className="caption personal-area__rating-label">
