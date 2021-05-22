@@ -7,7 +7,7 @@ function FooterSocialLinks() {
         <li className="footer__column-links">
           <a
             className="footer__column-link"
-            href="https://www.facebook.com/BigBrothers.BigSisters.Russia/"
+            href="https://facebook.com/BigBrothers.BigSisters.Russia"
             target="_blank"
             rel="noreferrer"
           >
@@ -27,7 +27,7 @@ function FooterSocialLinks() {
         <li className="footer__column-links">
           <a
             className="footer__column-link"
-            href="https://www.instagram.com/nastavniki_org/"
+            href="https://instagram.com/nastavniki_org"
             target="_blank"
             rel="noreferrer"
           >
@@ -37,7 +37,7 @@ function FooterSocialLinks() {
         <li className="footer__column-links">
           <a
             className="footer__column-link"
-            href="https://www.youtube.com/user/Nastavniki/"
+            href="https://youtube.com/user/Nastavniki"
             target="_blank"
             rel="noreferrer"
           >
