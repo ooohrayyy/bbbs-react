@@ -5,7 +5,7 @@ function HeaderRegularLinks() {
   return (
     <ul className="menu__list">
       <li className="menu__list-item">
-        <NavLink className="menu__link" to="/">
+        <NavLink className="menu__link" to="/calendar">
           Календарь
         </NavLink>
       </li>

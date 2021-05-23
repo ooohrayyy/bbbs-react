@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import CalendarEvent from '../CalendarEvent/CalendarEvent';
+import CalendarCard from '../CalendarCard/CalendarCard';
 import Filter from '../Filter/Filter';
 import filters from '../../assets/dev-data/filterTagsData';
 import {
@@ -57,7 +57,7 @@ function Calendar() {
           <p className="section-title">В этом месяце пока нет меропритяий</p>
         ) : (
           filteredEventsResult.map((item) => (
-            <CalendarEvent event={item} key={item.id} />
+            <CalendarCard event={item} key={item.id} />
           ))
         )}
       </section>
