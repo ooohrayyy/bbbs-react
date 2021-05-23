@@ -2,20 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { parsedDate } from '../../utils/calendarUtils';
 
-function CalendarEvent({ event }) {
-  const { address, contact, title, startAt, endAt, booked, seats, takenSeats } =
-    event;
-
+function CalendarEvent({
+  type,
+  address,
+  contact,
+  title,
+  startAt,
+  endAt,
+  booked,
+  seats,
+  takenSeats,
+  description,
+  handleMore,
+  needDescription,
+}) {
   const { month, dayWeek, time, dayMonth } = parsedDate(startAt);
   const endTime = parsedDate(endAt).time;
   const numberOfFreeSeats = seats - takenSeats;
   const hasFreeSeats = numberOfFreeSeats > 0;
 
   return (
-    <article className={`calendar ${booked ? 'calendar_selected' : ''}`}>
+    <>
       <div className="calendar__caption">
         <div className="calendar__info">
-          <p className="calendar__type">Волонтёры</p>
+          <p className="calendar__type">{type}</p>
           <p className="calendar__weekday">{`${month} / ${dayWeek}`}</p>
         </div>
         <div className="calendar__about">
@@ -36,7 +46,11 @@ function CalendarEvent({ event }) {
             <p className="calendar__contact">{contact}</p>
           </li>
         </ul>
-
+        {needDescription && (
+          <div className="calendar__description">
+            <p className="paragraph calendar__desc-paragraph">{description}</p>
+          </div>
+        )}
         <div className="calendar__submit">
           {booked ? (
             <button
@@ -61,20 +75,24 @@ function CalendarEvent({ event }) {
                 : 'Запись закрыта'}
             </p>
           )}
-          <button
-            className="button calendar__button-dots button_theme_light"
-            type="button"
-          >
-            &#8226;&#8226;&#8226;
-          </button>
+          {!needDescription && (
+            <button
+              onClick={handleMore}
+              className="button calendar__button-dots button_theme_light"
+              type="button"
+            >
+              &#8226;&#8226;&#8226;
+            </button>
+          )}
         </div>
       </div>
-    </article>
+    </>
   );
 }
 
 CalendarEvent.propTypes = {
   event: PropTypes.shape({
+    type: PropTypes.string,
     address: PropTypes.string,
     contact: PropTypes.string,
     title: PropTypes.string,

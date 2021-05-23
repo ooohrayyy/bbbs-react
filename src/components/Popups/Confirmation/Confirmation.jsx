@@ -7,15 +7,15 @@ import closeImage from '../../../images/svg/popup_close.svg';
 function Confirmation({
   title,
   isOpen,
+  handleClose,
   handleConfirm,
   butConf = 'Подтвердить запись',
   butEsc = 'Отменить',
 }) {
-  const [modalIsOpen, setIsOpen] = React.useState(isOpen);
   Modal.setAppElement(document.getElementById('page'));
 
   function closeModal() {
-    setIsOpen(false);
+    handleClose(false);
   }
   const customStyles = {
     content: {
@@ -45,9 +45,10 @@ function Confirmation({
   };
   return (
     <Modal
-      isOpen={modalIsOpen}
+      isOpen={isOpen}
       style={customStyles}
       onRequestClose={closeModal}
+      closeTimeoutMS={800}
     >
       <form>
         <button
@@ -86,6 +87,7 @@ export default Confirmation;
 Confirmation.propTypes = {
   title: PropTypes.string,
   isOpen: PropTypes.bool,
+  handleClose: PropTypes.func,
   handleConfirm: PropTypes.func,
   butConf: PropTypes.string,
   butEsc: PropTypes.string,
