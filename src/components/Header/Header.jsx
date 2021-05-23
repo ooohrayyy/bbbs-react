@@ -1,15 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import mock from '../../utils/mock';
+import api from '../../utils/api';
+
 import HeaderLinks from '../HeaderLinks/HeaderLinks';
 import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from '../HeaderButtons/HeaderButtons';
 import Signin from '../Popups/Signin/Signin';
 
 function Header({ isAuthorized }) {
+  mock.initializeAxiosMockAdapter(api.instance);
+
   const [signInModalIsOpen, setSignInModalIsOpen] = React.useState(false);
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
+
+  // const [loggedIn, setLoggedIn] = React.useState(false);
+  // const [userLogin, setUserLogin] = React.useState("");
 
   const headerClass = burgerMenuisOpen
     ? 'header header_displayed page__section'
@@ -36,9 +44,30 @@ function Header({ isAuthorized }) {
     setSignInModalIsOpen(false);
   }
 
-  function handleSignIn() {
-    console.log('Попытка входа!');
+  // Обработчик входа пользователя
+  function handleSignIn(user) {
+    console.log(user);
+    Promise.all([api.authUser(), api.updateProfile()])
+      .then(([authData, userData]) => {
+        console.log(authData, userData);
+        // if (authData.data.access) {
+        // setUserLogin(userLogin);
+        // setLoggedIn(true);
+        // localStorage.setItem('jwt', res.data.access);
+        // }
+      })
+      .catch((err) => {
+        console.log('Ошибка при попытке входа', err.message);
+      });
   }
+
+  // Обработчик выхода пользователя
+  // function handleSignOut() {
+  // setUserLogin("");
+  // setLoggedIn(false);
+  // localStorage.removeItem('jwt');
+  // history.push("./sign-in");
+  // }
 
   function toggleBurgerMenu() {
     if (burgerMenuisOpen) {

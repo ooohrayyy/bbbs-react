@@ -37,8 +37,8 @@ function Signin({ isOpen, onSignIn, onClose }) {
     },
   };
 
-  function onSubmit() {
-    onSignIn();
+  function onSubmit(user) {
+    onSignIn(user);
     onClose();
   }
 
