@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Meetup from '../Popups/Meetup/Meetup';
 import CalendarEvent from '../CalendarEvent/CalendarEvent';
 
-function CalendarCard({ event }) {
+function CalendarCard({ event, openMore }) {
   const {
     address,
     contact,
@@ -15,37 +14,14 @@ function CalendarCard({ event }) {
     takenSeats,
     description,
   } = event;
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   function handleMore() {
-    setIsMoreOpen(true);
-  }
-
-  function handleClose() {
-    setIsMoreOpen(false);
+    openMore(event);
   }
 
   return (
-    <>
-      <article className={`calendar ${booked ? 'calendar_selected' : ''}`}>
-        <CalendarEvent
-          type="Волонтеры"
-          address={address}
-          contact={contact}
-          title={title}
-          description={description}
-          startAt={startAt}
-          endAt={endAt}
-          seats={seats}
-          takenSeats={takenSeats}
-          handleMore={handleMore}
-          needDescription={false}
-        />
-      </article>
-
-      <Meetup
-        isOpen={isMoreOpen}
-        handleClose={handleClose}
+    <article className={`calendar ${booked ? 'calendar_selected' : ''}`}>
+      <CalendarEvent
         type="Волонтеры"
         address={address}
         contact={contact}
@@ -55,9 +31,10 @@ function CalendarCard({ event }) {
         endAt={endAt}
         seats={seats}
         takenSeats={takenSeats}
-        needDescription
+        handleMore={handleMore}
+        needDescription={false}
       />
-    </>
+    </article>
   );
 }
 
