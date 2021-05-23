@@ -8,6 +8,7 @@ import profile from '../assets/mock-data/profile.json';
 import main from '../assets/mock-data/main.json';
 import events from '../assets/mock-data/events.json';
 import eventParticipants from '../assets/mock-data/event-participants.json';
+import meetings from '../assets/mock-data/meetings.json';
 
 class Mock {
   constructor(params) {
@@ -39,6 +40,15 @@ class Mock {
     return [200, this.params.eventParticipants];
   }
 
+  addPhoto(config) {
+    this.params.photo = config;
+    return [200, this.params.photo];
+  }
+
+  getMeetings() {
+    return [200, this.params.meetings];
+  }
+
   // Эмулятор сервера
   initializeAxiosMockAdapter(instance) {
     const mock = new MockAdapter(instance);
@@ -48,6 +58,8 @@ class Mock {
     mock.onGet('/main').reply(() => this.getMain());
     mock.onGet('/afisha/events').reply(() => this.getEvents());
     mock.onPost('/afisha/event-participants').reply(() => this.bookEvent());
+    mock.onPost('/event-photo').reply((config) => this.addPhoto(config));
+    mock.onGet('/meetings').reply(() => this.getMeetings());
   }
 }
 
@@ -59,6 +71,7 @@ const mock = new Mock({
   main,
   events,
   eventParticipants,
+  meetings,
 });
 
 export default mock;

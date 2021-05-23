@@ -8,7 +8,8 @@ export function parsedDate(date) {
   const dayWeek = format(parseDate, 'EEEE', { locale: ru });
   const time = format(parseDate, 'kk:mm', { locale: ru });
   const dayMonth = format(parseDate, 'dd', { locale: ru });
-  return { month, dayWeek, time, dayMonth };
+  const year = format(parseDate, 'yyyy', { locale: ru });
+  return { month, dayWeek, time, dayMonth, year };
 }
 
 export function sortEventsByDate(events) {

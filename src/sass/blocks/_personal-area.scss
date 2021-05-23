@@ -12,9 +12,14 @@
   text-decoration: none;
   color: $lightGray;
   margin-left: 30px;
+  background: none;
+  border: none;
 
-  &:first-of-type {
+  &:first-child {
     margin-left: 0;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -42,13 +47,46 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
 }
 
+.personal-area__add-meeting {
+  margin: 50px auto 0;
+  max-width: 1170px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.personal-area__add-meeting-button {
+  padding: 0;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../../images/svg/personal-area-plus-blue.svg) center no-repeat;
+  border: 1px solid $blue;
+  border-radius: 100%;
+  outline: none;
+  cursor: pointer;
+}
+
+.personal-area__add-meeting-caption {
+  color: $blue;
+  font-family: $protoGrotesk;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  margin: 0 0 0 15px;
+}
 
 // пустая форма
 .personal-area__add-photo-button {
   padding: 0;
+  margin-bottom: 8.4%;
   height: 100px;
   width: 100px;
   display: flex;
@@ -62,8 +100,22 @@
 }
 
 .personal-area__bottom-caption {
-  padding-top: 5px;
   color: $lightGray;
+  cursor: pointer;
+  position: absolute;
+  bottom: 30%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.personal-area__input-photo {
+  position: absolute;
+  bottom: 30%;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .personal-area__form {
@@ -201,6 +253,7 @@
   margin: 0;
   font-size: 60px;
   text-align: end;
+  font-family: $protoGrotesk;
 }
 
 .personal-area__actions {
@@ -305,5 +358,20 @@
     margin: 0;
   }
 
+  @include atTablet {
+    .personal-area__add-meeting {
+      margin-top: 20px;
+    }
+
+    .personal-area__add-meeting-button {
+      width: 40px;
+      height: 40px;
+    }
+
+    .personal-area__add-meeting-caption {
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
 
 }
