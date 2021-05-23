@@ -48,7 +48,7 @@ function Main() {
         {isLoading ? (
           <Preloader />
         ) : (
-          answer.movies.map((item) => <Film item={item} />)
+          answer.movies.map((item) => <Film key={item.id} item={item} />)
         )}
       </section>
 

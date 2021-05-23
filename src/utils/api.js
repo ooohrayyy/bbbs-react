@@ -12,6 +12,11 @@ class Api {
   }
 
   authUser() {
+    this.instance.defaults.headers = {
+      Authorization:
+        'Bearer "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs"',
+      ...this.instance.defaults.headers,
+    };
     return this.instance.post('/token');
   }
 

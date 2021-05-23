@@ -1,14 +1,14 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Signin({ isOpen, handleSignin, handleClose }) {
-  Modal.setAppElement(document.getElementById('page'));
+function Signin({ isOpen, onSignIn, onClose }) {
+  Modal.setAppElement(document.getElementById('root'));
 
-  function closeModal() {
-    handleClose();
-  }
+  const { register, handleSubmit } = useForm();
+
   const customStyles = {
     content: {
       position: 'relative',
@@ -36,16 +36,22 @@ function Signin({ isOpen, handleSignin, handleClose }) {
       backdropFilter: 'blur(7px)',
     },
   };
+
+  function onSubmit() {
+    onSignIn();
+    onClose();
+  }
+
   return (
     <Modal
       isOpen={isOpen}
       style={customStyles}
-      onRequestClose={closeModal}
+      onRequestClose={onClose}
       closeTimeoutMS={800}
     >
-      <>
+      <form name="login-form" onSubmit={handleSubmit(onSubmit)}>
         <button
-          onClick={closeModal}
+          onClick={onClose}
           className="popup__close popup__cancel"
           type="button"
         >
@@ -61,26 +67,33 @@ function Signin({ isOpen, handleSignin, handleClose }) {
           письмо, свяжитесь с вашим куратором.
         </p>
         <input
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('login', { required: true })}
           type="text"
+          name="login"
           className="popup__input"
           required
           placeholder="Логин"
+          style={{ width: '100%' }}
         />
         <input
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('password', { required: true })}
           type="password"
+          name="password"
           className="popup__input"
           required
           placeholder="Пароль"
+          style={{ width: '100%' }}
         />
         <p className="popup__forgot-password ">Забыли пароль?</p>
         <button
-          onClick={handleSignin}
           className="button button_theme_light popup__enter"
-          type="button"
+          type="submit"
         >
           Войти
         </button>
-      </>
+      </form>
     </Modal>
   );
 }
@@ -89,5 +102,6 @@ export default Signin;
 
 Signin.propTypes = {
   isOpen: PropTypes.bool,
-  handleSignin: PropTypes.func,
+  onSignIn: PropTypes.func,
+  onClose: PropTypes.func,
 };

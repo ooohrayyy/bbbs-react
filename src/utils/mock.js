@@ -16,7 +16,7 @@ class Mock {
 
   // Обработчики запросов к псевдо-серверу
   authUser() {
-    return [200, this.params.token.access];
+    return [200, this.params.token];
   }
 
   getCities() {
