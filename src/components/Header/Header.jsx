@@ -29,7 +29,6 @@ function Header({ isAuthorized }) {
     : 'search__options menu__search-options';
 
   function handleSignInClick() {
-    console.log('Открытие окна авторизации');
     setSignInModalIsOpen(true);
   }
 
