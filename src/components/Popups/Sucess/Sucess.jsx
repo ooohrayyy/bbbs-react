@@ -38,7 +38,12 @@ function Sucess({ isOpen, handleClose }) {
     },
   };
   return (
-    <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
+    <Modal
+      isOpen={isOpen}
+      style={customStyles}
+      onRequestClose={closeModal}
+      closeTimeoutMS={800}
+    >
       <form noValidate>
         <button
           onClick={closeModal}

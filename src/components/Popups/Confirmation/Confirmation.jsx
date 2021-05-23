@@ -44,7 +44,12 @@ function Confirmation({
     },
   };
   return (
-    <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
+    <Modal
+      isOpen={isOpen}
+      style={customStyles}
+      onRequestClose={closeModal}
+      closeTimeoutMS={800}
+    >
       <form>
         <button
           onClick={closeModal}

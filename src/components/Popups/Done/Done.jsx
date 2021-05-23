@@ -36,7 +36,12 @@ function Done({ title, isOpen, handleClose }) {
     },
   };
   return (
-    <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
+    <Modal
+      isOpen={isOpen}
+      style={customStyles}
+      onRequestClose={closeModal}
+      closeTimeoutMS={800}
+    >
       <>
         <div className="calendar__image-done" />
         <button

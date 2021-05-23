@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Signin({ isOpen, handleClose }) {
+function Recomendation({ isOpen, handleClose }) {
   Modal.setAppElement(document.getElementById('page'));
 
   function closeModal() {
@@ -37,7 +37,12 @@ function Signin({ isOpen, handleClose }) {
     },
   };
   return (
-    <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
+    <Modal
+      isOpen={isOpen}
+      style={customStyles}
+      onRequestClose={closeModal}
+      closeTimeoutMS={800}
+    >
       <form noValidate>
         <button
           onClick={closeModal}
@@ -141,8 +146,8 @@ function Signin({ isOpen, handleClose }) {
   );
 }
 
-export default Signin;
+export default Recomendation;
 
-Signin.propTypes = {
+Recomendation.propTypes = {
   isOpen: PropTypes.bool,
 };
