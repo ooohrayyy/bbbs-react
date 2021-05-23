@@ -4,17 +4,12 @@ import { NavLink } from 'react-router-dom';
 import HeaderLinks from '../HeaderLinks/HeaderLinks';
 import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from '../HeaderButtons/HeaderButtons';
+import Signin from '../Popups/Signin/Signin';
 
 function Header({ isAuthorized }) {
+  const [signInModalIsOpen, setSignInModalIsOpen] = React.useState(false);
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
-
-  function toggleBurgerMenu() {
-    if (burgerMenuisOpen) {
-      setBurgerMenuIsOpen(false);
-    } else {
-      setBurgerMenuIsOpen(true);
-    }
-  }
+  const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
 
   const headerClass = burgerMenuisOpen
     ? 'header header_displayed page__section'
@@ -28,8 +23,31 @@ function Header({ isAuthorized }) {
   const menuListSocialClass = burgerMenuisOpen
     ? 'menu__list menu__list_type_social'
     : 'menu__list menu__list_type_social menu__list_hidden';
+  const menuClass = searchMenuIsOpen ? 'menu menu_state_search' : 'menu';
+  const searchOptionsClass = searchMenuIsOpen
+    ? 'search__options search__options_visible menu__search-options'
+    : 'search__options menu__search-options';
 
-  const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
+  function handleSignInClick() {
+    console.log('Открытие окна авторизации');
+    setSignInModalIsOpen(true);
+  }
+
+  function closeSignInModal() {
+    setSignInModalIsOpen(false);
+  }
+
+  function handleSignIn() {
+    console.log('Попытка входа!');
+  }
+
+  function toggleBurgerMenu() {
+    if (burgerMenuisOpen) {
+      setBurgerMenuIsOpen(false);
+    } else {
+      setBurgerMenuIsOpen(true);
+    }
+  }
 
   function toggleSearchMenu() {
     if (searchMenuIsOpen) {
@@ -38,11 +56,6 @@ function Header({ isAuthorized }) {
       setSearchMenuIsOpen(true);
     }
   }
-
-  const menuClass = searchMenuIsOpen ? 'menu menu_state_search' : 'menu';
-  const searchOptionsClass = searchMenuIsOpen
-    ? 'search__options search__options_visible menu__search-options'
-    : 'search__options menu__search-options';
 
   return (
     <header className={headerClass}>
@@ -62,8 +75,14 @@ function Header({ isAuthorized }) {
           isAuthorized={isAuthorized}
           toggleSearchMenu={toggleSearchMenu}
           searchOptionsClass={searchOptionsClass}
+          onSignInClick={handleSignInClick}
         />
       </nav>
+      <Signin
+        isOpen={signInModalIsOpen}
+        onSignIn={handleSignIn}
+        onClose={closeSignInModal}
+      />
     </header>
   );
 }

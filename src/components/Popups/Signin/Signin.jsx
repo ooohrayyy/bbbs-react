@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Signin({ isOpen, handleSignin, handleClose }) {
-  Modal.setAppElement(document.getElementById('page'));
+function Signin({ isOpen, onSignIn, onClose }) {
+  Modal.setAppElement(document.getElementById('root'));
 
-  function closeModal() {
-    handleClose();
-  }
   const customStyles = {
     content: {
       position: 'relative',
@@ -40,12 +37,12 @@ function Signin({ isOpen, handleSignin, handleClose }) {
     <Modal
       isOpen={isOpen}
       style={customStyles}
-      onRequestClose={closeModal}
+      onRequestClose={onClose}
       closeTimeoutMS={800}
     >
       <>
         <button
-          onClick={closeModal}
+          onClick={onClose}
           className="popup__close popup__cancel"
           type="button"
         >
@@ -74,7 +71,7 @@ function Signin({ isOpen, handleSignin, handleClose }) {
         />
         <p className="popup__forgot-password ">Забыли пароль?</p>
         <button
-          onClick={handleSignin}
+          onClick={onSignIn}
           className="button button_theme_light popup__enter"
           type="button"
         >
@@ -89,5 +86,6 @@ export default Signin;
 
 Signin.propTypes = {
   isOpen: PropTypes.bool,
-  handleSignin: PropTypes.func,
+  onSignIn: PropTypes.func,
+  onClose: PropTypes.func,
 };
