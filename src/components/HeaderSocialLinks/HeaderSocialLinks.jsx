@@ -6,7 +6,7 @@ function HeaderSocialLinks({ menuListSocialClass }) {
       <li className="menu__list-item">
         <a
           className="menu__link"
-          href="https://www.facebook.com/BigBrothers.BigSisters.Russia/"
+          href="https://facebook.com/BigBrothers.BigSisters.Russia"
           target="_blank"
           rel="noreferrer"
         >
@@ -26,7 +26,7 @@ function HeaderSocialLinks({ menuListSocialClass }) {
       <li className="menu__list-item">
         <a
           className="menu__link"
-          href="https://www.instagram.com/nastavniki_org/"
+          href="https://instagram.com/nastavniki_org"
           target="_blank"
           rel="noreferrer"
         >
@@ -36,7 +36,7 @@ function HeaderSocialLinks({ menuListSocialClass }) {
       <li className="menu__list-item">
         <a
           className="menu__link"
-          href="https://www.youtube.com/user/Nastavniki/"
+          href="https://youtube.com/user/Nastavniki"
           target="_blank"
           rel="noreferrer"
         >
