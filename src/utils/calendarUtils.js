@@ -27,9 +27,10 @@ export function sortEventsByDate(events) {
 
 export function getParsedEventsData(data) {
   return data.map((i) => {
-    const { month } = parsedDate(i.startAt);
+    const { month, dayMonth } = parsedDate(i.startAt);
     return {
       ...i,
+      startDayMonth: dayMonth,
       startMonth: month,
     };
   });

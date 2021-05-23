@@ -22,7 +22,7 @@ function CalendarEvent({
   const hasFreeSeats = numberOfFreeSeats > 0;
 
   return (
-    <>
+    <article className={`calendar ${booked ? 'calendar_selected' : ''}`}>
       <div className="calendar__caption">
         <div className="calendar__info">
           <p className="calendar__type">{type}</p>
@@ -86,7 +86,7 @@ function CalendarEvent({
           )}
         </div>
       </div>
-    </>
+    </article>
   );
 }
 

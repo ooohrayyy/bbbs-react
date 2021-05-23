@@ -1,5 +1,5 @@
 .personal-area {
-  padding-top: 30px;
+  padding-top: 120px;
 }
 
 .personal-area__user-info {
@@ -57,6 +57,57 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.personal-area__reg-events {
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  width: 100%;
+  min-height: 20px;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.personal-area__reg-event {
+  box-sizing: border-box;
+  padding: 30px;
+  min-width: 270px;
+  width: 270px;
+  border-radius: 30px;
+  background-color: #fff;
+  font-family: $ptRootUI;
+}
+
+.personal-area__reg-event-date {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.personal-area__reg-event-day {
+  display: block;
+  margin-right: 10px;
+  font-family: $protoGrotesk;
+  font-weight: 300;
+  font-size: 44px;
+  line-height: 1.14;
+}
+
+.personal-area__reg-event-month {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0.2px;
+}
+
+.personal-area__reg-event-description {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.36;
+  letter-spacing: 0.2px;
 }
 
 .personal-area__add-meeting-button {

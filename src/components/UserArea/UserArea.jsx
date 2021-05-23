@@ -4,11 +4,19 @@ import PropTypes from 'prop-types';
 
 import UserEventForm from '../UserEventForm/UserEventForm';
 import UserEvent from '../UserEvent/UserEvent';
+import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
 
-function UserArea({ meetings = [], onAddMeeting }) {
+import getRegistredEvents from '../../utils/userAreauUtils';
+
+function UserArea({ meetings = [], onAddMeeting, allEvents }) {
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
+  const [bookedEvents, setBookedEvents] = useState([]);
 
   useEffect(() => {}, [meetings]);
+
+  useEffect(() => {
+    setBookedEvents(getRegistredEvents(allEvents));
+  }, [allEvents]);
 
   function handleAddMeetClick() {
     setIsMeetButtonClicked(true);
@@ -36,8 +44,20 @@ function UserArea({ meetings = [], onAddMeeting }) {
       </div>
       <div className="personal-area__sign-up">
         <h2 className="section-title personal-area__title personal-area__title_type_sign-up">
-          У вас нет записи на мероприятия
+          {bookedEvents.length === 0
+            ? 'У вас нет записи на мероприятия'
+            : 'Вы записаны на мероприятия:'}
         </h2>
+        <ul className="personal-area__reg-events">
+          {bookedEvents.map((i) => (
+            <UserRegistredEvent
+              key={i.id}
+              title={i.title}
+              startDayMonth={i.startDayMonth}
+              startMonth={i.startMonth}
+            />
+          ))}
+        </ul>
       </div>
       {isAddMeetButtonClicked && (
         <div className="personal-area__story">

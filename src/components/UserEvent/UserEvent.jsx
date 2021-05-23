@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import parsedDate from '../../utils/calendarUtils';
+import { parsedDate } from '../../utils/calendarUtils';
 
 function UserEvent({ meeting }) {
   const { place, description, photo, date, rateGood, rateNeutral, rateBad } =
