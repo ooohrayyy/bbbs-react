@@ -11,7 +11,13 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import cities from '../../assets/mock-data/cities.json';
 
-function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
+function UserArea({
+  meetings = [],
+  onAddMeeting,
+  allEvents,
+  onSignOut,
+  isLoading,
+}) {
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
   const [bookedEvents, setBookedEvents] = useState([]);
   const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
@@ -109,7 +115,9 @@ function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
         />
       )}
       {!isAddMeetButtonClicked &&
-        meetings.map((el) => <UserEvent meeting={el} key={el.id} />)}
+        meetings.map((el) => (
+          <UserEvent meeting={el} isLoading={isLoading} key={el.id} />
+        ))}
       <Cities
         isOpen={isChangeCityPopupOpen}
         handleClose={closeChangeCityPopup}
