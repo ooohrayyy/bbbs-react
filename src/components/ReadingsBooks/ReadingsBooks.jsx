@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
+
 function ReadingsBooks() {
   return (
     <>
@@ -8,18 +10,7 @@ function ReadingsBooks() {
           <a href="./books.html" className="link">
             <h3 className="chapter-title chapter-title_clickable">Книги</h3>
           </a>
-          <div className="preview__buttons">
-            <button
-              className="preview__button preview__button_left"
-              type="button"
-              label="left"
-            />
-            <button
-              className="preview__button preview__button_right"
-              type="button"
-              label="right"
-            />
-          </div>
+          <ReadingsButtons />
         </div>
         <div className="preview__row">
           <article className="preview__card card-container">

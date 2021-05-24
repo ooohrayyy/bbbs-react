@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
 import ReadingsHandbookCard from '../ReadingsHandbookCard/ReadingsHandbookCard';
 
 import readingsHandbookCardsData from '../../assets/dev-data/ReadingsData/ReadingsHandbookData/readingsHandbookCardsData';
@@ -11,18 +12,7 @@ function ReadingsHandbook() {
         <a href="./catalog.html" className="link">
           <h3 className="chapter-title chapter-title_clickable">Справочник</h3>
         </a>
-        <div className="preview__buttons">
-          <button
-            className="preview__button preview__button_left"
-            type="button"
-            label="left"
-          />
-          <button
-            className="preview__button preview__button_right"
-            type="button"
-            label="right"
-          />
-        </div>
+        <ReadingsButtons />
       </div>
       <div className="preview__row">
         {readingsHandbookCardsData.map((item, index) => (
