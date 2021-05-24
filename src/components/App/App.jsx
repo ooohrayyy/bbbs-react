@@ -99,40 +99,42 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header
-        isAuthorized={isAuthorized}
-        onSignIn={handleSignIn}
-        isHidden={hiddenMenuClass}
-        pushToProfilePage={pushToProfilePage}
-      />
-      <main className="main">
-        <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <Route exact path="/about">
-            <AboutUs />
-          </Route>
-          <Route exact path="/calendar">
-            <Calendar />
-          </Route>
-          <Route exact path="/to-go">
-            <Places />
-          </Route>
-          <Route exact path="/profile">
-            <UserArea
-              allEvents={events}
-              meetings={meetings}
-              onAddMeeting={handleAddMeeting}
-              onSignOut={handleSignOut}
-            />
-          </Route>
-          <Route path="/">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </main>
-      <Footer />
+      <body className="page">
+        <Header
+          isAuthorized={isAuthorized}
+          onSignIn={handleSignIn}
+          isHidden={hiddenMenuClass}
+          pushToProfilePage={pushToProfilePage}
+        />
+        <main className="main">
+          <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            <Route exact path="/about">
+              <AboutUs />
+            </Route>
+            <Route exact path="/calendar">
+              <Calendar />
+            </Route>
+            <Route exact path="/to-go">
+              <Places />
+            </Route>
+            <Route exact path="/profile">
+              <UserArea
+                allEvents={events}
+                meetings={meetings}
+                onAddMeeting={handleAddMeeting}
+                onSignOut={handleSignOut}
+              />
+            </Route>
+            <Route path="/">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+        </main>
+        <Footer />
+      </body>
     </CurrentUserContext.Provider>
   );
 }
