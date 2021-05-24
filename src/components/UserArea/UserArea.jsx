@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import UserEventForm from '../UserEventForm/UserEventForm';
@@ -8,7 +7,7 @@ import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
 
 import getRegistredEvents from '../../utils/userAreauUtils';
 
-function UserArea({ meetings = [], onAddMeeting, allEvents }) {
+function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
   const [bookedEvents, setBookedEvents] = useState([]);
 
@@ -35,12 +34,13 @@ function UserArea({ meetings = [], onAddMeeting, allEvents }) {
         >
           Изменить город
         </button>
-        <Link
-          to="/main"
+        <button
+          type="button"
+          onClick={onSignOut}
           className="paragraph personal-area__user-link personal-area__user-link_type_exit"
         >
           Выйти
-        </Link>
+        </button>
       </div>
       <div className="personal-area__sign-up">
         <h2 className="section-title personal-area__title personal-area__title_type_sign-up">
