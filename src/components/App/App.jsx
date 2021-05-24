@@ -11,6 +11,7 @@ import Footer from '../Footer/Footer';
 
 import Main from '../Main/Main';
 import Calendar from '../Calendar/Calendar';
+import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
 import Places from '../Places/Places';
@@ -121,6 +122,9 @@ function App() {
             </Route>
             <Route exact path="/calendar">
               <Calendar />
+            </Route>
+            <Route exact path="/readings">
+              <Readings />
             </Route>
             <Route exact path="/to-go">
               <Places />
