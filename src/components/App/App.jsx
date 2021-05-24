@@ -18,9 +18,10 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   mock.initializeAxiosMockAdapter(api.instance);
-  const [isAuthorized, setIsAuthorized] = React.useState(false);
+
   const [currentUser, setCurrentUser] = React.useState({});
   const [events, setEvents] = React.useState([]);
+  const [isAuthorized, setIsAuthorized] = React.useState(false);
 
   const [scrollTop, setScrollTop] = React.useState(0);
   const [hiddenMenuClass, setHiddenMenuClass] = React.useState('');
