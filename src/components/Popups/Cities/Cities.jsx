@@ -4,11 +4,12 @@ import Modal from 'react-modal';
 import mock from '../../../utils/mock';
 import api from '../../../utils/api';
 import City from '../City/City';
+import Preloader from '../../Preloader/Preloader';
 
 function Cities({ isOpen, handleClose, handleCities }) {
   Modal.setAppElement(document.getElementById('page'));
   const [answer, setAnswer] = useState([]);
-  //   const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   mock.initializeAxiosMockAdapter(api.instance);
 
   useEffect(() => {
@@ -16,8 +17,7 @@ function Cities({ isOpen, handleClose, handleCities }) {
       .getCities()
       .then((res) => {
         setAnswer(res.data);
-        // setIsLoading(false);
-        console.log(answer);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err.message));
   }, []);
@@ -40,10 +40,12 @@ function Cities({ isOpen, handleClose, handleCities }) {
       backgroundColor: '#ffffff',
       boxSizing: 'border-box',
       alignItems: 'center',
-      padding: '50px 85px 0',
+      padding: '50px 15px',
       justifyContent: 'flex-start',
       maxWidth: '400px',
       maxHeight: '547px',
+      width: '320px',
+      height: 'fit-content',
     },
     overlay: {
       position: 'fixed',
@@ -57,42 +59,48 @@ function Cities({ isOpen, handleClose, handleCities }) {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      style={customStyles}
-      onRequestClose={closeModal}
-      closeTimeoutMS={800}
-    >
-      <>
-        <h2 className="cities__title section-title">Выберите ваш город</h2>
-        <ul className="cities__capitals">
-          {answer.map(
-            (item) =>
-              item.isPrimary && (
-                <City
-                  id={item.id}
-                  name={item.name}
-                  key={item.id}
-                  handleCity={handleCity}
-                />
-              ),
-          )}
-        </ul>
-        <ul className="cities__region">
-          {answer.map(
-            (item) =>
-              !item.isPrimary && (
-                <City
-                  id={item.id}
-                  name={item.name}
-                  key={item.id}
-                  handleCity={handleCity}
-                />
-              ),
-          )}
-        </ul>
-      </>
-    </Modal>
+    <>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <Modal
+          isOpen={isOpen}
+          style={customStyles}
+          onRequestClose={closeModal}
+          closeTimeoutMS={800}
+        >
+          <>
+            <h2 className="cities__title section-title">Выберите ваш город</h2>
+            <ul className="cities__capitals">
+              {answer.map(
+                (item) =>
+                  item.isPrimary && (
+                    <City
+                      id={item.id}
+                      name={item.name}
+                      key={item.id}
+                      handleCity={handleCity}
+                    />
+                  ),
+              )}
+            </ul>
+            <ul className="cities__region">
+              {answer.map(
+                (item) =>
+                  !item.isPrimary && (
+                    <City
+                      id={item.id}
+                      name={item.name}
+                      key={item.id}
+                      handleCity={handleCity}
+                    />
+                  ),
+              )}
+            </ul>
+          </>
+        </Modal>
+      )}
+    </>
   );
 }
 

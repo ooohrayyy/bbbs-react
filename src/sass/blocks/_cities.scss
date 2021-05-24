@@ -3,7 +3,10 @@
 
   &__title {
     padding-bottom: 30px;
-    font-size: 23px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 23px
   }
 
   &__name {
@@ -36,12 +39,13 @@
     line-height: 1.25;
     letter-spacing: .2px;
     list-style: none;
+    width: 100%;
 
     &:after {
       content: '';
       display: block;
       border-bottom: 1px solid $lightGray;
-      width: 370px;
+      width: 100%;
     }
   }
 

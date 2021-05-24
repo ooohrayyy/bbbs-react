@@ -45,7 +45,6 @@ function Meetup({
       bottom: 0,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       display: 'flex',
-      backdropFilter: 'blur(7px)',
     },
   };
   return (
