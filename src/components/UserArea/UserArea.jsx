@@ -1,15 +1,23 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import UserEventForm from '../UserEventForm/UserEventForm';
 import UserEvent from '../UserEvent/UserEvent';
 import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
+import Cities from '../Popups/Cities/Cities';
 
 import getRegistredEvents from '../../utils/userAreauUtils';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+
+import cities from '../../assets/mock-data/cities.json';
 
 function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
   const [bookedEvents, setBookedEvents] = useState([]);
+  const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
+  const [userCity, setUserCity] = useState('');
+
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {}, [meetings]);
 
@@ -25,14 +33,30 @@ function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
     setIsMeetButtonClicked(false);
   }
 
+  function handleChangeCityClick() {
+    setIsChangeCityPopupOpen(true);
+  }
+
+  function closeChangeCityPopup() {
+    setIsChangeCityPopupOpen(false);
+  }
+
+  function handleCities(currentCity) {
+    currentUser.city = currentCity;
+    const cityName = cities.filter((el) => el.id === currentCity)[0].name;
+    setUserCity(cityName);
+    console.log('currentUser is ', currentUser);
+  }
+
   return (
     <section className="personal-area page__section">
       <div className="personal-area__user-info">
         <button
+          onClick={handleChangeCityClick}
           type="button"
           className="paragraph personal-area__user-link personal-area__user-link_type_city"
         >
-          Изменить город
+          {userCity && `${userCity}. `} Изменить город
         </button>
         <button
           type="button"
@@ -86,6 +110,11 @@ function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
       )}
       {!isAddMeetButtonClicked &&
         meetings.map((el) => <UserEvent meeting={el} key={el.id} />)}
+      <Cities
+        isOpen={isChangeCityPopupOpen}
+        handleClose={closeChangeCityPopup}
+        handleCities={handleCities}
+      />
     </section>
   );
 }
