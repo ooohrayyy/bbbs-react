@@ -1,42 +1,48 @@
 const readingsHandbookCardsData = [
   {
     cardTitle: 'Психологические особенности детей-сирот',
-    cardImage: './CardImages/catalog-hulk-boys.jpg',
+    cardImage:
+      '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-hulk-boys.jpg',
     cardAlt: 'Психологические особенности детей-сирот',
     cardLink: './articles',
     cardStyle: 'square',
   },
   {
     cardTitle: 'Привязанность',
-    cardImage: './CardImages/catalog-coffee.jpg',
+    cardImage:
+      '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-coffee.jpg',
     cardAlt: 'Привязанность',
     cardLink: './articles',
     cardStyle: 'circle',
   },
   {
     cardTitle: 'Особенности социально дезадаптивных детей',
-    cardImage: './CardImages/catalog-beach.jpg',
+    cardImage:
+      '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-beach.jpg',
     cardAlt: 'Особенности социально дезадаптивных детей',
     cardLink: './articles',
     cardStyle: 'arc',
   },
   {
     cardTitle: 'Социальная адаптация',
-    cardImage: './CardImages/catalog-coffee.jpg',
+    cardImage:
+      '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-coffee.jpg',
     cardAlt: 'Социальная адаптация',
     cardLink: './articles',
     cardStyle: 'circle',
   },
   {
     cardTitle: 'Социально дезадаптивные дети',
-    cardImage: './CardImages/catalog-blue-hand.jpg',
+    cardImage:
+      '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-blue-hand.jpg',
     cardAlt: 'Социально дезадаптивные дети',
     cardLink: './articles',
     cardStyle: 'arc',
   },
   {
     cardTitle: 'Проявление агрессии у детей-сирот',
-    cardImage: './CardImages/catalog-spear.jpg',
+    cardImage:
+      '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-spear.jpg',
     cardAlt: 'Проявление агрессии у детей-сирот',
     cardLink: './articles',
     cardStyle: 'square',

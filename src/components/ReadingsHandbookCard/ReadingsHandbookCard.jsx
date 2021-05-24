@@ -1,8 +1,10 @@
 import React from 'react';
 
+import devImage from '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-hulk-boys.jpg';
+
 function ReadingsHandbookCard({
   cardTitle,
-  cardImage,
+  // cardImage,
   cardAlt,
   cardLink,
   cardStyle,
@@ -28,7 +30,8 @@ function ReadingsHandbookCard({
       <div className={`card ${cardModificator} rights__card`}>
         <a href={cardLink} className="rights__link">
           <img
-            src={cardImage}
+            // src={cardImage}
+            src={devImage}
             alt={cardAlt || cardTitle}
             className="catalog-card__image"
           />
