@@ -1,18 +1,11 @@
 import React from 'react';
 import './Preloader.css';
+import loader from '../../images/loading.png';
 
 function Preloader() {
   return (
-    <div className="preloader-4">
-      <div>i</div>
-      <div>i</div>
-      <div>i</div>
-      <div>i</div>
-      <div>i</div>
-      <div>i</div>
-      <div>i</div>
-      <div>i</div>
-      <div>i</div>
+    <div className="preloader">
+      <img className="loader" src={loader} alt="Loading..." />
     </div>
   );
 }
