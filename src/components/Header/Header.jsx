@@ -6,7 +6,7 @@ import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from '../HeaderButtons/HeaderButtons';
 import Signin from '../Popups/Signin/Signin';
 
-function Header({ isAuthorized, handleSignIn, isHidden }) {
+function Header({ isAuthorized, onSignIn, isHidden, pushToProfilePage }) {
   const [signInModalIsOpen, setSignInModalIsOpen] = React.useState(false);
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
@@ -29,7 +29,11 @@ function Header({ isAuthorized, handleSignIn, isHidden }) {
     : 'search__options menu__search-options';
 
   function handleSignInClick() {
-    setSignInModalIsOpen(true);
+    if (isAuthorized) {
+      pushToProfilePage();
+    } else {
+      setSignInModalIsOpen(true);
+    }
   }
 
   function closeSignInModal() {
@@ -75,7 +79,7 @@ function Header({ isAuthorized, handleSignIn, isHidden }) {
       </nav>
       <Signin
         isOpen={signInModalIsOpen}
-        onSignIn={handleSignIn}
+        onSignIn={onSignIn}
         onClose={closeSignInModal}
       />
     </header>
