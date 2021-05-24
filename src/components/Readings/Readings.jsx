@@ -10,14 +10,14 @@ function Readings() {
               Справочник
             </h3>
           </a>
-          <div className="preview__bottons">
+          <div className="preview__buttons">
             <button
               className="preview__button preview__button_left"
               type="button"
               label="left"
             />
             <button
-              className="preview__button preview__button_rigrh"
+              className="preview__button preview__button_right"
               type="button"
               label="right"
             />
@@ -119,14 +119,14 @@ function Readings() {
           <a href="./video.html" className="link">
             <h3 className="chapter-title chapter-title_clickable">Видео</h3>
           </a>
-          <div className="preview__bottons">
+          <div className="preview__buttons">
             <button
               className="preview__button preview__button_left"
               type="button"
               label="left"
             />
             <button
-              className="preview__button preview__button_rigrh"
+              className="preview__button preview__button_right"
               type="button"
               label="right"
             />
@@ -284,14 +284,14 @@ function Readings() {
           <a href="./articles.html" className="link">
             <h3 className="chapter-title chapter-title_clickable">Статьи</h3>
           </a>
-          <div className="preview__bottons">
+          <div className="preview__buttons">
             <button
               className="preview__button preview__button_left"
               type="button"
               label="left"
             />
             <button
-              className="preview__button preview__button_rigrh"
+              className="preview__button preview__button_right"
               type="button"
               label="right"
             />
@@ -531,14 +531,14 @@ function Readings() {
           <a href="./films.html" className="link">
             <h3 className="chapter-title chapter-title_clickable">Фильмы</h3>
           </a>
-          <div className="preview__bottons">
+          <div className="preview__buttons">
             <button
               className="preview__button preview__button_left"
               type="button"
               label="left"
             />
             <button
-              className="preview__button preview__button_rigrh"
+              className="preview__button preview__button_right"
               type="button"
               label="right"
             />
@@ -873,14 +873,14 @@ function Readings() {
           <a href="./books.html" className="link">
             <h3 className="chapter-title chapter-title_clickable">Книги</h3>
           </a>
-          <div className="preview__bottons">
+          <div className="preview__buttons">
             <button
               className="preview__button preview__button_left"
               type="button"
               label="left"
             />
             <button
-              className="preview__button preview__button_rigrh"
+              className="preview__button preview__button_right"
               type="button"
               label="right"
             />
