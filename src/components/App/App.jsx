@@ -29,6 +29,8 @@ function App() {
   const [scrollTop, setScrollTop] = React.useState(0);
   const [hiddenMenuClass, setHiddenMenuClass] = React.useState('');
 
+  const [isLoadingMeetings, setIsLoadingMeetings] = React.useState(true);
+
   const history = useHistory();
 
   // Проверка токена
@@ -48,6 +50,7 @@ function App() {
       .then(([meetingsData, eventsData]) => {
         const parseDate = getParsedEventsData(eventsData.data);
         setMeetings(meetingsData.data);
+        setIsLoadingMeetings(false);
         setEvents(parseDate);
       })
       .catch((err) => err.message);
@@ -125,6 +128,7 @@ function App() {
                 meetings={meetings}
                 onAddMeeting={handleAddMeeting}
                 onSignOut={handleSignOut}
+                isLoading={isLoadingMeetings}
               />
             </Route>
             <Route path="/">
