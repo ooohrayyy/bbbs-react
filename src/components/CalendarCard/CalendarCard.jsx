@@ -20,21 +20,20 @@ function CalendarCard({ event, openMore }) {
   }
 
   return (
-    <article className={`calendar ${booked ? 'calendar_selected' : ''}`}>
-      <CalendarEvent
-        type="Волонтеры"
-        address={address}
-        contact={contact}
-        title={title}
-        description={description}
-        startAt={startAt}
-        endAt={endAt}
-        seats={seats}
-        takenSeats={takenSeats}
-        handleMore={handleMore}
-        needDescription={false}
-      />
-    </article>
+    <CalendarEvent
+      type="Волонтеры"
+      address={address}
+      contact={contact}
+      title={title}
+      description={description}
+      startAt={startAt}
+      endAt={endAt}
+      seats={seats}
+      takenSeats={takenSeats}
+      handleMore={handleMore}
+      needDescription={false}
+      booked={booked}
+    />
   );
 }
 

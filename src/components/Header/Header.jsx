@@ -6,14 +6,14 @@ import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from '../HeaderButtons/HeaderButtons';
 import Signin from '../Popups/Signin/Signin';
 
-function Header({ isAuthorized, handleSignIn }) {
+function Header({ isAuthorized, handleSignIn, isHidden }) {
   const [signInModalIsOpen, setSignInModalIsOpen] = React.useState(false);
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
 
   const headerClass = burgerMenuisOpen
-    ? 'header header_displayed page__section'
-    : 'header page__section';
+    ? `header ${isHidden} header_displayed page__section`
+    : `header ${isHidden} page__section`;
   const burgerMenuClass = burgerMenuisOpen
     ? 'menu__burger menu__burger_active'
     : 'menu__burger';

@@ -28,7 +28,7 @@ function Main() {
   }, []);
 
   return (
-    <main className="main">
+    <>
       <section className="lead page__section">
         <article className="card-container card-container_type_identical">
           <Description />
@@ -70,7 +70,7 @@ function Main() {
       <section className="main-section page__section">
         {isLoading ? <Preloader /> : <Quote article={answer.articles[1]} />}
       </section>
-    </main>
+    </>
   );
 }
 

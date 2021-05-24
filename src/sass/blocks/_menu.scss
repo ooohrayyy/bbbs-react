@@ -2,7 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  min-height: 110px;
 }
 
 .menu__logo {
@@ -196,9 +197,8 @@
   .menu {
     display: grid;
     grid-template-columns: 60px 1fr 40px;
-    grid-template-rows: 30px 1fr;
     justify-items: center;
-    align-items: start;
+    align-items: center;
   }
 
   .menu__button-list {
@@ -363,5 +363,17 @@
     /* & .menu__user-info {
       display: none;
     } */
+  }
+}
+
+@include atDesktop1024 {
+  .menu {
+    min-height: 90px;
+  }
+}
+
+@include atMobile {
+  .menu {
+    min-height: 60px;
   }
 }
