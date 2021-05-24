@@ -67,6 +67,9 @@
       width: 470px;
       height: 238px;
     }
+    &:focus {
+      outline: none !important;
+    }
   }
 
   &__box {

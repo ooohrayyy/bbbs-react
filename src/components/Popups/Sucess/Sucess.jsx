@@ -9,37 +9,14 @@ function Sucess({ isOpen, handleClose }) {
   function closeModal() {
     handleClose();
   }
-  const customStyles = {
-    content: {
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      zIndex: 2,
-      margin: '75px auto 0',
-      padding: '50px 100px',
-      borderRadius: '30px',
-      maxWidth: '770px',
-      maxHeight: '80vh',
-      backgroundColor: '#ffffff',
-      boxSizing: 'border-box',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '618px',
-    },
-    overlay: {
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      left: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      display: 'flex',
-    },
-  };
   return (
     <Modal
       isOpen={isOpen}
-      style={customStyles}
+      className="
+          popup__container
+          popup__container_type_recommendation
+          popup__container_type_recommendation-finish"
+      overlayClassName="popup recommendation recommendation_type_finish"
       onRequestClose={closeModal}
       closeTimeoutMS={800}
     >

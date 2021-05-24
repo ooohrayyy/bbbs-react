@@ -29,34 +29,6 @@ function Cities({ isOpen, handleClose, handleCities }) {
     handleClose();
     handleCities(id);
   }
-  const customStyles = {
-    content: {
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      zIndex: 2,
-      margin: '75px auto 0',
-      borderRadius: '30px',
-      backgroundColor: '#ffffff',
-      boxSizing: 'border-box',
-      alignItems: 'center',
-      padding: '50px 15px',
-      justifyContent: 'flex-start',
-      maxWidth: '400px',
-      maxHeight: '547px',
-      width: '320px',
-      height: 'fit-content',
-    },
-    overlay: {
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      left: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      display: 'flex',
-    },
-  };
 
   return (
     <>
@@ -65,7 +37,8 @@ function Cities({ isOpen, handleClose, handleCities }) {
       ) : (
         <Modal
           isOpen={isOpen}
-          style={customStyles}
+          className="popup__container popup__container_type_cities"
+          overlayClassName="popup pupup_type_cities cities"
           onRequestClose={closeModal}
           closeTimeoutMS={800}
         >
