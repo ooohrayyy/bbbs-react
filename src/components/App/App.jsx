@@ -18,7 +18,6 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   mock.initializeAxiosMockAdapter(api.instance);
-  // eslint-disable-next-line no-unused-vars
   const [isAuthorized, setIsAuthorized] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [events, setEvents] = React.useState([]);
@@ -58,7 +57,7 @@ function App() {
   // history.push("./");
   // }
 
-  function onScroll() {
+  function handleScroll() {
     const currentPosition = window.pageYOffset;
     if (currentPosition > scrollTop && currentPosition > 20) {
       setHiddenMenuClass('header_hidden');
@@ -73,8 +72,8 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
 
   return (
