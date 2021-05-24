@@ -17,7 +17,7 @@ function ReadingsHandbookCard({
       cardModificator = 'card_form_circle';
       break;
     case 'arc':
-      cardModificator = 'card_form_arch';
+      cardModificator = 'card_form_arc';
       break;
     default:
       cardModificator = '';
