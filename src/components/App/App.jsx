@@ -55,7 +55,7 @@ function App() {
 
   // Обработчик входа пользователя
   function handleSignIn() {
-    Promise.all([api.authUser(), api.updateProfile(), api.getEvents()])
+    Promise.all([api.authUser(), api.updateProfile()])
       .then(([authData, userData]) => {
         if (authData.data.access) {
           setIsAuthorized(true);
@@ -63,9 +63,7 @@ function App() {
           localStorage.setItem('jwt', authData.data.access);
         }
       })
-      .catch((err) => {
-        console.log('Ошибка при попытке входа', err.message);
-      });
+      .catch((err) => err.message);
   }
 
   function pushToProfilePage() {
@@ -90,10 +88,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    handleSignIn();
-  }, []);
-
-  React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
@@ -104,7 +98,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <body className="page">
+      <div className="page">
         <Header
           isAuthorized={isAuthorized}
           onSignIn={handleSignIn}
@@ -139,7 +133,7 @@ function App() {
           </Switch>
         </main>
         <Footer />
-      </body>
+      </div>
     </CurrentUserContext.Provider>
   );
 }
