@@ -117,7 +117,7 @@ function App() {
               <Calendar />
             </Route>
             <Route exact path="/to-go">
-              <Places />
+              <Places isAuthorized={isAuthorized} />
             </Route>
             <Route exact path="/profile">
               <UserArea
