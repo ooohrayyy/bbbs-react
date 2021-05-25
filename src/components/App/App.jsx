@@ -101,42 +101,44 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Header
-          isAuthorized={isAuthorized}
-          onSignIn={handleSignIn}
-          isHidden={hiddenMenuClass}
-          pushToProfilePage={pushToProfilePage}
-        />
-        <main className="main">
-          <Switch>
-            <Route exact path="/">
-              <Main />
-            </Route>
-            <Route exact path="/about">
-              <AboutUs />
-            </Route>
-            <Route exact path="/calendar">
-              <Calendar />
-            </Route>
-            <Route exact path="/to-go">
-              <Places />
-            </Route>
-            <Route exact path="/profile">
-              <UserArea
-                allEvents={events}
-                meetings={meetings}
-                onAddMeeting={handleAddMeeting}
-                onSignOut={handleSignOut}
-                isLoading={isLoadingMeetings}
-              />
-            </Route>
-            <Route path="/">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </main>
-        <Footer />
+      <div className="page__container">
+        <div className="page">
+          <Header
+            isAuthorized={isAuthorized}
+            onSignIn={handleSignIn}
+            isHidden={hiddenMenuClass}
+            pushToProfilePage={pushToProfilePage}
+          />
+          <main className="main">
+            <Switch>
+              <Route exact path="/">
+                <Main />
+              </Route>
+              <Route exact path="/about">
+                <AboutUs />
+              </Route>
+              <Route exact path="/calendar">
+                <Calendar />
+              </Route>
+              <Route exact path="/to-go">
+                <Places />
+              </Route>
+              <Route exact path="/profile">
+                <UserArea
+                  allEvents={events}
+                  meetings={meetings}
+                  onAddMeeting={handleAddMeeting}
+                  onSignOut={handleSignOut}
+                  isLoading={isLoadingMeetings}
+                />
+              </Route>
+              <Route path="/">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </main>
+          <Footer />
+        </div>
       </div>
     </CurrentUserContext.Provider>
   );

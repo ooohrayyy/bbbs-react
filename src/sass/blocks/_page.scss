@@ -10,6 +10,10 @@
   -moz-text-size-adjust: 100%;
 }
 
+.page__container {
+  background-color: $background;
+}
+
 .page__section {
   margin: 0 auto;
   padding: 150px 75px 0;
