@@ -1,11 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function HeaderRegularLinks() {
+function HeaderRegularLinks({ isAuthorized, onCalendarLinkClick }) {
+  function handleCalendarLinkClick(e) {
+    if (!isAuthorized) {
+      e.preventDefault();
+      onCalendarLinkClick();
+    }
+  }
+
   return (
     <ul className="menu__list">
       <li className="menu__list-item">
-        <NavLink className="menu__link" to="/calendar">
+        <NavLink
+          onClick={handleCalendarLinkClick}
+          className="menu__link"
+          to="/calendar"
+        >
           Календарь
         </NavLink>
       </li>
