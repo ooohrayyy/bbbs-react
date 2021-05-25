@@ -4,10 +4,13 @@ import { NavLink } from 'react-router-dom';
 import HeaderLinks from '../HeaderLinks/HeaderLinks';
 import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from '../HeaderButtons/HeaderButtons';
-import Signin from '../Popups/Signin/Signin';
 
-function Header({ isAuthorized, onSignIn, isHidden, pushToProfilePage }) {
-  const [signInModalIsOpen, setSignInModalIsOpen] = React.useState(false);
+function Header({
+  isAuthorized,
+  isHidden,
+  pushToProfilePage,
+  openSignInModal,
+}) {
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
 
@@ -28,20 +31,12 @@ function Header({ isAuthorized, onSignIn, isHidden, pushToProfilePage }) {
     ? 'search__options search__options_visible menu__search-options'
     : 'search__options menu__search-options';
 
-  function openSignInModal() {
-    setSignInModalIsOpen(true);
-  }
-
   function handleSignInClick() {
     if (isAuthorized) {
       pushToProfilePage();
     } else {
       openSignInModal();
     }
-  }
-
-  function closeSignInModal() {
-    setSignInModalIsOpen(false);
   }
 
   function toggleBurgerMenu() {
@@ -83,11 +78,6 @@ function Header({ isAuthorized, onSignIn, isHidden, pushToProfilePage }) {
           onSignInClick={handleSignInClick}
         />
       </nav>
-      <Signin
-        isOpen={signInModalIsOpen}
-        onSignIn={onSignIn}
-        onClose={closeSignInModal}
-      />
     </header>
   );
 }

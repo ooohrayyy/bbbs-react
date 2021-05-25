@@ -17,6 +17,8 @@ import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
 import Places from '../Places/Places';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Signin from '../Popups/Signin/Signin';
+import Cities from '../Popups/Cities/Cities';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -35,6 +37,10 @@ function App() {
   const [isLoadingMeetings, setIsLoadingMeetings] = useState(true);
 
   const [userCity, setUserCity] = useState('');
+
+  const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
+
+  const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
   const history = useHistory();
 
@@ -55,9 +61,33 @@ function App() {
     setUserCity(cityName);
   }
 
+  function openSignInModal() {
+    setSignInModalIsOpen(true);
+  }
+
+  function closeSignInModal() {
+    setSignInModalIsOpen(false);
+  }
+
+  function handleChangeCityClick() {
+    setIsChangeCityPopupOpen(true);
+  }
+
+  function closeChangeCityPopup() {
+    setIsChangeCityPopupOpen(false);
+  }
+
+  // Предложить выбрать город неавторизованному пользователю
+  function offerChoiceOfCity() {
+    if (!isAuthorized) {
+      handleChangeCityClick();
+    }
+  }
+
   // Проверка при загрузке страницы, авторизован ли пользователь
   useEffect(() => {
     checkToken();
+    offerChoiceOfCity();
     Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
       .then(([meetingsData, eventsData, userData]) => {
         const parseDate = getParsedEventsData(eventsData.data);
@@ -119,9 +149,10 @@ function App() {
         <div className="page">
           <Header
             isAuthorized={isAuthorized}
-            onSignIn={handleSignIn}
             isHidden={hiddenMenuClass}
             pushToProfilePage={pushToProfilePage}
+            signInModalIsOpen={signInModalIsOpen}
+            openSignInModal={openSignInModal}
           />
           <main className="main">
             <Switch>
@@ -151,7 +182,7 @@ function App() {
                 onSignOut={handleSignOut}
                 isLoading={isLoadingMeetings}
                 userCity={userCity}
-                onChooseCity={handleCities}
+                onChooseCity={handleChangeCityClick}
               />
               <Route path="/">
                 <Redirect to="/" />
@@ -160,6 +191,16 @@ function App() {
           </main>
         </div>
         <Footer />
+        <Signin
+          isOpen={signInModalIsOpen}
+          onSignIn={handleSignIn}
+          onClose={closeSignInModal}
+        />
+        <Cities
+          isOpen={isChangeCityPopupOpen}
+          handleClose={closeChangeCityPopup}
+          handleCities={handleCities}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

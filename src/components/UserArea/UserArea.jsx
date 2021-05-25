@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import UserEventForm from '../UserEventForm/UserEventForm';
 import UserEvent from '../UserEvent/UserEvent';
 import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
-import Cities from '../Popups/Cities/Cities';
 
 import getRegistredEvents from '../../utils/userAreauUtils';
 
@@ -19,7 +18,6 @@ function UserArea({
 }) {
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
   const [bookedEvents, setBookedEvents] = useState([]);
-  const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
   useEffect(() => {}, [meetings]);
 
@@ -37,23 +35,11 @@ function UserArea({
     setIsMeetButtonClicked(false);
   }
 
-  function handleChangeCityClick() {
-    setIsChangeCityPopupOpen(true);
-  }
-
-  function closeChangeCityPopup() {
-    setIsChangeCityPopupOpen(false);
-  }
-
-  function handleCities(currentCity) {
-    onChooseCity(currentCity);
-  }
-
   return (
     <section className="personal-area page__section">
       <div className="personal-area__user-info">
         <button
-          onClick={handleChangeCityClick}
+          onClick={onChooseCity}
           type="button"
           className="paragraph personal-area__user-link personal-area__user-link_type_city"
         >
@@ -113,11 +99,6 @@ function UserArea({
         meetings.map((el) => (
           <UserEvent meeting={el} isLoading={isLoading} key={el.id} />
         ))}
-      <Cities
-        isOpen={isChangeCityPopupOpen}
-        handleClose={closeChangeCityPopup}
-        handleCities={handleCities}
-      />
     </section>
   );
 }
