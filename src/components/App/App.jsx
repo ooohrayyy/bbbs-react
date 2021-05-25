@@ -137,8 +137,8 @@ function App() {
               </Route>
             </Switch>
           </main>
-          <Footer />
         </div>
+        <Footer />
       </div>
     </CurrentUserContext.Provider>
   );
