@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useContext } from 'react';
+import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import UserEventForm from '../UserEventForm/UserEventForm';
@@ -7,9 +7,6 @@ import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
 import Cities from '../Popups/Cities/Cities';
 
 import getRegistredEvents from '../../utils/userAreauUtils';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
-
-import cities from '../../assets/mock-data/cities.json';
 
 function UserArea({
   meetings = [],
@@ -17,15 +14,16 @@ function UserArea({
   allEvents,
   onSignOut,
   isLoading,
+  userCity,
+  onChooseCity,
 }) {
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
   const [bookedEvents, setBookedEvents] = useState([]);
   const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
-  const [userCity, setUserCity] = useState('');
-
-  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {}, [meetings]);
+
+  useEffect(() => {}, [userCity]);
 
   useEffect(() => {
     setBookedEvents(getRegistredEvents(allEvents));
@@ -48,10 +46,7 @@ function UserArea({
   }
 
   function handleCities(currentCity) {
-    currentUser.city = currentCity;
-    const cityName = cities.filter((el) => el.id === currentCity)[0].name;
-    setUserCity(cityName);
-    console.log('currentUser is ', currentUser);
+    onChooseCity(currentCity);
   }
 
   return (

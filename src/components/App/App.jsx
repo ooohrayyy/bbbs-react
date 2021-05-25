@@ -1,8 +1,10 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import mock from '../../utils/mock';
 import api from '../../utils/api';
+
+import cities from '../../assets/mock-data/cities.json';
 
 import { getParsedEventsData } from '../../utils/calendarUtils';
 
@@ -20,16 +22,18 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 function App() {
   mock.initializeAxiosMockAdapter(api.instance);
 
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [isAuthorized, setIsAuthorized] = React.useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const [events, setEvents] = React.useState([]);
-  const [meetings, setMeetings] = React.useState([]);
+  const [events, setEvents] = useState([]);
+  const [meetings, setMeetings] = useState([]);
 
-  const [scrollTop, setScrollTop] = React.useState(0);
-  const [hiddenMenuClass, setHiddenMenuClass] = React.useState('');
+  const [scrollTop, setScrollTop] = useState(0);
+  const [hiddenMenuClass, setHiddenMenuClass] = useState('');
 
-  const [isLoadingMeetings, setIsLoadingMeetings] = React.useState(true);
+  const [isLoadingMeetings, setIsLoadingMeetings] = useState(true);
+
+  const [userCity, setUserCity] = useState('');
 
   const history = useHistory();
 
@@ -43,15 +47,23 @@ function App() {
     }
   }
 
+  // Определить актуальный город пользователя
+  function handleCities(currentCity) {
+    currentUser.city = currentCity;
+    const cityName = cities.filter((el) => el.id === currentCity)[0].name;
+    setUserCity(cityName);
+  }
+
   // Проверка при загрузке страницы, авторизован ли пользователь
-  React.useEffect(() => {
+  useEffect(() => {
     checkToken();
-    Promise.all([api.getMeetings(), api.getEvents()])
-      .then(([meetingsData, eventsData]) => {
+    Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
+      .then(([meetingsData, eventsData, userData]) => {
         const parseDate = getParsedEventsData(eventsData.data);
         setMeetings(meetingsData.data);
         setIsLoadingMeetings(false);
         setEvents(parseDate);
+        handleCities(userData.data.city);
       })
       .catch((err) => err.message);
   }, []);
@@ -64,6 +76,7 @@ function App() {
           setIsAuthorized(true);
           setCurrentUser(userData.data);
           localStorage.setItem('jwt', authData.data.access);
+          handleCities(userData.data.city);
         }
       })
       .catch((err) => err.message);
@@ -90,7 +103,7 @@ function App() {
     setScrollTop(currentPosition);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
@@ -130,6 +143,8 @@ function App() {
                   onAddMeeting={handleAddMeeting}
                   onSignOut={handleSignOut}
                   isLoading={isLoadingMeetings}
+                  userCity={userCity}
+                  onChooseCity={handleCities}
                 />
               </Route>
               <Route path="/">
