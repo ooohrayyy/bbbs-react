@@ -16,6 +16,7 @@ import Calendar from '../Calendar/Calendar';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
 import Places from '../Places/Places';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -130,23 +131,28 @@ function App() {
               <Route exact path="/about">
                 <AboutUs />
               </Route>
-              <Route exact path="/calendar">
-                <Calendar />
-              </Route>
+              <ProtectedRoute
+                exact
+                path="/calendar"
+                isAuthorized={isAuthorized}
+                component={Calendar}
+              />
               <Route exact path="/to-go">
                 <Places />
               </Route>
-              <Route exact path="/profile">
-                <UserArea
-                  allEvents={events}
-                  meetings={meetings}
-                  onAddMeeting={handleAddMeeting}
-                  onSignOut={handleSignOut}
-                  isLoading={isLoadingMeetings}
-                  userCity={userCity}
-                  onChooseCity={handleCities}
-                />
-              </Route>
+              <ProtectedRoute
+                exact
+                path="/profile"
+                isAuthorized={isAuthorized}
+                component={UserArea}
+                allEvents={events}
+                meetings={meetings}
+                onAddMeeting={handleAddMeeting}
+                onSignOut={handleSignOut}
+                isLoading={isLoadingMeetings}
+                userCity={userCity}
+                onChooseCity={handleCities}
+              />
               <Route path="/">
                 <Redirect to="/" />
               </Route>

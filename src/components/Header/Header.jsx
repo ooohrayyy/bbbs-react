@@ -28,11 +28,15 @@ function Header({ isAuthorized, onSignIn, isHidden, pushToProfilePage }) {
     ? 'search__options search__options_visible menu__search-options'
     : 'search__options menu__search-options';
 
+  function openSignInModal() {
+    setSignInModalIsOpen(true);
+  }
+
   function handleSignInClick() {
     if (isAuthorized) {
       pushToProfilePage();
     } else {
-      setSignInModalIsOpen(true);
+      openSignInModal();
     }
   }
 
@@ -65,6 +69,8 @@ function Header({ isAuthorized, onSignIn, isHidden, pushToProfilePage }) {
         <HeaderLinks
           menuListsWrapClass={menuListsWrapClass}
           menuListSocialClass={menuListSocialClass}
+          isAuthorized={isAuthorized}
+          onCalendarLinkClick={openSignInModal}
         />
         <HeaderBurgerMenu
           burgerMenuClass={burgerMenuClass}
