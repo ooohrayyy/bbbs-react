@@ -2,8 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CalendarEvent from '../CalendarEvent/CalendarEvent';
 
-function CalendarCard({ event, openMore }) {
+function CalendarCard({
+  event,
+  openMore,
+  openConfirmationMadal,
+  onBookingEvent,
+  closeMoreModal,
+}) {
   const {
+    id,
     address,
     contact,
     title,
@@ -21,6 +28,7 @@ function CalendarCard({ event, openMore }) {
 
   return (
     <CalendarEvent
+      id={id}
       type="Волонтеры"
       address={address}
       contact={contact}
@@ -33,6 +41,9 @@ function CalendarCard({ event, openMore }) {
       handleMore={handleMore}
       needDescription={false}
       booked={booked}
+      openConfirmationMadal={openConfirmationMadal}
+      onBookingEvent={onBookingEvent}
+      closeMoreModal={closeMoreModal}
     />
   );
 }

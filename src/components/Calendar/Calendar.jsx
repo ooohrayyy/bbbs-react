@@ -2,46 +2,47 @@ import { React, useEffect, useState } from 'react';
 import CalendarCard from '../CalendarCard/CalendarCard';
 import Filter from '../Filter/Filter';
 import filters from '../../assets/dev-data/filterTagsData';
+import Preloader from '../Preloader/Preloader';
 import {
-  getRotatedMonth,
-  getParsedEventsData,
   getFilteredTags,
   getFilteredData,
   sortEventsByDate,
+  getInitialTags,
 } from '../../utils/calendarUtils';
-import mock from '../../utils/mock';
-import api from '../../utils/api';
 import Meetup from '../Popups/Meetup/Meetup';
+import Confirmation from '../Popups/Confirmation/Confirmation';
+import Done from '../Popups/Done/Done';
 
-function Calendar() {
-  const [events, setEvents] = useState([]);
+function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
   const [selectedTags, setSelectedTags] = useState([]);
   const [filteredEventsResult, setFilteredEventsResult] = useState([]);
   const [event, setEvent] = useState({});
+
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [confirmationMadalIsOpen, setConfirmationMadalIsOpen] = useState(false);
+  const [doneModalIsOpen, setDoneModalIsOpen] = useState(false);
+
+  function handleDoneModalOpen(value) {
+    setDoneModalIsOpen(value);
+  }
 
   useEffect(() => {
-    mock.initializeAxiosMockAdapter(api.instance);
-    api
-      .getEvents()
-      .then(({ data }) => {
-        const parsedData = getParsedEventsData(data);
-        const initialTagValue = getRotatedMonth(filters.months);
-        const filteredEvents = getFilteredData(
-          initialTagValue,
-          parsedData,
-          'startMonth',
-        );
-        sortEventsByDate(filteredEvents);
-        setEvents(parsedData);
-        setFilteredEventsResult(filteredEvents);
-        setSelectedTags(initialTagValue);
-      })
-      .catch((err) => console.log(err.message));
-  }, []);
+    if (selectedTags.length !== 0) {
+      handleDoneModalOpen(isRegisteredEvent); // подумать, как лучше сделать
+      const filteredEvents = getFilteredData(selectedTags, cityEvents);
+      sortEventsByDate(filteredEvents);
+      setFilteredEventsResult(filteredEvents);
+    } else {
+      const initialTagValue = getInitialTags(filters.months, cityEvents);
+      const filteredEvents = getFilteredData(initialTagValue, cityEvents);
+      sortEventsByDate(filteredEvents);
+      setFilteredEventsResult(filteredEvents);
+      setSelectedTags(initialTagValue);
+    }
+  }, [cityEvents]);
 
   useEffect(() => {
-    const filteredEvents = getFilteredData(selectedTags, events, 'startMonth');
+    const filteredEvents = getFilteredData(selectedTags, cityEvents);
     sortEventsByDate(filteredEvents);
     setFilteredEventsResult(filteredEvents);
   }, [selectedTags]);
@@ -50,12 +51,21 @@ function Calendar() {
     const newTagsArray = getFilteredTags(tag, selectedTags);
     setSelectedTags(newTagsArray);
   }
+
+  // модальные окна
   function openMore(item) {
     setEvent(item);
     setIsMoreOpen(true);
   }
-  function handleClose() {
+  function handleAllModalClose() {
     setIsMoreOpen(false);
+    setConfirmationMadalIsOpen(false);
+    setDoneModalIsOpen(false);
+  }
+
+  function handleConfirmationMadalOpen(item) {
+    setEvent(item);
+    setConfirmationMadalIsOpen(true);
   }
 
   return (
@@ -65,20 +75,48 @@ function Calendar() {
         <Filter tags={selectedTags} onSelectedTag={handleSlectedTag} />
         <section className="calendar-container page__section">
           {filteredEventsResult.length === 0 ? (
-            <p className="section-title">В этом месяце пока нет меропритяий</p>
+            <Preloader />
           ) : (
             filteredEventsResult.map((item) => (
-              <CalendarCard event={item} key={item.id} openMore={openMore} />
+              <CalendarCard
+                event={item}
+                key={item.id}
+                openMore={openMore}
+                openConfirmationMadal={handleConfirmationMadalOpen}
+                onBookingEvent={onBookingEvent}
+                closeMoreModal={handleAllModalClose}
+              />
             ))
           )}
         </section>
       </section>
+      <Confirmation
+        isOpen={confirmationMadalIsOpen}
+        handleClose={handleAllModalClose}
+        title={event.title}
+        dayMonth={event.dayMonth}
+        endTime={event.endTime}
+        mothGenitive={event.mothGenitive}
+        time={event.time}
+        id={event.id}
+        onBookingEvent={onBookingEvent}
+      />
+      <Done
+        isOpen={doneModalIsOpen}
+        handleClose={handleAllModalClose}
+        title={event.title}
+        dayMonth={event.dayMonth}
+        endTime={event.endTime}
+        mothGenitive={event.mothGenitive}
+        time={event.time}
+      />
       <Meetup
         isOpen={isMoreOpen}
-        handleClose={handleClose}
+        handleClose={handleAllModalClose}
         type="Волонтеры"
         address={event.address}
         contact={event.contact}
+        id={event.id}
         title={event.title}
         description={event.description}
         startAt={event.startAt}
@@ -86,6 +124,7 @@ function Calendar() {
         seats={event.seats}
         takenSeats={event.takenSeats}
         needDescription
+        onBookingEvent={onBookingEvent}
       />
     </>
   );

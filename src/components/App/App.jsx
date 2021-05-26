@@ -30,6 +30,7 @@ function App() {
   const [hiddenMenuClass, setHiddenMenuClass] = React.useState('');
 
   const [isLoadingMeetings, setIsLoadingMeetings] = React.useState(true);
+  const [isRegisteredEvent, setIsRegisteredEvent] = React.useState(false);
 
   const history = useHistory();
 
@@ -46,12 +47,21 @@ function App() {
   // Проверка при загрузке страницы, авторизован ли пользователь
   React.useEffect(() => {
     checkToken();
-    Promise.all([api.getMeetings(), api.getEvents()])
-      .then(([meetingsData, eventsData]) => {
-        const parseDate = getParsedEventsData(eventsData.data);
+    Promise.all([api.getMeetings(), api.updateProfile()])
+      .then(([meetingsData, userData]) => {
         setMeetings(meetingsData.data);
         setIsLoadingMeetings(false);
-        setEvents(parseDate);
+        setCurrentUser(userData.data);
+        api
+          .getEvents()
+          .then(({ data }) => {
+            const parseDate = getParsedEventsData(data);
+            const cityEvents = parseDate.filter(
+              (i) => userData.data.city === i.city,
+            );
+            setEvents(cityEvents);
+          })
+          .catch((err) => err.message);
       })
       .catch((err) => err.message);
   }, []);
@@ -80,6 +90,7 @@ function App() {
     history.push('./');
   }
 
+  // появление хедера при обратном скролле
   function handleScroll() {
     const currentPosition = window.pageYOffset;
     if (currentPosition > scrollTop && currentPosition > 20) {
@@ -97,6 +108,23 @@ function App() {
 
   function handleAddMeeting(meeting) {
     setMeetings([meeting, ...meetings]);
+  }
+
+  // запись на мероприятие
+  function handleBookingEventClick(eventId) {
+    api
+      .bookEvent({ id: currentUser.user, event: eventId })
+      .then(() => {
+        setIsRegisteredEvent(true);
+        api
+          .getEvents()
+          .then(({ data }) => {
+            const parseDate = getParsedEventsData(data);
+            setEvents(parseDate);
+          })
+          .catch((err) => err.message);
+      })
+      .catch((err) => err.message);
   }
 
   return (
@@ -117,7 +145,11 @@ function App() {
               <AboutUs />
             </Route>
             <Route exact path="/calendar">
-              <Calendar />
+              <Calendar
+                cityEvents={events}
+                onBookingEvent={handleBookingEventClick}
+                isRegisteredEvent={isRegisteredEvent}
+              />
             </Route>
             <Route exact path="/to-go">
               <Places />

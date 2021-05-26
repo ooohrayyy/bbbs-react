@@ -5,6 +5,7 @@ import closeImage from '../../../images/svg/popup_close.svg';
 import CalendarEvent from '../../CalendarEvent/CalendarEvent';
 
 function Meetup({
+  id,
   isOpen,
   handleClose,
   address,
@@ -15,6 +16,7 @@ function Meetup({
   endAt,
   seats,
   takenSeats,
+  onBookingEvent,
 }) {
   Modal.setAppElement(document.getElementById('page'));
 
@@ -38,6 +40,8 @@ function Meetup({
           <img alt="close" src={closeImage} />
         </button>
         <CalendarEvent
+          closeMoreMadal={closeModal}
+          id={id}
           type="Волонтеры"
           address={address}
           contact={contact}
@@ -48,6 +52,7 @@ function Meetup({
           seats={seats}
           takenSeats={takenSeats}
           needDescription
+          onBookingEvent={onBookingEvent}
         />
       </>
     </Modal>

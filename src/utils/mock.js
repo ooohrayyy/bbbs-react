@@ -36,7 +36,12 @@ class Mock {
     return [200, this.params.events];
   }
 
-  bookEvent() {
+  bookEvent(config) {
+    const data = JSON.parse(config.data);
+    const newEvents = this.params.events.map((i) =>
+      i.id === data.event ? { ...i, booked: true } : i,
+    );
+    this.params.events = newEvents;
     return [200, this.params.eventParticipants];
   }
 
@@ -56,8 +61,10 @@ class Mock {
     mock.onGet('/cities').reply(() => this.getCities());
     mock.onGet('/profile').reply(() => this.updateProfile());
     mock.onGet('/main').reply(() => this.getMain());
-    mock.onGet('/afisha/events').reply(() => this.getEvents());
-    mock.onPost('/afisha/event-participants').reply(() => this.bookEvent());
+    mock.onGet('/afisha/events').reply((config) => this.getEvents(config));
+    mock
+      .onPost('/afisha/event-participants')
+      .reply((config) => this.bookEvent(config));
     mock.onPost('/event-photo').reply((config) => this.addPhoto(config));
     mock.onGet('/meetings').reply(() => this.getMeetings());
   }
