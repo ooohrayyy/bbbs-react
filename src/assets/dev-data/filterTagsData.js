@@ -40,14 +40,6 @@ const filters = {
       name: '11-13 лет',
       active: false,
     },
-    {
-      name: 'Выбор наставников',
-      active: false,
-    },
-    {
-      name: 'Музеи',
-      active: false,
-    },
   ],
   months: [
     { name: 'Январь', active: false, value: 'январь' },
