@@ -90,7 +90,10 @@ function App() {
     offerChoiceOfCity();
     Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
       .then(([meetingsData, eventsData, userData]) => {
-        const parseDate = getParsedEventsData(eventsData.data);
+        const cityEvent = eventsData.data.filter(
+          (i) => userData.data.city === i.city,
+        );
+        const parseDate = getParsedEventsData(cityEvent);
         setMeetings(meetingsData.data);
         setIsLoadingMeetings(false);
         setEvents(parseDate);
@@ -101,9 +104,14 @@ function App() {
 
   // Обработчик входа пользователя
   function handleSignIn() {
-    Promise.all([api.authUser(), api.updateProfile()])
-      .then(([authData, userData]) => {
+    Promise.all([api.authUser(), api.updateProfile(), api.getEvents()])
+      .then(([authData, userData, eventsData]) => {
         if (authData.data.access) {
+          const cityEvent = eventsData.data.filter(
+            (i) => userData.data.city === i.city,
+          );
+          const parseDate = getParsedEventsData(cityEvent);
+          setEvents(parseDate);
           setIsAuthorized(true);
           setCurrentUser(userData.data);
           localStorage.setItem('jwt', authData.data.access);
@@ -153,7 +161,8 @@ function App() {
         api
           .getEvents()
           .then(({ data }) => {
-            const parseDate = getParsedEventsData(data);
+            const cityEvent = data.filter((i) => currentUser.city === i.city);
+            const parseDate = getParsedEventsData(cityEvent);
             setEvents(parseDate);
           })
           .catch((err) => err.message);
@@ -183,6 +192,7 @@ function App() {
               <ProtectedRoute
                 exact
                 path="/calendar"
+                cityEvents={events}
                 isAuthorized={isAuthorized}
                 component={Calendar}
                 isRegisteredEvent={isRegisteredEvent}
