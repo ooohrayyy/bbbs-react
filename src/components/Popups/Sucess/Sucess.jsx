@@ -20,20 +20,18 @@ function Sucess({ isOpen, handleClose }) {
       onRequestClose={closeModal}
       closeTimeoutMS={800}
     >
-      <form noValidate>
-        <button
-          onClick={closeModal}
-          className="popup__close popup__cancel"
-          type="button"
-        >
-          <img alt="close" src={closeImage} />
-        </button>
-        <div class="recommendation__logo" />
-        <legend class="section-title recommendation__popup-title">
-          Спасибо, мы проверим информацию, и скоро все пользователи смогут
-          увидеть вашу рекомендацию
-        </legend>
-      </form>
+      <button
+        onClick={closeModal}
+        className="popup__close popup__cancel"
+        type="button"
+      >
+        <img alt="close" src={closeImage} />
+      </button>
+      <div className="recommendation__logo" />
+      <legend className="section-title recommendation__popup-title">
+        Спасибо, мы проверим информацию, и скоро все пользователи смогут увидеть
+        вашу рекомендацию
+      </legend>
     </Modal>
   );
 }

@@ -8,9 +8,11 @@ import filters from '../../assets/dev-data/filterTagsData';
 import placesCards from '../../assets/dev-data/placesData';
 import MakePlace from '../MakePlace/MakePlace';
 import Recomendation from '../Popups/Recommendation/Recommendation';
+import Sucess from '../Popups/Sucess/Sucess';
 
 function Places({ isAuthorized }) {
   const [isRecomendationOpen, setIsRecomendationOpen] = useState(false);
+  const [isSucessOpen, setIsSucessOpen] = useState(false);
   const [rubricIndex, setRubricIndex] = useState(-1);
   const isRubricNeed = isAuthorized; // сейчас только авторизация, а затем должно добавиться условие по выбранному значению фильтра "Все"
   function handleMakePlace() {
@@ -18,6 +20,11 @@ function Places({ isAuthorized }) {
   }
   function handleClose() {
     setIsRecomendationOpen(false);
+    setIsSucessOpen(false);
+  }
+  function handleSubmit() {
+    setIsRecomendationOpen(false);
+    setIsSucessOpen(true);
   }
 
   useEffect(() => {
@@ -62,7 +69,12 @@ function Places({ isAuthorized }) {
           )}
         </section>
       </main>
-      <Recomendation isOpen={isRecomendationOpen} handleClose={handleClose} />
+      <Recomendation
+        isOpen={isRecomendationOpen}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+      />
+      <Sucess isOpen={isSucessOpen} handleClose={handleClose} />
     </>
   );
 }

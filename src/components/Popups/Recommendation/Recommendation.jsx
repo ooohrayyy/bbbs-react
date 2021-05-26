@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Recomendation({ isOpen, handleClose }) {
+function Recomendation({ isOpen, handleClose, handleSubmit }) {
   Modal.setAppElement(document.getElementById('page'));
-
+  const [photoText, setPhotoText] = useState('Добавить фото');
+  function handleFileChange(e) {
+    setPhotoText(e.target.files[0].name);
+  }
   function closeModal() {
     handleClose();
   }
@@ -96,15 +99,23 @@ function Recomendation({ isOpen, handleClose }) {
       />
 
       <div className="popup__box-inputs">
-        <button
+        <label
+          htmlFor="photo-input"
           className="button button_theme_light recommendation__add-button"
-          type="button"
-          aria-label="Добавить фото"
-        />
-        <p className="recommendation__add-place">Добавить фото</p>
+        >
+          <input
+            id="photo-input"
+            type="file"
+            onChange={handleFileChange}
+            className="button recommendation__input-photo"
+          />
+        </label>
+        <p className="recommendation__add-place">{photoText}</p>
+
         <button
           className="button button_theme_light recommendation__submit"
           type="submit"
+          onClick={handleSubmit}
         >
           Отправить
         </button>
