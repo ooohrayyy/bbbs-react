@@ -64,6 +64,7 @@ function AboutUs() {
                   поддерживают дружбу между ребенком и наставником."
           path="/main"
           link="сделать пожертвование"
+          color="blue"
         />
 
         <AboutCard
@@ -75,6 +76,7 @@ function AboutUs() {
                   ему надежду на более счастливое и успешное будущее."
           path="/main"
           link="подробнее"
+          color="pink"
         />
 
         <AboutCard
@@ -86,6 +88,7 @@ function AboutUs() {
                   программы."
           path="/main"
           link="подробнее"
+          color="green"
         />
       </div>
     </section>

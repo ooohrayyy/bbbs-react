@@ -1,8 +1,10 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import mock from '../../utils/mock';
 import api from '../../utils/api';
+
+import cities from '../../assets/mock-data/cities.json';
 
 import { getParsedEventsData } from '../../utils/calendarUtils';
 
@@ -14,23 +16,31 @@ import Calendar from '../Calendar/Calendar';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
 import Places from '../Places/Places';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Signin from '../Popups/Signin/Signin';
+import Cities from '../Popups/Cities/Cities';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   mock.initializeAxiosMockAdapter(api.instance);
 
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [isAuthorized, setIsAuthorized] = React.useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const [events, setEvents] = React.useState([]);
-  const [meetings, setMeetings] = React.useState([]);
+  const [events, setEvents] = useState([]);
+  const [meetings, setMeetings] = useState([]);
 
-  const [scrollTop, setScrollTop] = React.useState(0);
-  const [hiddenMenuClass, setHiddenMenuClass] = React.useState('');
+  const [scrollTop, setScrollTop] = useState(0);
+  const [hiddenMenuClass, setHiddenMenuClass] = useState('');
 
-  const [isLoadingMeetings, setIsLoadingMeetings] = React.useState(true);
-  const [isRegisteredEvent, setIsRegisteredEvent] = React.useState(false);
+  const [isLoadingMeetings, setIsLoadingMeetings] = useState(true);
+
+  const [userCity, setUserCity] = useState('');
+
+  const [isRegisteredEvent, setIsRegisteredEvent] = useState(false);
+  const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
+  const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
   const history = useHistory();
 
@@ -44,24 +54,47 @@ function App() {
     }
   }
 
+  // Определить актуальный город пользователя
+  function handleCities(currentCity) {
+    currentUser.city = currentCity;
+    const cityName = cities.filter((el) => el.id === currentCity)[0].name;
+    setUserCity(cityName);
+  }
+
+  function openSignInModal() {
+    setSignInModalIsOpen(true);
+  }
+
+  function closeSignInModal() {
+    setSignInModalIsOpen(false);
+  }
+
+  function handleChangeCityClick() {
+    setIsChangeCityPopupOpen(true);
+  }
+
+  function closeChangeCityPopup() {
+    setIsChangeCityPopupOpen(false);
+  }
+
+  // Предложить выбрать город неавторизованному пользователю
+  function offerChoiceOfCity() {
+    if (!isAuthorized) {
+      handleChangeCityClick();
+    }
+  }
+
   // Проверка при загрузке страницы, авторизован ли пользователь
-  React.useEffect(() => {
+  useEffect(() => {
     checkToken();
-    Promise.all([api.getMeetings(), api.updateProfile()])
-      .then(([meetingsData, userData]) => {
+    offerChoiceOfCity();
+    Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
+      .then(([meetingsData, eventsData, userData]) => {
+        const parseDate = getParsedEventsData(eventsData.data);
         setMeetings(meetingsData.data);
         setIsLoadingMeetings(false);
-        setCurrentUser(userData.data);
-        api
-          .getEvents()
-          .then(({ data }) => {
-            const parseDate = getParsedEventsData(data);
-            const cityEvents = parseDate.filter(
-              (i) => userData.data.city === i.city,
-            );
-            setEvents(cityEvents);
-          })
-          .catch((err) => err.message);
+        setEvents(parseDate);
+        handleCities(userData.data.city);
       })
       .catch((err) => err.message);
   }, []);
@@ -74,6 +107,7 @@ function App() {
           setIsAuthorized(true);
           setCurrentUser(userData.data);
           localStorage.setItem('jwt', authData.data.access);
+          handleCities(userData.data.city);
         }
       })
       .catch((err) => err.message);
@@ -101,7 +135,7 @@ function App() {
     setScrollTop(currentPosition);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
@@ -129,46 +163,62 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Header
-          isAuthorized={isAuthorized}
-          onSignIn={handleSignIn}
-          isHidden={hiddenMenuClass}
-          pushToProfilePage={pushToProfilePage}
-        />
-        <main className="main">
-          <Switch>
-            <Route exact path="/">
-              <Main />
-            </Route>
-            <Route exact path="/about">
-              <AboutUs />
-            </Route>
-            <Route exact path="/calendar">
-              <Calendar
-                cityEvents={events}
-                onBookingEvent={handleBookingEventClick}
-                isRegisteredEvent={isRegisteredEvent}
+      <div className="page__container">
+        <div className="page">
+          <Header
+            isAuthorized={isAuthorized}
+            isHidden={hiddenMenuClass}
+            pushToProfilePage={pushToProfilePage}
+            signInModalIsOpen={signInModalIsOpen}
+            openSignInModal={openSignInModal}
+          />
+          <main className="main">
+            <Switch>
+              <Route exact path="/">
+                <Main />
+              </Route>
+              <Route exact path="/about">
+                <AboutUs />
+              </Route>
+              <ProtectedRoute
+                exact
+                path="/calendar"
+                isAuthorized={isAuthorized}
+                component={Calendar}
               />
-            </Route>
-            <Route exact path="/to-go">
-              <Places />
-            </Route>
-            <Route exact path="/profile">
-              <UserArea
+              <Route exact path="/to-go">
+                <Places />
+              </Route>
+              <ProtectedRoute
+                exact
+                path="/profile"
+                isAuthorized={isAuthorized}
+                component={UserArea}
                 allEvents={events}
                 meetings={meetings}
                 onAddMeeting={handleAddMeeting}
                 onSignOut={handleSignOut}
                 isLoading={isLoadingMeetings}
+                userCity={userCity}
+                onChooseCity={handleChangeCityClick}
               />
-            </Route>
-            <Route path="/">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </main>
+              <Route path="/">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </main>
+        </div>
         <Footer />
+        <Signin
+          isOpen={signInModalIsOpen}
+          onSignIn={handleSignIn}
+          onClose={closeSignInModal}
+        />
+        <Cities
+          isOpen={isChangeCityPopupOpen}
+          handleClose={closeChangeCityPopup}
+          handleCities={handleCities}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

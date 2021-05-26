@@ -31,7 +31,6 @@ function Meetup({
       onRequestClose={closeModal}
       closeTimeoutMS={800}
     >
-      <>
         <button
           onClick={closeModal}
           className="popup__close popup__cancel"
@@ -53,8 +52,7 @@ function Meetup({
           takenSeats={takenSeats}
           needDescription
           onBookingEvent={onBookingEvent}
-        />
-      </>
+        />  
     </Modal>
   );
 }

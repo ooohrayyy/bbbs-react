@@ -33,7 +33,10 @@
 .calendar__title_type_confirmation {
   text-align: center;
 }
-
+.calendar__title_type_delete {
+  max-width: 470px;
+  text-align: center;
+}
 .calendar_selected {
   background-color: $lightBlue;
 }
