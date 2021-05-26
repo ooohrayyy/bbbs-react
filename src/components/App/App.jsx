@@ -186,6 +186,7 @@ function App() {
               <ProtectedRoute
                 exact
                 path="/calendar"
+                cityEvents={events}
                 isAuthorized={isAuthorized}
                 component={Calendar}
                 isRegisteredEvent={isRegisteredEvent}
