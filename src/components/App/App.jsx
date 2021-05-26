@@ -104,9 +104,14 @@ function App() {
 
   // Обработчик входа пользователя
   function handleSignIn() {
-    Promise.all([api.authUser(), api.updateProfile()])
-      .then(([authData, userData]) => {
+    Promise.all([api.authUser(), api.updateProfile(), api.getEvents()])
+      .then(([authData, userData, eventsData]) => {
         if (authData.data.access) {
+          const cityEvent = eventsData.data.filter(
+            (i) => userData.data.city === i.city,
+          );
+          const parseDate = getParsedEventsData(cityEvent);
+          setEvents(parseDate);
           setIsAuthorized(true);
           setCurrentUser(userData.data);
           localStorage.setItem('jwt', authData.data.access);
@@ -156,7 +161,8 @@ function App() {
         api
           .getEvents()
           .then(({ data }) => {
-            const parseDate = getParsedEventsData(data);
+            const cityEvent = data.filter((i) => currentUser.city === i.city);
+            const parseDate = getParsedEventsData(cityEvent);
             setEvents(parseDate);
           })
           .catch((err) => err.message);
