@@ -25,34 +25,32 @@ function Confirmation({
       onRequestClose={closeModal}
       closeTimeoutMS={800}
     >
-      <form>
+      <button
+        onClick={closeModal}
+        className="popup__close popup__cancel"
+        type="button"
+      >
+        <img alt="close" src={closeImage} />
+      </button>
+      <h2 className="section-title calendar__title_type_popup calendar__title_type_confirmation">
+        {title}
+      </h2>
+      <div className="calendar__buttons">
         <button
-          onClick={closeModal}
-          className="popup__close popup__cancel"
+          onClick={handleConfirm}
+          className="button button_theme_light calendar__confirm"
           type="button"
         >
-          <img alt="close" src={closeImage} />
+          {butConf}
         </button>
-        <h2 className="section-title calendar__title_type_popup calendar__title_type_confirmation">
-          {title}
-        </h2>
-        <div className="calendar__buttons">
-          <button
-            onClick={handleConfirm}
-            className="button button_theme_light calendar__confirm"
-            type="button"
-          >
-            {butConf}
-          </button>
-          <button
-            onClick={closeModal}
-            className="button popup__cancel"
-            type="button"
-          >
-            {butEsc}
-          </button>
-        </div>
-      </form>
+        <button
+          onClick={closeModal}
+          className="button popup__cancel"
+          type="button"
+        >
+          {butEsc}
+        </button>
+      </div>
     </Modal>
   );
 }
