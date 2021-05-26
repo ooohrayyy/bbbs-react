@@ -38,8 +38,8 @@ function App() {
 
   const [userCity, setUserCity] = useState('');
 
+  const [isRegisteredEvent, setIsRegisteredEvent] = useState(false);
   const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
-
   const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
   const history = useHistory();
@@ -124,6 +124,7 @@ function App() {
     history.push('./');
   }
 
+  // появление хедера при обратном скролле
   function handleScroll() {
     const currentPosition = window.pageYOffset;
     if (currentPosition > scrollTop && currentPosition > 20) {
@@ -141,6 +142,23 @@ function App() {
 
   function handleAddMeeting(meeting) {
     setMeetings([meeting, ...meetings]);
+  }
+
+  // запись на мероприятие
+  function handleBookingEventClick(eventId) {
+    api
+      .bookEvent({ id: currentUser.user, event: eventId })
+      .then(() => {
+        setIsRegisteredEvent(true);
+        api
+          .getEvents()
+          .then(({ data }) => {
+            const parseDate = getParsedEventsData(data);
+            setEvents(parseDate);
+          })
+          .catch((err) => err.message);
+      })
+      .catch((err) => err.message);
   }
 
   return (

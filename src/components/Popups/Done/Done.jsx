@@ -3,18 +3,26 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Done({ title, isOpen, handleClose }) {
+function Done({
+  title,
+  isOpen,
+  handleClose,
+  dayMonth,
+  endTime,
+  mothGenitive,
+  time,
+}) {
   Modal.setAppElement(document.getElementById('page'));
 
   function closeModal() {
     handleClose(false);
   }
-  const customStyles = {
+
   return (
     <Modal
       isOpen={isOpen}
-          className="popup__container popup__container_type_done"
-          overlayClassName="popup popup_type_done"
+      className="popup__container popup__container_type_done"
+      overlayClassName="popup popup_type_done"
       onRequestClose={closeModal}
       closeTimeoutMS={800}
     >
@@ -27,9 +35,11 @@ function Done({ title, isOpen, handleClose }) {
         >
           <img alt="close" src={closeImage} />
         </button>
-        <p className="section-title calendar__title_type_popup calendar__title_type_popup-done ">
-          {title}
-        </p>
+        <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done ">
+          Подтвердить запись на мероприятие:
+          <p>{`"${title}" `}</p>
+          <p>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</p>
+        </h2>
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done">
           Если у вас не получится прийти — отмените, пожалуйста, запись.
         </h2>

@@ -1,5 +1,6 @@
 import { parseISO } from 'date-fns';
 import format from 'date-fns/format';
+import getMonth from 'date-fns/getMonth';
 import ru from 'date-fns/locale/ru';
 
 export function parsedDate(date) {
@@ -9,7 +10,10 @@ export function parsedDate(date) {
   const time = format(parseDate, 'kk:mm', { locale: ru });
   const dayMonth = format(parseDate, 'dd', { locale: ru });
   const year = format(parseDate, 'yyyy', { locale: ru });
-  return { month, dayWeek, time, dayMonth, year };
+  const mothGenitive = format(parseDate, 'MMMM', { locale: ru });
+  const monthNumber = getMonth(parseDate);
+
+  return { month, dayWeek, time, dayMonth, year, mothGenitive, monthNumber };
 }
 
 export function sortEventsByDate(events) {
@@ -27,11 +31,12 @@ export function sortEventsByDate(events) {
 
 export function getParsedEventsData(data) {
   return data.map((i) => {
-    const { month, dayMonth } = parsedDate(i.startAt);
+    const { month, dayMonth, monthNumber } = parsedDate(i.startAt);
     return {
       ...i,
       startDayMonth: dayMonth,
       startMonth: month,
+      startMonthNumber: monthNumber,
     };
   });
 }
@@ -42,27 +47,43 @@ export function getRotatedMonth(months) {
   for (let i = 0; i < months.length; i += 1) {
     ret.push(months[(i + currentMonth) % months.length]);
   }
-  ret[0].active = true;
   return ret;
 }
 
-export function getFilteredTags(tag, selectedTag) {
-  return selectedTag.map((i) => (i.name === tag.name ? tag : i));
-}
+export function getInitialTags(months, events) {
+  const flaggedMonths = getRotatedMonth(months).map((i) => ({
+    ...i,
+    hasInEvents: false,
+  }));
 
-export function getFilteredData(selectedTags, data, keyObj) {
-  const selectedTagsArr = selectedTags.filter((i) => i.active === true);
-
-  if (selectedTagsArr.length === 0) return data;
-
-  const result = [];
-  for (let i = 0; i < selectedTagsArr.length; i += 1) {
-    for (let a = 0; a < data.length; a += 1) {
-      if (data[a][keyObj] === selectedTagsArr[i].value) {
-        result.push(data[a]);
+  for (let i = 0; i < events.length; i += 1) {
+    for (let j = 0; j < flaggedMonths.length; j += 1) {
+      if (flaggedMonths[j].value === events[i].startMonthNumber) {
+        flaggedMonths[j].hasInEvents = true;
+        break;
       }
     }
   }
 
-  return result;
+  const filtered = flaggedMonths.filter((i) => i.hasInEvents);
+
+  if (filtered.length > 0) filtered[0].active = true;
+
+  if (filtered.length <= 1) return [];
+
+  return filtered;
+}
+
+export function getFilteredTags(tag, selectedTags) {
+  return selectedTags.map((i) => ({ ...i, active: i.name === tag.name }));
+}
+
+export function getFilteredData(selectedTags, data) {
+  if (selectedTags.length !== 0) {
+    const selectedTagsArr = selectedTags.filter((i) => i.active === true);
+    const selectedTag = selectedTagsArr[0];
+
+    return data.filter((i) => i.startMonthNumber === selectedTag.value);
+  }
+  return data;
 }

@@ -36,8 +36,8 @@ class Api {
     return this.instance.get('/afisha/events');
   }
 
-  bookEvent() {
-    return this.instance.post('/afisha/event-participants');
+  bookEvent(data) {
+    return this.instance.post('/afisha/event-participants', data);
   }
 
   addPhoto(data) {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { parsedDate } from '../../utils/calendarUtils';
 
 function CalendarEvent({
+  id,
   type,
   address,
   contact,
@@ -15,11 +16,22 @@ function CalendarEvent({
   description,
   handleMore,
   needDescription,
+  openConfirmationMadal,
+  onBookingEvent,
+  closeMoreMadal,
 }) {
-  const { month, dayWeek, time, dayMonth } = parsedDate(startAt);
+  const { month, dayWeek, time, dayMonth, mothGenitive } = parsedDate(startAt);
   const endTime = parsedDate(endAt).time;
   const numberOfFreeSeats = seats - takenSeats;
   const hasFreeSeats = numberOfFreeSeats > 0;
+
+  function handleConfirmationMadalOpen() {
+    openConfirmationMadal({ title, dayMonth, endTime, mothGenitive, time, id });
+  }
+  function handleBookingEvent() {
+    onBookingEvent(id);
+    closeMoreMadal();
+  }
 
   return (
     <article className={`calendar ${booked ? 'calendar_selected' : ''}`}>
@@ -61,6 +73,11 @@ function CalendarEvent({
             </button>
           ) : (
             <button
+              onClick={
+                needDescription
+                  ? handleBookingEvent
+                  : handleConfirmationMadalOpen
+              }
               className="button button_theme_light"
               type="button"
               disabled={!hasFreeSeats}

@@ -5,10 +5,15 @@ import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
 function Confirmation({
+  id,
   title,
+  dayMonth,
+  endTime,
+  mothGenitive,
+  time,
   isOpen,
   handleClose,
-  handleConfirm,
+  onBookingEvent,
   butConf = 'Подтвердить запись',
   butEsc = 'Отменить',
 }) {
@@ -16,6 +21,11 @@ function Confirmation({
 
   function closeModal() {
     handleClose(false);
+  }
+
+  function handleBookingEventClick() {
+    onBookingEvent(id);
+    closeModal();
   }
   return (
     <Modal
@@ -32,25 +42,27 @@ function Confirmation({
       >
         <img alt="close" src={closeImage} />
       </button>
-      <h2 className="section-title calendar__title_type_popup calendar__title_type_confirmation">
-        {title}
-      </h2>
-      <div className="calendar__buttons">
-        <button
-          onClick={handleConfirm}
-          className="button button_theme_light calendar__confirm"
-          type="button"
-        >
-          {butConf}
-        </button>
-        <button
-          onClick={closeModal}
-          className="button popup__cancel"
-          type="button"
-        >
-          {butEsc}
-        </button>
-      </div>
+        <h2 className="section-title calendar__title_type_popup calendar__title_type_confirmation">
+          Подтвердить запись на мероприятие:
+          <p>{`"${title}" `}</p>
+          <p>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</p>
+        </h2>
+        <div className="calendar__buttons">
+          <button
+            onClick={handleBookingEventClick}
+            className="button button_theme_light calendar__confirm"
+            type="button"
+          >
+            {butConf}
+          </button>
+          <button
+            onClick={closeModal}
+            className="button popup__cancel"
+            type="button"
+          >
+            {butEsc}
+          </button>
+        </div>
     </Modal>
   );
 }
@@ -61,7 +73,6 @@ Confirmation.propTypes = {
   title: PropTypes.string,
   isOpen: PropTypes.bool,
   handleClose: PropTypes.func,
-  handleConfirm: PropTypes.func,
   butConf: PropTypes.string,
   butEsc: PropTypes.string,
 };
