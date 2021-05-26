@@ -39,6 +39,14 @@
     user-select: none;
   }
 
+  &_theme_gray {
+    border-color: $lightGray;
+    color: $lightGray;
+    &:hover {
+      color: $black;
+    }
+  }
+
   &_theme_light {
     border-color: $blue;
     color: $blue;
