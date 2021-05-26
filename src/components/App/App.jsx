@@ -90,7 +90,10 @@ function App() {
     offerChoiceOfCity();
     Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
       .then(([meetingsData, eventsData, userData]) => {
-        const parseDate = getParsedEventsData(eventsData.data);
+        const cityEvent = eventsData.data.filter(
+          (i) => userData.data.city === i.city,
+        );
+        const parseDate = getParsedEventsData(cityEvent);
         setMeetings(meetingsData.data);
         setIsLoadingMeetings(false);
         setEvents(parseDate);
