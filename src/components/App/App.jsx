@@ -175,7 +175,7 @@ function App() {
           <main className="main">
             <Switch>
               <Route exact path="/">
-                <Main />
+                <Main isAuthorized={isAuthorized} />
               </Route>
               <Route exact path="/about">
                 <AboutUs />
@@ -189,7 +189,7 @@ function App() {
                 onBookingEvent={handleBookingEventClick}
               />
               <Route exact path="/to-go">
-                <Places />
+                <Places isAuthorized={isAuthorized} />
               </Route>
               <ProtectedRoute
                 exact
