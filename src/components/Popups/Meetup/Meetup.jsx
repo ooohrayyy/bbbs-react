@@ -31,28 +31,28 @@ function Meetup({
       onRequestClose={closeModal}
       closeTimeoutMS={800}
     >
-        <button
-          onClick={closeModal}
-          className="popup__close popup__cancel"
-          type="button"
-        >
-          <img alt="close" src={closeImage} />
-        </button>
-        <CalendarEvent
-          closeMoreMadal={closeModal}
-          id={id}
-          type="Волонтеры"
-          address={address}
-          contact={contact}
-          title={title}
-          description={description}
-          startAt={startAt}
-          endAt={endAt}
-          seats={seats}
-          takenSeats={takenSeats}
-          needDescription
-          onBookingEvent={onBookingEvent}
-        />  
+      <button
+        onClick={closeModal}
+        className="popup__close popup__cancel"
+        type="button"
+      >
+        <img alt="close" src={closeImage} />
+      </button>
+      <CalendarEvent
+        closeMoreMadal={closeModal}
+        id={id}
+        type="Волонтеры"
+        address={address}
+        contact={contact}
+        title={title}
+        description={description}
+        startAt={startAt}
+        endAt={endAt}
+        seats={seats}
+        takenSeats={takenSeats}
+        needDescription
+        onBookingEvent={onBookingEvent}
+      />
     </Modal>
   );
 }

@@ -185,6 +185,8 @@ function App() {
                 path="/calendar"
                 isAuthorized={isAuthorized}
                 component={Calendar}
+                isRegisteredEvent={isRegisteredEvent}
+                onBookingEvent={handleBookingEventClick}
               />
               <Route exact path="/to-go">
                 <Places />
