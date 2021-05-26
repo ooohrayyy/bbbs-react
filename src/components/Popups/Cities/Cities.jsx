@@ -42,35 +42,33 @@ function Cities({ isOpen, handleClose, handleCities }) {
           onRequestClose={closeModal}
           closeTimeoutMS={800}
         >
-          <>
-            <h2 className="cities__title section-title">Выберите ваш город</h2>
-            <ul className="cities__capitals">
-              {answer.map(
-                (item) =>
-                  item.isPrimary && (
-                    <City
-                      id={item.id}
-                      name={item.name}
-                      key={item.id}
-                      handleCity={handleCity}
-                    />
-                  ),
-              )}
-            </ul>
-            <ul className="cities__region">
-              {answer.map(
-                (item) =>
-                  !item.isPrimary && (
-                    <City
-                      id={item.id}
-                      name={item.name}
-                      key={item.id}
-                      handleCity={handleCity}
-                    />
-                  ),
-              )}
-            </ul>
-          </>
+          <h2 className="cities__title section-title">Выберите ваш город</h2>
+          <ul className="cities__capitals">
+            {answer.map(
+              (item) =>
+                item.isPrimary && (
+                  <City
+                    id={item.id}
+                    name={item.name}
+                    key={item.id}
+                    handleCity={handleCity}
+                  />
+                ),
+            )}
+          </ul>
+          <ul className="cities__region">
+            {answer.map(
+              (item) =>
+                !item.isPrimary && (
+                  <City
+                    id={item.id}
+                    name={item.name}
+                    key={item.id}
+                    handleCity={handleCity}
+                  />
+                ),
+            )}
+          </ul>
         </Modal>
       )}
     </>
