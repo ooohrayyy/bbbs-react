@@ -1,3 +1,7 @@
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
 .popup {
   position: fixed;
   top: 0;
@@ -40,6 +44,10 @@
 
     &_type_confirmation {
       height: 670px;
+      justify-content: center;
+    }
+    &_type_delete {
+      height: 238px;
       justify-content: center;
     }
 
