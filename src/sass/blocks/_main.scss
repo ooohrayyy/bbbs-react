@@ -1,0 +1,28 @@
+.main {
+  padding-bottom: 120px;
+}
+
+@include atDesktop1024 {
+  .main {
+    padding-bottom: 100px;
+  }
+}
+
+@include atMobile {
+  .main {
+    padding-bottom: 50px;
+  }
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 800ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
