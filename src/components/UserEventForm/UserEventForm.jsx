@@ -10,7 +10,6 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
   const { register, handleSubmit } = useForm();
 
   const [photo, setPhoto] = useState('');
-  const [file, setFile] = useState(null);
   const [isUploadFile, setIsUploadFile] = useState(false);
   const [currRate, setCurrRate] = useState('');
 
@@ -23,18 +22,15 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
 
   useEffect(() => {}, [photo]);
 
-  function handleFileChange(e) {
-    setFile(e.target.files[0]);
-  }
-
   function handleUploadFile() {
     setIsUploadFile(true);
   }
 
   // Положить загруженную фотографию в экземпляр глобального класса FormData,
   // отправить на сервер и преобразовать полученный файл в URL с помощью API FileReader
-  function onFileUpload() {
+  function onFileUpload(e) {
     const formData = new FormData();
+    const file = e.target.files[0];
     formData.append('userPhoto', file, file.name);
 
     api
@@ -74,20 +70,14 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
     <article className="card-container card-container_type_personal-area">
       {!isUploadFile && (
         <div className="card personal-area__card personal-area__card_type_add-photo">
-          <button
-            onClick={onFileUpload}
-            aria-label="Add photo"
-            className="personal-area__add-photo-button"
-            type="button"
-            disabled={!file && true}
-          />
+          <div className="personal-area__add-photo-button" />
           <p className="caption personal-area__bottom-caption">
             Загрузить фото
           </p>
           <input
             id="photo-input"
             type="file"
-            onChange={handleFileChange}
+            onChange={onFileUpload}
             className="personal-area__input-photo"
           />
         </div>
