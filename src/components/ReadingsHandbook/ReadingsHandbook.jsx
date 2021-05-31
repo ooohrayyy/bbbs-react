@@ -13,13 +13,29 @@ function ReadingsHandbook() {
   function scrollRight() {
     containerRef.current.scroll(containerPosition + 300, 0);
 
-    setContainerPosition(containerPosition + 300);
+    let newPosition;
+
+    if (containerPosition + 300 > containerRef.current.offsetWidth) {
+      newPosition = containerRef.current.offsetWidth;
+    } else {
+      newPosition = containerPosition + 300;
+    }
+
+    setContainerPosition(newPosition);
   }
 
   function scrollLeft() {
     containerRef.current.scroll(containerPosition - 300, 0);
 
-    setContainerPosition(containerPosition - 300);
+    let newPosition;
+
+    if (containerPosition - 300 > containerRef.current.offsetWidth) {
+      newPosition = containerRef.current.offsetWidth;
+    } else {
+      newPosition = containerPosition - 300;
+    }
+
+    setContainerPosition(newPosition);
   }
 
   return (
