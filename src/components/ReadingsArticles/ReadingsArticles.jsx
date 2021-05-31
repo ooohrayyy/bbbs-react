@@ -3,9 +3,29 @@ import React from 'react';
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
 import ReadingsArticleCard from '../ReadingsArticleCard/ReadingsArticleCard';
 
+import useScroll from '../../utils/useScroll';
+
 import readingsArticlesCardsData from '../../assets/dev-data/ReadingsData/ReadingsArticlesData/readingsArticlesCardsData';
 
 function ReadingsArticles() {
+  const [containerPosition, setContainerPosition] = React.useState(0);
+
+  const containerRef = React.useRef(null);
+
+  const scrollRight = useScroll(
+    containerRef,
+    containerPosition,
+    setContainerPosition,
+    'right',
+  );
+
+  const scrollLeft = useScroll(
+    containerRef,
+    containerPosition,
+    setContainerPosition,
+    'left',
+  );
+
   return (
     <>
       <section className="preview page__section">
@@ -13,9 +33,12 @@ function ReadingsArticles() {
           <a href="./articles.html" className="link">
             <h3 className="chapter-title chapter-title_clickable">Статьи</h3>
           </a>
-          <ReadingsButtons />
+          <ReadingsButtons
+            onClickRight={scrollRight}
+            onClickLeft={scrollLeft}
+          />
         </div>
-        <div className="preview__row">
+        <div className="preview__row" ref={containerRef}>
           {readingsArticlesCardsData.map((item, index) => (
             <ReadingsArticleCard
               cardTitle={item.cardTitle}

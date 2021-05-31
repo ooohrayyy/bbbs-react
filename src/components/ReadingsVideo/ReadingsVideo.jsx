@@ -3,9 +3,29 @@ import React from 'react';
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
 import ReadingsVideoCard from '../ReadingsVideoCard/ReadingsVideoCard';
 
+import useScroll from '../../utils/useScroll';
+
 import readingsVideoCardsData from '../../assets/dev-data/ReadingsData/ReadingsVideoData/readingsVideoCardsData';
 
 function ReadingsVideo() {
+  const [containerPosition, setContainerPosition] = React.useState(0);
+
+  const containerRef = React.useRef(null);
+
+  const scrollRight = useScroll(
+    containerRef,
+    containerPosition,
+    setContainerPosition,
+    'right',
+  );
+
+  const scrollLeft = useScroll(
+    containerRef,
+    containerPosition,
+    setContainerPosition,
+    'left',
+  );
+
   return (
     <>
       <section className="preview page__section">
@@ -13,9 +33,12 @@ function ReadingsVideo() {
           <a href="./video.html" className="link">
             <h3 className="chapter-title chapter-title_clickable">Видео</h3>
           </a>
-          <ReadingsButtons />
+          <ReadingsButtons
+            onClickRight={scrollRight}
+            onClickLeft={scrollLeft}
+          />
         </div>
-        <div className="preview__row">
+        <div className="preview__row" ref={containerRef}>
           {readingsVideoCardsData.map((item, index) => (
             <ReadingsVideoCard
               cardTitle={item.cardTitle}
