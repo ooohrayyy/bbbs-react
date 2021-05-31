@@ -25,9 +25,7 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
 
   useEffect(() => {}, [photo]);
 
-  function handleUploadFile() {
-    setIsUploadFile(true);
-  }
+  const handleUploadFile = () => setIsUploadFile(true);
 
   // Положить загруженную фотографию в экземпляр глобального класса FormData,
   // отправить на сервер и преобразовать полученный файл в URL с помощью API FileReader
