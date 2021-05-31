@@ -3,6 +3,8 @@ import React from 'react';
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
 import ReadingsHandbookCard from '../ReadingsHandbookCard/ReadingsHandbookCard';
 
+import useScroll from '../../utils/useScroll';
+
 import readingsHandbookCardsData from '../../assets/dev-data/ReadingsData/ReadingsHandbookData/readingsHandbookCardsData';
 
 function ReadingsHandbook() {
@@ -10,33 +12,18 @@ function ReadingsHandbook() {
 
   const containerRef = React.useRef(null);
 
-  function scrollRight() {
-    containerRef.current.scroll(containerPosition + 300, 0);
-
-    let newPosition;
-
-    if (containerPosition + 300 > containerRef.current.offsetWidth) {
-      newPosition = containerRef.current.offsetWidth;
-    } else {
-      newPosition = containerPosition + 300;
-    }
-
-    setContainerPosition(newPosition);
-  }
-
-  function scrollLeft() {
-    containerRef.current.scroll(containerPosition - 300, 0);
-
-    let newPosition;
-
-    if (containerPosition - 300 > containerRef.current.offsetWidth) {
-      newPosition = containerRef.current.offsetWidth;
-    } else {
-      newPosition = containerPosition - 300;
-    }
-
-    setContainerPosition(newPosition);
-  }
+  const scrollRight = useScroll(
+    containerRef,
+    containerPosition,
+    setContainerPosition,
+    'right',
+  );
+  const scrollLeft = useScroll(
+    containerRef,
+    containerPosition,
+    setContainerPosition,
+    'left',
+  );
 
   return (
     <section className="preview page__section">
