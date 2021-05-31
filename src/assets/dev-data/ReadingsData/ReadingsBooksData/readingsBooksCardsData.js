@@ -1,12 +1,5 @@
 const readingsBooksCardsData = [
   {
-    title: '',
-    author: '',
-    year: '',
-    annotation: '',
-    color: '',
-  },
-  {
     title: 'Жизнь после утраты',
     author: 'Волкан Вамик, Зинтл Элизабет',
     year: '2011',
