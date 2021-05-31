@@ -227,6 +227,7 @@
   background-repeat: no-repeat;
   background-color: transparent;
   cursor: pointer;
+  appearance: none;
 
   &_type_good {
     background-image: url('../../images/personal-area/good.svg');
