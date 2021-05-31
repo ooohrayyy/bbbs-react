@@ -13,7 +13,10 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
   const [isUploadFile, setIsUploadFile] = useState(false);
   const [currRate, setCurrRate] = useState('');
 
-  // Использовать API FileReader чтобы переводить загруженные файлы в URL
+  // Использовать экземпляр глобального класса FormData для обработки файлов с фотографиями
+  const formData = new FormData();
+
+  // Использовать API FileReader, чтобы переводить загруженные файлы в URL
   const reader = new FileReader();
 
   reader.addEventListener('load', () => {
@@ -29,7 +32,6 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
   // Положить загруженную фотографию в экземпляр глобального класса FormData,
   // отправить на сервер и преобразовать полученный файл в URL с помощью API FileReader
   function onFileUpload(e) {
-    const formData = new FormData();
     const file = e.target.files[0];
     formData.append('userPhoto', file, file.name);
 
