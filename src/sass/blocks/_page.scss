@@ -30,6 +30,10 @@
   .page__section {
     padding: 100px 127px 0;
   }
+
+  .page__section_rights {
+    padding-top: 15px;
+  }
 }
 
 @include atTablet {

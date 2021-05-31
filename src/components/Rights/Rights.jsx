@@ -5,6 +5,9 @@ import arrow from '../../images/svg/arrow-right.svg';
 function Rights() {
   return (
     <>
+      <div className="article-lead__top-overlay" />
+      <div className="article-lead__top" />
+      <div className="article-lead__overlay" />
       <section className="article-lead">
         <div className="article-lead__content">
           <h1 className="chapter-title article-lead__title">
@@ -22,7 +25,7 @@ function Rights() {
         </div>
       </section>
 
-      <section className="article page__section">
+      <section className="article page__section page__section_rights">
         <div className="article__container">
           <h2 className="section-title article__subtitle">
             Отрицательный образ себя
