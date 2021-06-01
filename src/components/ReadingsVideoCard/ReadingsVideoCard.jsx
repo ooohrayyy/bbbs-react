@@ -1,18 +1,15 @@
 import React from 'react';
 
-import devImage from '../../assets/dev-data/ReadingsData/ReadingsVideoData/CardImages/video-ex-1.png';
-
 function ReadingsVideoCard({
   cardTitle,
   cardCaption,
-  // cardPreview,
+  cardPreview,
   cardDuration,
 }) {
   return (
     <article className="preview__card card card_content_video">
       <div className="video">
-        {/* <img className="video__img" src={cardPreview} alt="Превью видео" /> */}
-        <img className="video__img" src={devImage} alt="Превью видео" />
+        <img className="video__img" src={cardPreview} alt="Превью видео" />
         <p className="video__duration paragraph">{cardDuration}</p>
       </div>
       <div className="card__video-info">
