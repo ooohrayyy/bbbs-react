@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ReadingsHandbook from '../ReadingsHandbook/ReadingsHandbook';
-import ReadingsVideo from '../ReadingsVideo/ReadingsVideo';
-import ReadingsArticles from '../ReadingsArticles/ReadingsArticles';
-import ReadingsMovies from '../ReadingsMovies/ReadingsMovies';
-import ReadingsBooks from '../ReadingsBooks/ReadingsBooks';
+import ReadingsHandbook from './ReadingsHandbook/ReadingsHandbook';
+import ReadingsVideo from './ReadingsVideo/ReadingsVideo';
+import ReadingsArticles from './ReadingsArticles/ReadingsArticles';
+import ReadingsMovies from './ReadingsMovies/ReadingsMovies';
+import ReadingsBooks from './ReadingsBooks/ReadingsBooks';
 
 function Readings() {
   return (

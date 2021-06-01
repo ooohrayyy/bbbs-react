@@ -1,13 +1,13 @@
 import React from 'react';
 
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
-import ReadingsVideoCard from '../ReadingsVideoCard/ReadingsVideoCard';
+import ReadingsMovieCard from './ReadingsMovieCard/ReadingsMovieCard';
 
-import useScroll from '../../utils/useScroll';
+import useScroll from '../../../utils/useScroll';
 
-import readingsVideoCardsData from '../../assets/dev-data/ReadingsData/ReadingsVideoData/readingsVideoCardsData';
+import readingsMoviesCardsData from '../../../assets/dev-data/ReadingsData/ReadingsMoviesData/readingsMoviesCardsData';
 
-function ReadingsVideo() {
+function ReadingsMovies() {
   const [containerPosition, setContainerPosition] = React.useState(0);
   const [containerOffsetWidth, setContainerOffsetWidth] = React.useState(0);
   const [containerScrollWidth, setContainerScrollWidth] = React.useState(0);
@@ -43,8 +43,8 @@ function ReadingsVideo() {
     <>
       <section className="preview page__section">
         <div className="preview__title-wrap">
-          <a href="./video.html" className="link">
-            <h3 className="chapter-title chapter-title_clickable">Видео</h3>
+          <a href="./films.html" className="link">
+            <h3 className="chapter-title chapter-title_clickable">Фильмы</h3>
           </a>
           <ReadingsButtons
             onClickRight={scrollRight}
@@ -59,12 +59,14 @@ function ReadingsVideo() {
           ref={containerRef}
           onScroll={handleScroll}
         >
-          {readingsVideoCardsData.map((item, index) => (
-            <ReadingsVideoCard
-              cardTitle={item.cardTitle}
-              cardCaption={item.cardCaption}
-              cardPreview={item.cardPreview}
-              cardDuration={item.cardDuration}
+          {readingsMoviesCardsData.map((item, index) => (
+            <ReadingsMovieCard
+              title={item.title}
+              caption={item.caption}
+              annotation={item.annotation}
+              preview={item.preview}
+              trailer={item.trailer}
+              categories={item.categories}
               key={index}
             />
           ))}
@@ -74,4 +76,4 @@ function ReadingsVideo() {
   );
 }
 
-export default ReadingsVideo;
+export default ReadingsMovies;

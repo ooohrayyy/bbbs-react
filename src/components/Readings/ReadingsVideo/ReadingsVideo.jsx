@@ -1,13 +1,13 @@
 import React from 'react';
 
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
-import ReadingsBookCard from '../ReadingsBookCard/ReadingsBookCard';
+import ReadingsVideoCard from './ReadingsVideoCard/ReadingsVideoCard';
 
-import useScroll from '../../utils/useScroll';
+import useScroll from '../../../utils/useScroll';
 
-import readingsBooksCardsData from '../../assets/dev-data/ReadingsData/ReadingsBooksData/readingsBooksCardsData';
+import readingsVideoCardsData from '../../../assets/dev-data/ReadingsData/ReadingsVideoData/readingsVideoCardsData';
 
-function ReadingsBooks() {
+function ReadingsVideo() {
   const [containerPosition, setContainerPosition] = React.useState(0);
   const [containerOffsetWidth, setContainerOffsetWidth] = React.useState(0);
   const [containerScrollWidth, setContainerScrollWidth] = React.useState(0);
@@ -43,8 +43,8 @@ function ReadingsBooks() {
     <>
       <section className="preview page__section">
         <div className="preview__title-wrap">
-          <a href="./books.html" className="link">
-            <h3 className="chapter-title chapter-title_clickable">Книги</h3>
+          <a href="./video.html" className="link">
+            <h3 className="chapter-title chapter-title_clickable">Видео</h3>
           </a>
           <ReadingsButtons
             onClickRight={scrollRight}
@@ -59,13 +59,12 @@ function ReadingsBooks() {
           ref={containerRef}
           onScroll={handleScroll}
         >
-          {readingsBooksCardsData.map((book, index) => (
-            <ReadingsBookCard
-              title={book.title}
-              author={book.author}
-              year={book.year}
-              annotation={book.annotation}
-              color={book.color}
+          {readingsVideoCardsData.map((item, index) => (
+            <ReadingsVideoCard
+              cardTitle={item.cardTitle}
+              cardCaption={item.cardCaption}
+              cardPreview={item.cardPreview}
+              cardDuration={item.cardDuration}
               key={index}
             />
           ))}
@@ -75,4 +74,4 @@ function ReadingsBooks() {
   );
 }
 
-export default ReadingsBooks;
+export default ReadingsVideo;

@@ -1,13 +1,13 @@
 import React from 'react';
 
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
-import ReadingsMovieCard from '../ReadingsMovieCard/ReadingsMovieCard';
+import ReadingsArticleCard from './ReadingsArticleCard/ReadingsArticleCard';
 
-import useScroll from '../../utils/useScroll';
+import useScroll from '../../../utils/useScroll';
 
-import readingsMoviesCardsData from '../../assets/dev-data/ReadingsData/ReadingsMoviesData/readingsMoviesCardsData';
+import readingsArticlesCardsData from '../../../assets/dev-data/ReadingsData/ReadingsArticlesData/readingsArticlesCardsData';
 
-function ReadingsMovies() {
+function ReadingsArticles() {
   const [containerPosition, setContainerPosition] = React.useState(0);
   const [containerOffsetWidth, setContainerOffsetWidth] = React.useState(0);
   const [containerScrollWidth, setContainerScrollWidth] = React.useState(0);
@@ -43,8 +43,8 @@ function ReadingsMovies() {
     <>
       <section className="preview page__section">
         <div className="preview__title-wrap">
-          <a href="./films.html" className="link">
-            <h3 className="chapter-title chapter-title_clickable">Фильмы</h3>
+          <a href="./articles.html" className="link">
+            <h3 className="chapter-title chapter-title_clickable">Статьи</h3>
           </a>
           <ReadingsButtons
             onClickRight={scrollRight}
@@ -59,14 +59,13 @@ function ReadingsMovies() {
           ref={containerRef}
           onScroll={handleScroll}
         >
-          {readingsMoviesCardsData.map((item, index) => (
-            <ReadingsMovieCard
-              title={item.title}
-              caption={item.caption}
-              annotation={item.annotation}
-              preview={item.preview}
-              trailer={item.trailer}
-              categories={item.categories}
+          {readingsArticlesCardsData.map((item, index) => (
+            <ReadingsArticleCard
+              cardTitle={item.cardTitle}
+              cardCaption={item.cardCaption}
+              cardText={item.cardText}
+              cardLink={item.cardLink}
+              cardColor={item.cardColor}
               key={index}
             />
           ))}
@@ -76,4 +75,4 @@ function ReadingsMovies() {
   );
 }
 
-export default ReadingsMovies;
+export default ReadingsArticles;

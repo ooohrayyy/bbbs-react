@@ -1,13 +1,13 @@
 import React from 'react';
 
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
-import ReadingsArticleCard from '../ReadingsArticleCard/ReadingsArticleCard';
+import ReadingsBookCard from './ReadingsBookCard/ReadingsBookCard';
 
-import useScroll from '../../utils/useScroll';
+import useScroll from '../../../utils/useScroll';
 
-import readingsArticlesCardsData from '../../assets/dev-data/ReadingsData/ReadingsArticlesData/readingsArticlesCardsData';
+import readingsBooksCardsData from '../../../assets/dev-data/ReadingsData/ReadingsBooksData/readingsBooksCardsData';
 
-function ReadingsArticles() {
+function ReadingsBooks() {
   const [containerPosition, setContainerPosition] = React.useState(0);
   const [containerOffsetWidth, setContainerOffsetWidth] = React.useState(0);
   const [containerScrollWidth, setContainerScrollWidth] = React.useState(0);
@@ -43,8 +43,8 @@ function ReadingsArticles() {
     <>
       <section className="preview page__section">
         <div className="preview__title-wrap">
-          <a href="./articles.html" className="link">
-            <h3 className="chapter-title chapter-title_clickable">Статьи</h3>
+          <a href="./books.html" className="link">
+            <h3 className="chapter-title chapter-title_clickable">Книги</h3>
           </a>
           <ReadingsButtons
             onClickRight={scrollRight}
@@ -59,13 +59,13 @@ function ReadingsArticles() {
           ref={containerRef}
           onScroll={handleScroll}
         >
-          {readingsArticlesCardsData.map((item, index) => (
-            <ReadingsArticleCard
-              cardTitle={item.cardTitle}
-              cardCaption={item.cardCaption}
-              cardText={item.cardText}
-              cardLink={item.cardLink}
-              cardColor={item.cardColor}
+          {readingsBooksCardsData.map((book, index) => (
+            <ReadingsBookCard
+              title={book.title}
+              author={book.author}
+              year={book.year}
+              annotation={book.annotation}
+              color={book.color}
               key={index}
             />
           ))}
@@ -75,4 +75,4 @@ function ReadingsArticles() {
   );
 }
 
-export default ReadingsArticles;
+export default ReadingsBooks;

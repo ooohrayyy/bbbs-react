@@ -1,11 +1,11 @@
 import React from 'react';
 
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
-import ReadingsHandbookCard from '../ReadingsHandbookCard/ReadingsHandbookCard';
+import ReadingsHandbookCard from './ReadingsHandbookCard/ReadingsHandbookCard';
 
-import useScroll from '../../utils/useScroll';
+import useScroll from '../../../utils/useScroll';
 
-import readingsHandbookCardsData from '../../assets/dev-data/ReadingsData/ReadingsHandbookData/readingsHandbookCardsData';
+import readingsHandbookCardsData from '../../../assets/dev-data/ReadingsData/ReadingsHandbookData/readingsHandbookCardsData';
 
 function ReadingsHandbook() {
   const [containerPosition, setContainerPosition] = React.useState(0);

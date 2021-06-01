@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useLongPress from '../../utils/useLongPress';
+import useLongPress from '../../../utils/useLongPress';
 
 function ReadingsButtons({
   onClickLeft,
