@@ -1,8 +1,10 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import mock from '../../utils/mock';
 import api from '../../utils/api';
+
+import cities from '../../assets/mock-data/cities.json';
 
 import { getParsedEventsData } from '../../utils/calendarUtils';
 
@@ -15,20 +17,31 @@ import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
 import Places from '../Places/Places';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Signin from '../Popups/Signin/Signin';
+import Cities from '../Popups/Cities/Cities';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   mock.initializeAxiosMockAdapter(api.instance);
 
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [isAuthorized, setIsAuthorized] = React.useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const [events, setEvents] = React.useState([]);
-  const [meetings, setMeetings] = React.useState([]);
+  const [events, setEvents] = useState([]);
+  const [meetings, setMeetings] = useState([]);
 
-  const [scrollTop, setScrollTop] = React.useState(0);
-  const [hiddenMenuClass, setHiddenMenuClass] = React.useState('');
+  const [scrollTop, setScrollTop] = useState(0);
+  const [hiddenMenuClass, setHiddenMenuClass] = useState('');
+
+  const [isLoadingMeetings, setIsLoadingMeetings] = useState(true);
+
+  const [userCity, setUserCity] = useState('');
+
+  const [isRegisteredEvent, setIsRegisteredEvent] = useState(false);
+  const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
+  const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
   const history = useHistory();
 
@@ -42,14 +55,50 @@ function App() {
     }
   }
 
+  // Определить актуальный город пользователя
+  function handleCities(currentCity) {
+    currentUser.city = currentCity;
+    const cityName = cities.filter((el) => el.id === currentCity)[0].name;
+    setUserCity(cityName);
+  }
+
+  function openSignInModal() {
+    setSignInModalIsOpen(true);
+  }
+
+  function closeSignInModal() {
+    setSignInModalIsOpen(false);
+  }
+
+  function handleChangeCityClick() {
+    setIsChangeCityPopupOpen(true);
+  }
+
+  function closeChangeCityPopup() {
+    setIsChangeCityPopupOpen(false);
+  }
+
+  // Предложить выбрать город неавторизованному пользователю
+  function offerChoiceOfCity() {
+    if (!isAuthorized) {
+      handleChangeCityClick();
+    }
+  }
+
   // Проверка при загрузке страницы, авторизован ли пользователь
-  React.useEffect(() => {
+  useEffect(() => {
     checkToken();
-    Promise.all([api.getMeetings(), api.getEvents()])
-      .then(([meetingsData, eventsData]) => {
-        const parseDate = getParsedEventsData(eventsData.data);
+    offerChoiceOfCity();
+    Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
+      .then(([meetingsData, eventsData, userData]) => {
+        const cityEvent = eventsData.data.filter(
+          (i) => userData.data.city === i.city,
+        );
+        const parseDate = getParsedEventsData(cityEvent);
         setMeetings(meetingsData.data);
+        setIsLoadingMeetings(false);
         setEvents(parseDate);
+        handleCities(userData.data.city);
       })
       .catch((err) => err.message);
   }, []);
@@ -57,16 +106,20 @@ function App() {
   // Обработчик входа пользователя
   function handleSignIn() {
     Promise.all([api.authUser(), api.updateProfile(), api.getEvents()])
-      .then(([authData, userData]) => {
+      .then(([authData, userData, eventsData]) => {
         if (authData.data.access) {
+          const cityEvent = eventsData.data.filter(
+            (i) => userData.data.city === i.city,
+          );
+          const parseDate = getParsedEventsData(cityEvent);
+          setEvents(parseDate);
           setIsAuthorized(true);
           setCurrentUser(userData.data);
           localStorage.setItem('jwt', authData.data.access);
+          handleCities(userData.data.city);
         }
       })
-      .catch((err) => {
-        console.log('Ошибка при попытке входа', err.message);
-      });
+      .catch((err) => err.message);
   }
 
   function pushToProfilePage() {
@@ -80,6 +133,7 @@ function App() {
     history.push('./');
   }
 
+  // появление хедера при обратном скролле
   function handleScroll() {
     const currentPosition = window.pageYOffset;
     if (currentPosition > scrollTop && currentPosition > 20) {
@@ -90,11 +144,7 @@ function App() {
     setScrollTop(currentPosition);
   }
 
-  React.useEffect(() => {
-    handleSignIn();
-  }, []);
-
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
@@ -103,47 +153,86 @@ function App() {
     setMeetings([meeting, ...meetings]);
   }
 
+  // запись на мероприятие
+  function handleBookingEventClick(eventId) {
+    api
+      .bookEvent({ id: currentUser.user, event: eventId })
+      .then(() => {
+        setIsRegisteredEvent(true);
+        api
+          .getEvents()
+          .then(({ data }) => {
+            const cityEvent = data.filter((i) => currentUser.city === i.city);
+            const parseDate = getParsedEventsData(cityEvent);
+            setEvents(parseDate);
+          })
+          .catch((err) => err.message);
+      })
+      .catch((err) => err.message);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <body className="page">
-        <Header
-          isAuthorized={isAuthorized}
-          onSignIn={handleSignIn}
-          isHidden={hiddenMenuClass}
-          pushToProfilePage={pushToProfilePage}
-        />
-        <main className="main">
-          <Switch>
-            <Route exact path="/">
-              <Main />
-            </Route>
-            <Route exact path="/about">
-              <AboutUs />
-            </Route>
-            <Route exact path="/calendar">
-              <Calendar />
-            </Route>
-            <Route exact path="/readings">
-              <Readings />
-            </Route>
-            <Route exact path="/to-go">
-              <Places />
-            </Route>
-            <Route exact path="/profile">
-              <UserArea
+      <div className="page__container">
+        <div className="page">
+          <Header
+            isAuthorized={isAuthorized}
+            isHidden={hiddenMenuClass}
+            pushToProfilePage={pushToProfilePage}
+            signInModalIsOpen={signInModalIsOpen}
+            openSignInModal={openSignInModal}
+          />
+          <main className="main">
+            <Switch>
+              <Route exact path="/">
+                <Main isAuthorized={isAuthorized} />
+              </Route>
+              <Route exact path="/about">
+                <AboutUs />
+              </Route>
+              <ProtectedRoute
+                exact
+                path="/calendar"
+                cityEvents={events}
+                isAuthorized={isAuthorized}
+                component={Calendar}
+                isRegisteredEvent={isRegisteredEvent}
+                onBookingEvent={handleBookingEventClick}
+              />
+              <Route exact path="/to-go">
+                <Places isAuthorized={isAuthorized} />
+              </Route>
+              <ProtectedRoute
+                exact
+                path="/profile"
+                isAuthorized={isAuthorized}
+                component={UserArea}
                 allEvents={events}
                 meetings={meetings}
                 onAddMeeting={handleAddMeeting}
                 onSignOut={handleSignOut}
+                isLoading={isLoadingMeetings}
+                userCity={userCity}
+                onChooseCity={handleChangeCityClick}
               />
-            </Route>
-            <Route path="/">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </main>
+              <Route path="/">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
+          </main>
+        </div>
         <Footer />
-      </body>
+        <Signin
+          isOpen={signInModalIsOpen}
+          onSignIn={handleSignIn}
+          onClose={closeSignInModal}
+        />
+        <Cities
+          isOpen={isChangeCityPopupOpen}
+          handleClose={closeChangeCityPopup}
+          handleCities={handleCities}
+        />
+      </div>
     </CurrentUserContext.Provider>
   );
 }

@@ -7,11 +7,21 @@ import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
 
 import getRegistredEvents from '../../utils/userAreauUtils';
 
-function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
+function UserArea({
+  meetings = [],
+  onAddMeeting,
+  allEvents,
+  onSignOut,
+  isLoading,
+  userCity,
+  onChooseCity,
+}) {
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
   const [bookedEvents, setBookedEvents] = useState([]);
 
   useEffect(() => {}, [meetings]);
+
+  useEffect(() => {}, [userCity]);
 
   useEffect(() => {
     setBookedEvents(getRegistredEvents(allEvents));
@@ -29,10 +39,11 @@ function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
     <section className="personal-area page__section">
       <div className="personal-area__user-info">
         <button
+          onClick={onChooseCity}
           type="button"
           className="paragraph personal-area__user-link personal-area__user-link_type_city"
         >
-          Изменить город
+          {userCity && `${userCity}. `} Изменить город
         </button>
         <button
           type="button"
@@ -85,7 +96,9 @@ function UserArea({ meetings = [], onAddMeeting, allEvents, onSignOut }) {
         />
       )}
       {!isAddMeetButtonClicked &&
-        meetings.map((el) => <UserEvent meeting={el} key={el.id} />)}
+        meetings.map((el) => (
+          <UserEvent meeting={el} isLoading={isLoading} key={el.id} />
+        ))}
     </section>
   );
 }

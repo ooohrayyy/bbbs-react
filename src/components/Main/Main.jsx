@@ -11,10 +11,13 @@ import Film from '../Film/Film';
 import Question from '../Question/Question';
 import Facebook from '../Facebook/Facebook';
 import Preloader from '../Preloader/Preloader';
+import Meetup from '../Popups/Meetup/Meetup';
+import CalendarCard from '../CalendarCard/CalendarCard';
 
-function Main() {
+function Main({ isAuthorized }) {
   const [answer, setAnswer] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   mock.initializeAxiosMockAdapter(api.instance);
 
   useEffect(() => {
@@ -26,12 +29,25 @@ function Main() {
       })
       .catch((err) => console.log(err.message));
   }, []);
+  function openMore() {
+    setIsMoreOpen(true);
+  }
+  function handleClose() {
+    setIsMoreOpen(false);
+  }
 
   return (
     <>
       <section className="lead page__section">
         <article className="card-container card-container_type_identical">
-          <Description />
+          {isAuthorized &&
+            (isLoading ? (
+              <Preloader />
+            ) : (
+              <CalendarCard event={answer.event} openMore={openMore} />
+            ))}
+          {!isAuthorized && <Description />}
+
           {isLoading ? <Preloader /> : <Stories history={answer.history} />}
         </article>
       </section>
@@ -70,6 +86,24 @@ function Main() {
       <section className="main-section page__section">
         {isLoading ? <Preloader /> : <Quote article={answer.articles[1]} />}
       </section>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <Meetup
+          isOpen={isMoreOpen}
+          handleClose={handleClose}
+          type="Волонтеры"
+          address={answer.event.address}
+          contact={answer.event.contact}
+          title={answer.event.title}
+          description={answer.event.description}
+          startAt={answer.event.startAt}
+          endAt={answer.event.endAt}
+          seats={answer.event.seats}
+          takenSeats={answer.event.takenSeats}
+          needDescription
+        />
+      )}
     </>
   );
 }

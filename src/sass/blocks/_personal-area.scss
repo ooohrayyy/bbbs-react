@@ -80,6 +80,10 @@
   font-family: $ptRootUI;
 }
 
+.personal-area__reg-event:hover {
+  cursor: pointer;
+}
+
 .personal-area__reg-event-date {
   display: flex;
   margin-bottom: 10px;

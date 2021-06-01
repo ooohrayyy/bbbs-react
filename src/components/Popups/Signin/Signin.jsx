@@ -9,34 +9,6 @@ function Signin({ isOpen, onSignIn, onClose }) {
 
   const { register, handleSubmit } = useForm();
 
-  const customStyles = {
-    content: {
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      zIndex: 2,
-      margin: '75px auto 0',
-      padding: '50px 100px',
-      borderRadius: '30px',
-      maxWidth: '770px',
-      maxHeight: '80vh',
-      backgroundColor: '#ffffff',
-      boxSizing: 'border-box',
-      justifyContent: 'space-between',
-      height: '559px',
-    },
-    overlay: {
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      left: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      display: 'flex',
-      backdropFilter: 'blur(7px)',
-    },
-  };
-
   function onSubmit() {
     onSignIn();
     onClose();
@@ -45,7 +17,8 @@ function Signin({ isOpen, onSignIn, onClose }) {
   return (
     <Modal
       isOpen={isOpen}
-      style={customStyles}
+      className="popup__container popup__container_type_sign-in"
+      overlayClassName="popup popup_type_sign-in"
       onRequestClose={onClose}
       closeTimeoutMS={800}
     >
