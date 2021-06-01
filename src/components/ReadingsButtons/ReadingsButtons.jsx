@@ -16,7 +16,7 @@ function ReadingsButtons({
       ? 'preview__button_left-grey'
       : 'preview__button_left';
   const rightButtonModificator =
-    containerPosition === containerWidth
+    containerPosition >= containerWidth
       ? 'preview__button_right-grey'
       : 'preview__button_right';
 
