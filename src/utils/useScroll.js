@@ -18,8 +18,8 @@ function useScroll(ref, position, setPosition, direction, pixels = 300) {
 
     let newPosition;
 
-    if (position - pixels > ref.current.offsetWidth) {
-      newPosition = ref.current.offsetWidth;
+    if (position - pixels <= 0) {
+      newPosition = 0;
     } else {
       newPosition = position - pixels;
     }
