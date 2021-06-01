@@ -2,14 +2,28 @@ import React from 'react';
 
 import useLongPress from '../../utils/useLongPress';
 
-function ReadingsButtons({ onClickLeft, onClickRight }) {
+function ReadingsButtons({
+  onClickLeft,
+  onClickRight,
+  containerPosition,
+  containerWidth,
+}) {
   const leftLongPress = useLongPress(onClickLeft, 100);
   const rightLongPress = useLongPress(onClickRight, 100);
+
+  const leftButtonModificator =
+    containerPosition === 0
+      ? 'preview__button_left-grey'
+      : 'preview__button_left';
+  const rightButtonModificator =
+    containerPosition === containerWidth
+      ? 'preview__button_right-grey'
+      : 'preview__button_right';
 
   return (
     <div className="preview__buttons">
       <button
-        className="preview__button preview__button_left"
+        className={`preview__button ${leftButtonModificator}`}
         type="button"
         label="left"
         onClick={onClickLeft}
@@ -20,7 +34,7 @@ function ReadingsButtons({ onClickLeft, onClickRight }) {
         onTouchEnd={leftLongPress.onTouchEnd}
       />
       <button
-        className="preview__button preview__button_right"
+        className={`preview__button ${rightButtonModificator}`}
         type="button"
         label="right"
         onClick={onClickRight}

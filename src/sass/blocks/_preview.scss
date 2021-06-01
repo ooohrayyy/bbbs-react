@@ -35,8 +35,16 @@
     background-image: url('../../images/svg/arrow-right.svg');
   }
 
+  &_right-grey {
+    background-image: url('../../images/svg/arrow-right-grey.svg');
+  }
+
   &_left {
     background-image: url('../../images/svg/arrow-left.svg');
+  }
+
+  &_left-grey {
+    background-image: url('../../images/svg/arrow-left-grey.svg');
   }
 }
 
