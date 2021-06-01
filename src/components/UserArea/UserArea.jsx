@@ -27,13 +27,9 @@ function UserArea({
     setBookedEvents(getRegistredEvents(allEvents));
   }, [allEvents]);
 
-  function handleAddMeetClick() {
-    setIsMeetButtonClicked(true);
-  }
+  const handleAddMeetClick = () => setIsMeetButtonClicked(true);
 
-  function handleAddMeetCardClick() {
-    setIsMeetButtonClicked(false);
-  }
+  const handleAddMeetCardClick = () => setIsMeetButtonClicked(false);
 
   return (
     <section className="personal-area page__section">
@@ -105,6 +101,11 @@ function UserArea({
 
 UserArea.propTypes = {
   meetings: PropTypes.instanceOf(Array),
+  onAddMeeting: PropTypes.instanceOf(Function),
+  allEvents: PropTypes.instanceOf(Array),
+  onSignOut: PropTypes.instanceOf(Function),
+  userCity: PropTypes.string,
+  onChooseCity: PropTypes.instanceOf(Function),
 };
 
 export default UserArea;

@@ -6,8 +6,7 @@ import { parsedDate } from '../../utils/calendarUtils';
 import Preloader from '../Preloader/Preloader';
 
 function UserEvent({ meeting, isLoading }) {
-  const { place, description, photo, date, rateGood, rateNeutral, rateBad } =
-    meeting;
+  const { place, description, photo, date, rate } = meeting;
   const { month, dayMonth, year } = parsedDate(date);
 
   useEffect(() => {}, [isLoading]);
@@ -44,7 +43,7 @@ function UserEvent({ meeting, isLoading }) {
         )}
         <div className="personal-area__actions">
           <div className="personal-area__rating">
-            {rateGood && (
+            {rate === 'good' && (
               <>
                 <button
                   aria-label="Rate good"
@@ -56,7 +55,7 @@ function UserEvent({ meeting, isLoading }) {
                 </p>
               </>
             )}
-            {rateNeutral && (
+            {rate === 'neutral' && (
               <>
                 <button
                   aria-label="Rate neutral"
@@ -68,7 +67,7 @@ function UserEvent({ meeting, isLoading }) {
                 </p>
               </>
             )}
-            {rateBad && (
+            {rate === 'bad' && (
               <>
                 <button
                   aria-label="Rate bad"
