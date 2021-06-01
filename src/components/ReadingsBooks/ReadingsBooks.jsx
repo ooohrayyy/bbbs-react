@@ -27,6 +27,10 @@ function ReadingsBooks() {
     'left',
   );
 
+  function handleScroll(evt) {
+    setContainerPosition(evt.target.scrollLeft);
+  }
+
   React.useEffect(() => {
     if (containerRef.current) {
       setContainerWidth(containerRef.current.offsetWidth);
@@ -47,7 +51,11 @@ function ReadingsBooks() {
             containerWidth={containerWidth}
           />
         </div>
-        <div className="preview__row" ref={containerRef}>
+        <div
+          className="preview__row"
+          ref={containerRef}
+          onScroll={handleScroll}
+        >
           {readingsBooksCardsData.map((book, index) => (
             <ReadingsBookCard
               title={book.title}
