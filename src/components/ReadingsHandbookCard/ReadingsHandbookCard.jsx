@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import devImage from '../../assets/dev-data/ReadingsData/ReadingsHandbookData/CardImages/catalog-hulk-boys.jpg';
-
 function ReadingsHandbookCard({
   cardTitle,
-  // cardImage,
+  cardImage,
   cardAlt,
   cardLink,
   cardStyle,
@@ -31,8 +29,7 @@ function ReadingsHandbookCard({
       <div className={`card ${cardModificator} rights__card`}>
         <Link className="rights__link" to={cardLink}>
           <img
-            // src={cardImage}
-            src={devImage}
+            src={cardImage}
             alt={cardAlt || cardTitle}
             className="catalog-card__image"
           />
