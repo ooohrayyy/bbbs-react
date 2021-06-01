@@ -193,7 +193,7 @@ function App() {
               <Route exact path="/about">
                 <AboutUs />
               </Route>
-              <Route>
+              <Route exact path="/questions">
                 <Answers questions={answersData} />
               </Route>
               <Route exact path="/readings">
