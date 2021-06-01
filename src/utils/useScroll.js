@@ -1,21 +1,18 @@
 function useScroll(ref, position, setPosition, direction, pixels = 300) {
   function scrollRight() {
-    ref.current.scroll(position + pixels, 0);
-
     let newPosition;
 
-    if (position + pixels > ref.current.offsetWidth) {
+    if (position + pixels >= ref.current.offsetWidth) {
       newPosition = ref.current.offsetWidth;
     } else {
       newPosition = position + pixels;
     }
 
+    ref.current.scrollTo(newPosition, 0);
     setPosition(newPosition);
   }
 
   function scrollLeft() {
-    ref.current.scroll(position - pixels, 0);
-
     let newPosition;
 
     if (position - pixels <= 0) {
@@ -24,6 +21,7 @@ function useScroll(ref, position, setPosition, direction, pixels = 300) {
       newPosition = position - pixels;
     }
 
+    ref.current.scrollTo(newPosition, 0);
     setPosition(newPosition);
   }
 
