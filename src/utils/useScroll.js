@@ -2,8 +2,11 @@ function useScroll(ref, position, setPosition, direction, pixels = 300) {
   function scrollRight() {
     let newPosition;
 
-    if (position + pixels >= ref.current.offsetWidth) {
-      newPosition = ref.current.offsetWidth;
+    if (
+      position + pixels >=
+      ref.current.scrollWidth - ref.current.offsetWidth
+    ) {
+      newPosition = ref.current.scrollWidth - ref.current.offsetWidth;
     } else {
       newPosition = position + pixels;
     }

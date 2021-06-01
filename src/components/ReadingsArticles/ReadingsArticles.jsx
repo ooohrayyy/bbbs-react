@@ -9,7 +9,8 @@ import readingsArticlesCardsData from '../../assets/dev-data/ReadingsData/Readin
 
 function ReadingsArticles() {
   const [containerPosition, setContainerPosition] = React.useState(0);
-  const [containerWidth, setContainerWidth] = React.useState(0);
+  const [containerOffsetWidth, setContainerOffsetWidth] = React.useState(0);
+  const [containerScrollWidth, setContainerScrollWidth] = React.useState(0);
 
   const containerRef = React.useRef(null);
 
@@ -33,7 +34,8 @@ function ReadingsArticles() {
 
   React.useEffect(() => {
     if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
+      setContainerScrollWidth(containerRef.current.scrollWidth);
+      setContainerOffsetWidth(containerRef.current.offsetWidth);
     }
   }, []);
 
@@ -48,7 +50,8 @@ function ReadingsArticles() {
             onClickRight={scrollRight}
             onClickLeft={scrollLeft}
             containerPosition={containerPosition}
-            containerWidth={containerWidth}
+            containerScrollWidth={containerScrollWidth}
+            containerOffsetWidth={containerOffsetWidth}
           />
         </div>
         <div

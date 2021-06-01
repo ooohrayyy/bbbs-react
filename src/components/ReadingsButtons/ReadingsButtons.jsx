@@ -6,7 +6,8 @@ function ReadingsButtons({
   onClickLeft,
   onClickRight,
   containerPosition,
-  containerWidth,
+  containerScrollWidth,
+  containerOffsetWidth,
 }) {
   const leftLongPress = useLongPress(onClickLeft, 100);
   const rightLongPress = useLongPress(onClickRight, 100);
@@ -16,7 +17,7 @@ function ReadingsButtons({
       ? 'preview__button_left-grey'
       : 'preview__button_left';
   const rightButtonModificator =
-    containerPosition >= containerWidth
+    containerPosition >= containerScrollWidth - containerOffsetWidth
       ? 'preview__button_right-grey'
       : 'preview__button_right';
 
