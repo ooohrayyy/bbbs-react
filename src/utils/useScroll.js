@@ -1,4 +1,4 @@
-function useScroll(ref, position, setPosition, direction, pixels = 300) {
+function useScroll(ref, position, setPosition, direction, pixels = 400) {
   function scrollRight() {
     let newPosition;
 
@@ -11,7 +11,11 @@ function useScroll(ref, position, setPosition, direction, pixels = 300) {
       newPosition = position + pixels;
     }
 
-    ref.current.scrollTo(newPosition, 0);
+    ref.current.scrollTo({
+      top: 0,
+      left: newPosition,
+      behavior: 'smooth',
+    });
     setPosition(newPosition);
   }
 
@@ -24,7 +28,11 @@ function useScroll(ref, position, setPosition, direction, pixels = 300) {
       newPosition = position - pixels;
     }
 
-    ref.current.scrollTo(newPosition, 0);
+    ref.current.scrollTo({
+      top: 0,
+      left: newPosition,
+      behavior: 'smooth',
+    });
     setPosition(newPosition);
   }
 
