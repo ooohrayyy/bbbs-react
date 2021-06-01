@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import ReadingsButtons from '../ReadingsButtons/ReadingsButtons';
 import ReadingsHandbookCard from './ReadingsHandbookCard/ReadingsHandbookCard';
@@ -41,9 +42,9 @@ function ReadingsHandbook() {
   return (
     <section className="preview page__section">
       <div className="preview__title-wrap">
-        <a href="./catalog.html" className="link">
+        <Link to="/handbook" className="link">
           <h3 className="chapter-title chapter-title_clickable">Справочник</h3>
-        </a>
+        </Link>
         <ReadingsButtons
           onClickRight={scrollRight}
           onClickLeft={scrollLeft}
