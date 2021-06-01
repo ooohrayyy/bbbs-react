@@ -37,8 +37,8 @@ function Done({
         </button>
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done ">
           Подтвердить запись на мероприятие:
-          <p>{`"${title}" `}</p>
-          <p>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</p>
+          <span>{`"${title}" `}</span>
+          <span>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</span>
         </h2>
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done">
           Если у вас не получится прийти — отмените, пожалуйста, запись.
