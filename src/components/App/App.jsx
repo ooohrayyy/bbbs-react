@@ -6,6 +6,8 @@ import api from '../../utils/api';
 
 import cities from '../../assets/mock-data/cities.json';
 
+import answersData from '../../assets/dev-data/answersData';
+
 import { getParsedEventsData } from '../../utils/calendarUtils';
 
 import Header from '../Header/Header';
@@ -13,10 +15,11 @@ import Footer from '../Footer/Footer';
 
 import Main from '../Main/Main';
 import Calendar from '../Calendar/Calendar';
+import Places from '../Places/Places';
+import Answers from '../Answers/Answers';
 import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
-import Places from '../Places/Places';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';
 import Cities from '../Popups/Cities/Cities';
@@ -189,6 +192,9 @@ function App() {
               </Route>
               <Route exact path="/about">
                 <AboutUs />
+              </Route>
+              <Route>
+                <Answers questions={answersData} />
               </Route>
               <Route exact path="/readings">
                 <Readings />
