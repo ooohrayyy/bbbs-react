@@ -9,6 +9,7 @@ import readingsBooksCardsData from '../../assets/dev-data/ReadingsData/ReadingsB
 
 function ReadingsBooks() {
   const [containerPosition, setContainerPosition] = React.useState(0);
+  const [containerWidth, setContainerWidth] = React.useState(0);
 
   const containerRef = React.useRef(null);
 
@@ -26,6 +27,12 @@ function ReadingsBooks() {
     'left',
   );
 
+  React.useEffect(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+    }
+  }, []);
+
   return (
     <>
       <section className="preview page__section">
@@ -36,6 +43,8 @@ function ReadingsBooks() {
           <ReadingsButtons
             onClickRight={scrollRight}
             onClickLeft={scrollLeft}
+            containerPosition={containerPosition}
+            containerWidth={containerWidth}
           />
         </div>
         <div className="preview__row" ref={containerRef}>
