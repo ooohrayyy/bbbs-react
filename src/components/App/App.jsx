@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 
 import Main from '../Main/Main';
 import Calendar from '../Calendar/Calendar';
+import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
 import Places from '../Places/Places';
