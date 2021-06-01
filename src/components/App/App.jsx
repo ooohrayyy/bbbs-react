@@ -190,6 +190,9 @@ function App() {
               <Route exact path="/about">
                 <AboutUs />
               </Route>
+              <Route exact path="/readings">
+                <Readings />
+              </Route>
               <ProtectedRoute
                 exact
                 path="/calendar"
