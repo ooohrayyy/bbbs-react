@@ -19,10 +19,18 @@
   padding: 150px 75px 0;
 }
 
+.page__section_rights {
+  padding-top: 30px;
+}
+
 @include atDesktop1440 {
   .page__section {
     padding-left: 135px;
     padding-right: 135px;
+  }
+
+  .page__section_rights {
+    padding-top: 29px;
   }
 }
 
@@ -32,7 +40,7 @@
   }
 
   .page__section_rights {
-    padding-top: 15px;
+    padding-top: 20px;
   }
 }
 
