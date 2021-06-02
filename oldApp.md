@@ -48,125 +48,85 @@ function App() {
 
   const history = useHistory();
 
-  const openSignInModal = () => setSignInModalIsOpen(true);
-
-  const closeSignInModal = () => setSignInModalIsOpen(false);
-
-  const handleChangeCityClick = () => setIsChangeCityPopupOpen(true);
-
-  const closeChangeCityPopup = () => setIsChangeCityPopupOpen(false);
-
-  const pushToProfilePage = () => history.push('./profile');
-
-  const handleAddMeeting = (meeting) => setMeetings([meeting, ...meetings]);
+  // Проверка токена
+  function checkToken() {
+    const jwt = localStorage.getItem('jwt');
+    if (!jwt) {
+      setIsAuthorized(false);
+    } else {
+      setIsAuthorized(true);
+    }
+  }
 
   // Определить актуальный город пользователя
   function handleCities(currentCity) {
     currentUser.city = currentCity;
-    const { name } = cities.find(({ id }) => id === currentCity);
-    setUserCity(name);
+    const cityName = cities.filter((el) => el.id === currentCity)[0].name;
+    setUserCity(cityName);
   }
 
-  // Проверка токена
-  function checkToken() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      setIsAuthorized(true);
-    } else {
+  function openSignInModal() {
+    setSignInModalIsOpen(true);
+  }
+
+  function closeSignInModal() {
+    setSignInModalIsOpen(false);
+  }
+
+  function handleChangeCityClick() {
+    setIsChangeCityPopupOpen(true);
+  }
+
+  function closeChangeCityPopup() {
+    setIsChangeCityPopupOpen(false);
+  }
+
+  // Предложить выбрать город неавторизованному пользователю
+  function offerChoiceOfCity() {
+    if (!isAuthorized) {
       handleChangeCityClick();
     }
   }
 
-  function handleCityEvent(data, city) {
-    const cityEvent = data.filter((i) => city === i.city);
-    const parseDate = getParsedEventsData(cityEvent);
-    setEvents(parseDate);
-  }
-
+  // Проверка при загрузке страницы, авторизован ли пользователь
   useEffect(() => {
     checkToken();
-
-    async function loadPage() {
-      let results;
-
-      try {
-        results = await Promise.all([
-          api.getMeetings(),
-          api.getEvents(),
-          api.updateProfile(),
-        ]);
-      } catch (err) {
-        console.log(err.message);
-      }
-
-      const [meetingsData, eventsData, userData] = results;
-
-      const { data: meets } = meetingsData;
-      const { data: evts } = eventsData;
-      const {
-        data: { city },
-      } = userData;
-
-      setMeetings(meets);
-      setIsLoadingMeetings(false);
-
-      handleCityEvent(evts, city);
-      handleCities(city);
-    }
-
-    loadPage();
+    offerChoiceOfCity();
+    Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
+      .then(([meetingsData, eventsData, userData]) => {
+        const cityEvent = eventsData.data.filter(
+          (i) => userData.data.city === i.city,
+        );
+        const parseDate = getParsedEventsData(cityEvent);
+        setMeetings(meetingsData.data);
+        setIsLoadingMeetings(false);
+        setEvents(parseDate);
+        handleCities(userData.data.city);
+      })
+      .catch((err) => err.message);
   }, []);
 
-  // запись на мероприятие
-  function handleBookingEventClick(eventId) {
-    const { user, city } = currentUser;
-
-    api
-      .bookEvent({ id: user, event: eventId })
-      .then(() => {
-        setIsRegisteredEvent(true);
-        api
-          .getEvents()
-          .then(({ data }) => {
-            handleCityEvent(data, city);
-          })
-          .catch((err) => err.message);
+  // Обработчик входа пользователя
+  function handleSignIn() {
+    Promise.all([api.authUser(), api.updateProfile(), api.getEvents()])
+      .then(([authData, userData, eventsData]) => {
+        if (authData.data.access) {
+          const cityEvent = eventsData.data.filter(
+            (i) => userData.data.city === i.city,
+          );
+          const parseDate = getParsedEventsData(cityEvent);
+          setEvents(parseDate);
+          setIsAuthorized(true);
+          setCurrentUser(userData.data);
+          localStorage.setItem('jwt', authData.data.access);
+          handleCities(userData.data.city);
+        }
       })
       .catch((err) => err.message);
   }
 
-  // Обработчик входа пользователя
-  async function handleSignIn() {
-    let results;
-
-    try {
-      results = await Promise.all([
-        api.authUser(),
-        api.updateProfile(),
-        api.getEvents(),
-      ]);
-    } catch (err) {
-      console.log(err.message);
-    }
-
-    const [authData, userData, eventsData] = results;
-
-    const {
-      data: { access },
-    } = authData;
-
-    const { data: evts } = eventsData;
-    const { data: user } = userData;
-    const { city } = user;
-
-    if (access) {
-      handleCityEvent(evts, city);
-
-      setIsAuthorized(true);
-      setCurrentUser(user);
-      localStorage.setItem('jwt', access);
-      handleCities(city);
-    }
+  function pushToProfilePage() {
+    history.push('./profile');
   }
 
   // Обработчик выхода пользователя
@@ -191,6 +151,28 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
+
+  function handleAddMeeting(meeting) {
+    setMeetings([meeting, ...meetings]);
+  }
+
+  // запись на мероприятие
+  function handleBookingEventClick(eventId) {
+    api
+      .bookEvent({ id: currentUser.user, event: eventId })
+      .then(() => {
+        setIsRegisteredEvent(true);
+        api
+          .getEvents()
+          .then(({ data }) => {
+            const cityEvent = data.filter((i) => currentUser.city === i.city);
+            const parseDate = getParsedEventsData(cityEvent);
+            setEvents(parseDate);
+          })
+          .catch((err) => err.message);
+      })
+      .catch((err) => err.message);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
