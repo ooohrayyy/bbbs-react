@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import arrow from '../../images/svg/arrow-right.svg';
 
 function Rights() {
@@ -143,7 +142,5 @@ function Rights() {
     </>
   );
 }
-
-// Rights.propTypes = {};
 
 export default Rights;
