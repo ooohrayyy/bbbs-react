@@ -19,16 +19,28 @@
   padding: 150px 75px 0;
 }
 
+.page__section_rights {
+  padding-top: 30px;
+}
+
 @include atDesktop1440 {
   .page__section {
     padding-left: 135px;
     padding-right: 135px;
+  }
+
+  .page__section_rights {
+    padding-top: 29px;
   }
 }
 
 @include atDesktop1024 {
   .page__section {
     padding: 100px 127px 0;
+  }
+
+  .page__section_rights {
+    padding-top: 20px;
   }
 }
 

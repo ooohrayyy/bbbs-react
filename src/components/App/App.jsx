@@ -20,6 +20,7 @@ import Answers from '../Answers/Answers';
 import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../UserArea/UserArea';
+import Rights from '../Rights/Rights';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';
 import Cities from '../Popups/Cities/Cities';
@@ -141,6 +142,8 @@ function App() {
     const currentPosition = window.pageYOffset;
     if (currentPosition > scrollTop && currentPosition > 20) {
       setHiddenMenuClass('header_hidden');
+    } else if (currentPosition > 20) {
+      setHiddenMenuClass('header_attached');
     } else {
       setHiddenMenuClass('');
     }
@@ -210,6 +213,9 @@ function App() {
               />
               <Route exact path="/to-go">
                 <Places isAuthorized={isAuthorized} />
+              </Route>
+              <Route exact path="/rights">
+                <Rights />
               </Route>
               <ProtectedRoute
                 exact
