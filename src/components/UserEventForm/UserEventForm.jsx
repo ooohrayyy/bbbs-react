@@ -10,13 +10,13 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
   const { register, handleSubmit } = useForm();
 
   const [photo, setPhoto] = useState('');
-  const [file, setFile] = useState(null);
   const [isUploadFile, setIsUploadFile] = useState(false);
-  const [isRateGood, setIsRateGood] = useState(false);
-  const [isRateNeutral, setIsRateNeutral] = useState(false);
-  const [isRateBad, setIsRateBad] = useState(false);
+  const [currRate, setCurrRate] = useState('');
 
-  // Использовать API FileReader чтобы переводить загруженные файлы в URL
+  // Использовать экземпляр глобального класса FormData для обработки файлов с фотографиями
+  const formData = new FormData();
+
+  // Использовать API FileReader, чтобы переводить загруженные файлы в URL
   const reader = new FileReader();
 
   reader.addEventListener('load', () => {
@@ -25,18 +25,12 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
 
   useEffect(() => {}, [photo]);
 
-  function handleFileChange(e) {
-    setFile(e.target.files[0]);
-  }
-
-  function handleUploadFile() {
-    setIsUploadFile(true);
-  }
+  const handleUploadFile = () => setIsUploadFile(true);
 
   // Положить загруженную фотографию в экземпляр глобального класса FormData,
   // отправить на сервер и преобразовать полученный файл в URL с помощью API FileReader
-  function onFileUpload() {
-    const formData = new FormData();
+  function onFileUpload(e) {
+    const file = e.target.files[0];
     formData.append('userPhoto', file, file.name);
 
     api
@@ -58,35 +52,17 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
       id: num,
       // eslint-disable-next-line object-shorthand
       photo: photo,
-      rateGood: isRateGood,
-      rateNeutral: isRateNeutral,
-      rateBad: isRateBad,
+      rate: data.rate,
       ...data,
     });
     onAddMeetingClick();
   }
 
-  function handleRateGood() {
-    if (!isRateGood) {
-      setIsRateGood(true);
+  function handleRate(e) {
+    if (currRate === e.target.value) {
+      setCurrRate('');
     } else {
-      setIsRateGood(false);
-    }
-  }
-
-  function handleRateNeutral() {
-    if (!isRateNeutral) {
-      setIsRateNeutral(true);
-    } else {
-      setIsRateNeutral(false);
-    }
-  }
-
-  function handleRateBad() {
-    if (!isRateBad) {
-      setIsRateBad(true);
-    } else {
-      setIsRateBad(false);
+      setCurrRate(e.target.value);
     }
   }
 
@@ -94,20 +70,14 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
     <article className="card-container card-container_type_personal-area">
       {!isUploadFile && (
         <div className="card personal-area__card personal-area__card_type_add-photo">
-          <button
-            onClick={onFileUpload}
-            aria-label="Add photo"
-            className="personal-area__add-photo-button"
-            type="button"
-            disabled={!file && true}
-          />
+          <div className="personal-area__add-photo-button" />
           <p className="caption personal-area__bottom-caption">
             Загрузить фото
           </p>
           <input
             id="photo-input"
             type="file"
-            onChange={handleFileChange}
+            onChange={onFileUpload}
             className="personal-area__input-photo"
           />
         </div>
@@ -153,29 +123,42 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
           />
 
           <div className="personal-area__rating">
-            <button
-              onClick={handleRateGood}
-              aria-label="Rate good"
+            <input
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('rate', { required: true })}
+              onClick={handleRate}
+              id="rate_good"
+              value="good"
+              type="radio"
+              name="rate"
               className={`personal-area__rate personal-area__rate_type_good ${
-                isRateGood && 'personal-area__rate_type_active-good'
+                currRate === 'good' && 'personal-area__rate_type_active-good'
               }`}
-              type="button"
             />
-            <button
-              onClick={handleRateNeutral}
-              aria-label="Rate neutral"
+            <input
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('rate', { required: true })}
+              onClick={handleRate}
+              id="rate_neutral"
+              value="neutral"
+              type="radio"
+              name="rate"
               className={`personal-area__rate personal-area__rate_type_neutral ${
-                isRateNeutral && 'personal-area__rate_type_active-neutral'
+                currRate === 'neutral' &&
+                'personal-area__rate_type_active-neutral'
               }`}
-              type="button"
             />
-            <button
-              onClick={handleRateBad}
-              aria-label="Rate bad"
+            <input
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...register('rate', { required: true })}
+              onClick={handleRate}
+              id="rate_bad"
+              value="bad"
+              type="radio"
+              name="rate"
               className={`personal-area__rate personal-area__rate_type_bad ${
-                isRateBad && 'personal-area__rate_type_active-bad'
+                currRate === 'bad' && 'personal-area__rate_type_active-bad'
               }`}
-              type="button"
             />
             <p className="caption personal-area__rating-label">
               Оцените проведенное время

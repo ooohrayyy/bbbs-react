@@ -29,7 +29,8 @@
 
     &_type_recommendation {
       justify-content: flex-start;
-      height: 618px;
+      max-height: 650px;
+      max-width: 800px;
 
       &-finish {
         justify-content: center;
@@ -180,6 +181,13 @@
   &_type_radio {
     padding-left: 50px;
   }
+}
+
+.popup__error {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 15px;
+  color: #ff0000;
 }
 
 .popup__forgot-password {
