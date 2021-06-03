@@ -47,10 +47,14 @@
 
 .calendar__title_type_popup-done {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .calendar__title_type_confirmation {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .calendar__title_type_delete {
