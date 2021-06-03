@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
-function Video({ isOpen, title, caption, film, handleClose }) {
+function VideoPopup({ isOpen, title, caption, film, handleClose }) {
   Modal.setAppElement(document.getElementById('page'));
   function closeModal() {
     handleClose(false);
@@ -32,11 +32,11 @@ function Video({ isOpen, title, caption, film, handleClose }) {
     </Modal>
   );
 }
-Video.propTypes = {
+VideoPopup.propTypes = {
   title: PropTypes.string,
   isOpen: PropTypes.bool,
   caption: PropTypes.string,
   film: PropTypes.string,
 };
 
-export default Video;
+export default VideoPopup;
