@@ -93,6 +93,9 @@
     position: relative;
     max-width: 75vw;
     max-height: 75vh;
+    &:focus {
+      outline: none !important;
+    }
 
     &_type_video {
       padding: 30px 30px 50px;
