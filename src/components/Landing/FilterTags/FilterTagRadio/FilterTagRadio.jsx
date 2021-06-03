@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FilterTag({ tagName, tagActive, tagValue, onSelectedTag }) {
+function FilterTagRadio({ tagName, tagActive, tagValue, onSelectedTag }) {
   function handleClick(e) {
     const { value, name } = e.target;
     onSelectedTag({ name, active: !tagActive, value: Number(value) });
@@ -23,4 +23,4 @@ function FilterTag({ tagName, tagActive, tagValue, onSelectedTag }) {
   );
 }
 
-export default FilterTag;
+export default FilterTagRadio;

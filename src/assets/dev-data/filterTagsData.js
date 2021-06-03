@@ -55,6 +55,15 @@ const filters = {
     { name: 'Ноябрь', active: false, value: 10 },
     { name: 'Декабрь', active: false, value: 11 },
   ],
+  rights: [
+    { name: 'Все', active: true },
+    { name: 'Жильё', active: false },
+    { name: 'Образование', active: false },
+    { name: 'Транспорт', active: false },
+    { name: 'Трудоустройство', active: false },
+    { name: 'Пенсии', active: false },
+    { name: 'Медицина', active: false },
+  ],
 };
 
 export default filters;

@@ -74,10 +74,6 @@ export function getInitialTags(months, events) {
   return filtered;
 }
 
-export function getFilteredTags(tag, selectedTags) {
-  return selectedTags.map((i) => ({ ...i, active: i.name === tag.name }));
-}
-
 export function getFilteredData(selectedTags, data) {
   if (selectedTags.length !== 0) {
     const selectedTagsArr = selectedTags.filter((i) => i.active === true);

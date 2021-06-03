@@ -5,12 +5,14 @@ import Place from './Place/Place';
 import Rubric from '../Rubric/Rubric';
 
 import filters from '../../assets/dev-data/filterTagsData';
+import getFilteredTags from '../../utils/filterUtils';
 import placesCards from '../../assets/dev-data/placesData';
 import MakePlace from './MakePlace/MakePlace';
 import Recomendation from '../Popups/Recommendation/Recommendation';
 import Sucess from '../Popups/Sucess/Sucess';
 
 function Places({ isAuthorized }) {
+  const [selectedTags, setSelectedTags] = useState(filters.rubrics);
   const [isRecomendationOpen, setIsRecomendationOpen] = useState(false);
   const [isSucessOpen, setIsSucessOpen] = useState(false);
   const [rubricIndex, setRubricIndex] = useState(-1);
@@ -25,6 +27,11 @@ function Places({ isAuthorized }) {
   function handleSubmit() {
     setIsRecomendationOpen(false);
     setIsSucessOpen(true);
+  }
+
+  function handleSlectedTag(tag) {
+    const newTagsArray = getFilteredTags(tag, selectedTags);
+    setSelectedTags(newTagsArray);
   }
 
   useEffect(() => {
@@ -46,15 +53,16 @@ function Places({ isAuthorized }) {
     }
   }, [isAuthorized]);
 
-  function handleSlectedTag() {
-    // здесь должна быть реакция на изменения фильтра, будет после опиисания связи с бэкендом
-  }
   return (
     <>
       <main className="main">
         <section className="lead page__section">
           <h1 className="main-title">Куда пойти</h1>
-          <Filter tags={filters.rubrics} onSelectedTag={handleSlectedTag} />
+          <Filter
+            tags={selectedTags}
+            onSelectedTag={handleSlectedTag}
+            type="checkbox"
+          />
         </section>
         {isAuthorized && <MakePlace handleClick={handleMakePlace} />}
         {rubricIndex > -1 && (
