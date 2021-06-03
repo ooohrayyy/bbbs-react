@@ -1,5 +1,5 @@
 .ReactModal__Body--open {
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .popup {
@@ -76,6 +76,12 @@
       width: 470px;
       height: 238px;
     }
+    &_type_fall {
+      background: #F2E5E5;
+      max-height: 414px;
+      max-width: 570px;
+    margin: 100px auto 0;
+    }
     &:focus {
       outline: none !important;
     }
@@ -87,6 +93,9 @@
     position: relative;
     max-width: 75vw;
     max-height: 75vh;
+    &:focus {
+      outline: none !important;
+    }
 
     &_type_video {
       padding: 30px 30px 50px;
@@ -122,6 +131,9 @@
     display: flex;
     justify-content: space-between;
     width: 228px;
+  }
+  &__back {
+    align-self:flex-start;
   }
 }
 
