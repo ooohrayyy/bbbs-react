@@ -1,11 +1,37 @@
 import React from 'react';
+import ReactPaginate from 'react-paginate';
 
 import RightsCard from './RightsCard/RightsCard';
 import rightsCardsData from '../../assets/dev-data/rightsCardsData';
 
-import arrow from '../../images/svg/arrow-right-grey.svg';
+// import arrow from '../../images/svg/arrow-right-grey.svg';
 
 function Rights() {
+  const screenWidth = window.screen.width;
+  let cardsLimit;
+
+  switch (true) {
+    case screenWidth >= 1920:
+      cardsLimit = 16;
+      break;
+    case screenWidth >= 1440:
+      cardsLimit = 12;
+      break;
+    default:
+      cardsLimit = 4;
+  }
+
+  const cardsTotalCount = rightsCardsData.length;
+  const pageCount = Math.ceil(cardsTotalCount / cardsLimit);
+
+  React.useEffect(() => {
+    console.log(screenWidth, cardsLimit);
+  }, []);
+
+  // function handlePageClick() {
+  //   rightsCardsData.filter((item, index) => )
+  // };
+
   return (
     <>
       <section className="lead page__section">
@@ -71,7 +97,21 @@ function Rights() {
       </section>
 
       <section className="pagination page__section">
-        <nav className="pagination__nav" aria-label="Навигация по страницам">
+        <ReactPaginate
+          previousLabel=""
+          nextLabel=""
+          // breakLabel="..."
+          // breakClassName="pagination__list-item section-title"
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={6}
+          // onPageChange={handlePageClick}
+          containerClassName="pagination__nav"
+          activeClassName="active"
+          pageLinkClassName="pagination__list-item section-title"
+        />
+
+        {/* <nav className="pagination__nav" aria-label="Навигация по страницам">
           <ul className="pagination__list">
             <li className="pagination__list-item section-title">
               <a href="#" className="pagination__link pagination__link_active">
@@ -106,7 +146,7 @@ function Rights() {
             </li>
           </ul>
           <img src={arrow} alt="стрелка вправо" className="pagination__arrow" />
-        </nav>
+        </nav> */}
       </section>
     </>
   );
