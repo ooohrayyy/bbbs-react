@@ -63,45 +63,43 @@ function CalendarEvent({
             <p className="paragraph calendar__desc-paragraph">{description}</p>
           </div>
         )}
-        <div className="calendar__submit">
-          {booked ? (
-            <button
-              className="button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up"
-              type="button"
-            >
-              Отменить запись
-            </button>
-          ) : (
-            <button
-              onClick={
-                needDescription
-                  ? handleBookingEvent
-                  : handleConfirmationMadalOpen
-              }
-              className="button button_theme_light"
-              type="button"
-              disabled={!hasFreeSeats}
-            >
-              Записаться
-            </button>
-          )}
-          {!booked && (
-            <p className="calendar__place-left">
-              {hasFreeSeats
-                ? `Осталось ${numberOfFreeSeats} мест`
-                : 'Запись закрыта'}
-            </p>
-          )}
-          {!needDescription && (
-            <button
-              onClick={handleMore}
-              className="button calendar__button-dots button_theme_light"
-              type="button"
-            >
-              &#8226;&#8226;&#8226;
-            </button>
-          )}
-        </div>
+      </div>
+      <div className="calendar__submit">
+        {booked ? (
+          <button
+            className="button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up"
+            type="button"
+          >
+            Отменить запись
+          </button>
+        ) : (
+          <button
+            onClick={
+              needDescription ? handleBookingEvent : handleConfirmationMadalOpen
+            }
+            className="button button_theme_light"
+            type="button"
+            disabled={!hasFreeSeats}
+          >
+            Записаться
+          </button>
+        )}
+        {!booked && (
+          <p className="calendar__place-left">
+            {hasFreeSeats
+              ? `Осталось ${numberOfFreeSeats} мест`
+              : 'Запись закрыта'}
+          </p>
+        )}
+        {!needDescription && (
+          <button
+            onClick={handleMore}
+            className="button calendar__button-dots button_theme_light"
+            type="button"
+          >
+            &#8226;&#8226;&#8226;
+          </button>
+        )}
       </div>
     </article>
   );

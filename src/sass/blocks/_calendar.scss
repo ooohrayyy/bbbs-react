@@ -10,10 +10,17 @@
   line-height: 1.4;
   font-family: $ptRootUI;
   color: $black;
+  max-height: 100%;
 
   &_selected {
     background-color: $lightBlue;
   }
+}
+
+.calendar__meetup {
+  display: flex;
+  flex-direction: column;
+  max-height: 60%;
 }
 
 .calendar__title {
@@ -25,6 +32,7 @@
   text-align: start;
   margin-bottom: 40px;
 }
+
 .calendar__title_type_popup-fall {
   max-width: 60%;
   text-align: start;
@@ -43,10 +51,12 @@
 .calendar__title_type_confirmation {
   text-align: center;
 }
+
 .calendar__title_type_delete {
   max-width: 470px;
   text-align: center;
 }
+
 .calendar_selected {
   background-color: $lightBlue;
 }
@@ -100,13 +110,14 @@
 
 .calendar__description {
   margin-top: 30px;
-  max-height: 182px;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: rgba($lightGray, .6) transparent;
+
   &::-webkit-scrollbar {
     width: 3px;
   }
+
   &::-webkit-scrollbar-thumb {
     height: 30px;
     background-color: rgba($lightGray, .6);
