@@ -16,15 +16,17 @@ function PageNotFound() {
 
   return (
     <section className="page-404">
-      <div className="page-404__image" />
-      <h2 className="page-404__title">404</h2>
-      <p className="page-404__subtitle">
-        К сожалению, запрашиваемая страница не найдена. Попробуйте перейти на
-        главную страницу
-      </p>
-      <Link to="/" className="button button_theme_light page-404__button">
-        Вернутся на главную
-      </Link>
+      <div className="page-404__container">
+        <div className="page-404__image" />
+        <h2 className="page-404__title">404</h2>
+        <p className="page-404__subtitle">
+          К сожалению, запрашиваемая страница не найдена. Попробуйте перейти на
+          главную страницу
+        </p>
+        <Link to="/" className="button button_theme_light page-404__button">
+          Вернутся на главную
+        </Link>
+      </div>
     </section>
   );
 }

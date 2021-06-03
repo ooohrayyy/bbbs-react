@@ -36,7 +36,7 @@ function Done({
           <img alt="close" src={closeImage} />
         </button>
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done ">
-          Подтвердить запись на мероприятие:
+          Вы записаны на мероприятие:
           <span>{`"${title}" `}</span>
           <span>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</span>
         </h2>

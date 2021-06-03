@@ -1,7 +1,18 @@
 .page-404 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  background: $background;
+  overflow-y: auto;
+}
+
+.page-404__container {
   max-width: 700px;
   margin: 0 auto;
-  padding: 80px 15px 0;
+  padding: 80px 15px 50px;
   min-height: 100vh;
   box-sizing: border-box;
   text-align: center;
@@ -33,7 +44,7 @@
 }
 
 @include atTablet {
-  .page-404 {
+  .page-404__container {
     padding-top: 50px;
   }
 
