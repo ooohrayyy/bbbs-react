@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Stories({ history }) {
   return (
@@ -8,9 +9,9 @@ function Stories({ history }) {
         alt={history.title}
         className="card__media-img"
       />
-      <a href="./stories.html" className="card__media-link section-title">
+      <Link to="./stories" className="card__media-link section-title">
         {history.title}
-      </a>
+      </Link>
     </article>
   );
 }
