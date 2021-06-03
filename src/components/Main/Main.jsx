@@ -101,6 +101,7 @@ function Main({ isAuthorized }) {
           endAt={answer.event.endAt}
           seats={answer.event.seats}
           takenSeats={answer.event.takenSeats}
+          booked={answer.event.booked}
           needDescription
         />
       )}
