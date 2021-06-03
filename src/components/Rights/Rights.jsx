@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import arrow from '../../images/svg/arrow-right.svg';
+import Filter from '../Landing/Filter/Filter'; // вырезать и вставить в нужное место
+import filters from '../../assets/dev-data/filterTagsData'; // вырезать и вставить в нужное место
+import getFilteredTags from '../../utils/filterUtils'; // вырезать и вставить в нужное место
 
 function Rights() {
+  const [selectedTags, setSelectedTags] = useState(filters.rights); // вырезать и вставить в нужное место
+
+  function handleSlectedTag(tag) {
+    // вырезать и вставить в нужное место
+    const newTagsArray = getFilteredTags(tag, selectedTags);
+    setSelectedTags(newTagsArray);
+  }
+
+  // еще вырезать сам тег фильтр с пропсами,
+  console.log(selectedTags);
+
   return (
     <>
       <div className="article-lead__top-overlay" />
@@ -12,6 +26,11 @@ function Rights() {
           <h1 className="chapter-title article-lead__title">
             Пенсионное обеспечение для детей-&nbsp;сирот
           </h1>
+          <Filter
+            tags={selectedTags}
+            onSelectedTag={handleSlectedTag}
+            type="radio"
+          />
           <p className="section-title article-lead__text">
             Развитие детей-сирот отличается от&nbsp;развития детей, живущих
             в&nbsp;семьях. Все этапы развития у&nbsp;детей-сирот проходят
