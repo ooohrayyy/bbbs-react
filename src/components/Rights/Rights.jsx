@@ -1,12 +1,13 @@
-import React from 'react';
+import { React, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
 import RightsCard from './RightsCard/RightsCard';
 import rightsCardsData from '../../assets/dev-data/rightsCardsData';
 
-// import arrow from '../../images/svg/arrow-right-grey.svg';
+import arrow from '../../images/svg/arrow-right-grey.svg';
 
 function Rights() {
+  const cardsTotalCount = rightsCardsData.length;
   const screenWidth = window.screen.width;
   let cardsLimit;
 
@@ -21,16 +22,20 @@ function Rights() {
       cardsLimit = 4;
   }
 
-  const cardsTotalCount = rightsCardsData.length;
   const pageCount = Math.ceil(cardsTotalCount / cardsLimit);
 
-  React.useEffect(() => {
-    console.log(screenWidth, cardsLimit);
-  }, []);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(cardsLimit);
 
-  // function handlePageClick() {
-  //   rightsCardsData.filter((item, index) => )
-  // };
+  function handlePageClick(e) {
+    const pageNum = e.selected;
+    if (pageNum > 0) {
+      const currStart = pageNum * cardsLimit + 1;
+      const currEnd = currStart + cardsLimit;
+      setStart(currStart);
+      setEnd(currEnd);
+    }
+  }
 
   return (
     <>
@@ -85,68 +90,35 @@ function Rights() {
         <div className="rights__line rights__line_stage_second" />
         <div className="rights__line rights__line_stage_third" />
 
-        {rightsCardsData.map((item, index) => (
-          <RightsCard
-            cardTitle={item.cardTitle}
-            cardLink={item.cardLink}
-            cardForm={item.cardForm}
-            cardColor={item.cardColor}
-            key={index}
-          />
-        ))}
+        {rightsCardsData
+          .map((item, index) => (
+            <RightsCard
+              cardTitle={item.cardTitle}
+              cardLink={item.cardLink}
+              cardForm={item.cardForm}
+              cardColor={item.cardColor}
+              key={index}
+            />
+          ))
+          .slice(start, end)}
       </section>
 
       <section className="pagination page__section">
-        <ReactPaginate
-          previousLabel=""
-          nextLabel=""
-          // breakLabel="..."
-          // breakClassName="pagination__list-item section-title"
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={6}
-          // onPageChange={handlePageClick}
-          containerClassName="pagination__nav"
-          activeClassName="active"
-          pageLinkClassName="pagination__list-item section-title"
-        />
-
-        {/* <nav className="pagination__nav" aria-label="Навигация по страницам">
-          <ul className="pagination__list">
-            <li className="pagination__list-item section-title">
-              <a href="#" className="pagination__link pagination__link_active">
-                1
-              </a>
-            </li>
-            <li className="pagination__list-item section-title">
-              <a href="#" className="pagination__link">
-                2
-              </a>
-            </li>
-            <li className="pagination__list-item section-title">
-              <a href="#" className="pagination__link">
-                3
-              </a>
-            </li>
-            <li className="pagination__list-item section-title">
-              <a href="#" className="pagination__link">
-                4
-              </a>
-            </li>
-            <li className="pagination__list-item section-title">
-              <a href="#" className="pagination__link">
-                5
-              </a>
-            </li>
-            <li className="pagination__list-item section-title">...</li>
-            <li className="pagination__list-item section-title">
-              <a href="#" className="pagination__link">
-                18
-              </a>
-            </li>
-          </ul>
-          <img src={arrow} alt="стрелка вправо" className="pagination__arrow" />
-        </nav> */}
+        <nav className="pagination__nav" aria-label="Навигация по страницам">
+          <ReactPaginate
+            pageCount={pageCount}
+            previousLabel=""
+            nextLabel={<img src={arrow} alt="стрелка вправо" />}
+            breakLabel="..."
+            containerClassName="pagination__list"
+            pageClassName="pagination__list-item section-title"
+            pageLinkClassName="pagination__link"
+            activeLinkClassName="pagination__link pagination__link_active"
+            nextClassName="pagination__arrow"
+            onPageChange={handlePageClick}
+            marginPagesDisplayed={1}
+          />
+        </nav>
       </section>
     </>
   );
