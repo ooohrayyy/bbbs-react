@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HeaderSearch from '../HeaderSearch/HeaderSearch';
+import HeaderSearch from '../../HeaderSearch/HeaderSearch';
 import HeaderAuthorize from '../HeaderAuthorize/HeaderAuthorize';
 
 function HeaderButtons({
