@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Filter from '../Landing/Filter/Filter';
 import Place from './Place/Place';
-import Rubric from './Place/Rubric/Rubric';
+import Rubric from '../Rubric/Rubric';
 
 import filters from '../../assets/dev-data/filterTagsData';
 import placesCards from '../../assets/dev-data/placesData';
