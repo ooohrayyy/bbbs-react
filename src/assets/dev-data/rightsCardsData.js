@@ -14,7 +14,7 @@ const rightsCardsData = [
   {
     cardTitle: 'Трудоустройство для детей инвалидов',
     cardLink: './rights-article',
-    cardForm: 'arch',
+    cardForm: 'arc',
     cardColor: 'yellow',
   },
   {
@@ -26,7 +26,7 @@ const rightsCardsData = [
   {
     cardTitle: 'Жилье для выпускников детских домов',
     cardLink: './rights-article',
-    cardForm: 'arch',
+    cardForm: 'arc',
     cardColor: 'blue',
   },
   {
@@ -38,7 +38,7 @@ const rightsCardsData = [
   {
     cardTitle: 'Трудоустройство для детей инвалидов',
     cardLink: './rights-article',
-    cardForm: 'arch',
+    cardForm: 'arc',
     cardColor: 'green',
   },
   {
@@ -68,7 +68,7 @@ const rightsCardsData = [
   {
     cardTitle: 'Пенсионное обеспечение для детей-сирот',
     cardLink: './rights-article',
-    cardForm: 'arch',
+    cardForm: 'arc',
     cardColor: 'blue',
   },
   {
@@ -80,7 +80,7 @@ const rightsCardsData = [
   {
     cardTitle: 'Пенсионное обеспечение для детей-сирот',
     cardLink: './rights-article',
-    cardForm: 'arch',
+    cardForm: 'arc',
     cardColor: 'green',
   },
   {
@@ -92,7 +92,7 @@ const rightsCardsData = [
   {
     cardTitle: 'Пенсионное обеспечение для детей-сирот',
     cardLink: './rights-article',
-    cardForm: 'arch',
+    cardForm: 'arc',
     cardColor: 'pink',
   },
 ];

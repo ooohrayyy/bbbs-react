@@ -1,5 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+
+import RightsCard from './RightsCard/RightsCard';
+import rightsCardsData from '../../assets/dev-data/rightsCardsData';
+
+import arrow from '../../images/svg/arrow-right-grey.svg';
 
 function Rights() {
   return (
@@ -55,169 +59,15 @@ function Rights() {
         <div className="rights__line rights__line_stage_second" />
         <div className="rights__line rights__line_stage_third" />
 
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_yellow card_form_square rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">Сплав на байдарках в 2 строки</h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_green card_form_circle rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">Льготы детей на жильё</h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_yellow card_form_arch rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Трудоустройство для детей инвалидов
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_pink card_form_circle rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Пенсионное обеспечение для детей-сирот
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_blue card_form_arch rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Жилье для выпускников детских домов
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_pink card_form_square rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Трудоустройство для выпускников детских домов
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_green card_form_arch rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Трудоустройство для детей инвалидов
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_yellow card_form_square rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">Льготы детей на жильё</h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_green card_form_circle rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Пенсионное обеспечение для детей-сирот
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_blue card_form_square rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">Льготы детей на жильё</h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_pink card_form_circle rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Трудоустройство для детей инвалидов
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_blue card_form_arch rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Пенсионное обеспечение для детей-сирот
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_yellow card_form_circle rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">Льготы детей на жильё</h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_green card_form_arch rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Пенсионное обеспечение для детей-сирот
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_yellow card_form_square rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">Льготы детей на жильё</h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
-
-        <div className="catalog-card card-pagination card-pagination_type_shapes">
-          <div className="card card_color_pink card_form_arch rights__card">
-            <a href="./rights-article.html" className="rights__link">
-              <h2 className="section-title">
-                Пенсионное обеспечение для детей-сирот
-              </h2>
-              <p className="rubric rights__rubric">рубрика</p>
-            </a>
-          </div>
-        </div>
+        {rightsCardsData.map((item, index) => (
+          <RightsCard
+            cardTitle={item.cardTitle}
+            cardLink={item.cardLink}
+            cardForm={item.cardForm}
+            cardColor={item.cardColor}
+            key={index}
+          />
+        ))}
       </section>
 
       <section className="pagination page__section">
@@ -255,17 +105,11 @@ function Rights() {
               </a>
             </li>
           </ul>
-          <img
-            src="./images/svg/arrow-right-grey.svg"
-            alt="стрелка вправо"
-            className="pagination__arrow"
-          />
+          <img src={arrow} alt="стрелка вправо" className="pagination__arrow" />
         </nav>
       </section>
     </>
   );
 }
-
-// Rights.propTypes = {};
 
 export default Rights;

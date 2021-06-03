@@ -13,8 +13,8 @@ function RightsCard({ cardTitle, cardLink, cardForm, cardColor }) {
     case 'circle':
       form = 'card_form_circle';
       break;
-    case 'arch':
-      form = 'card_form_arch';
+    case 'arc':
+      form = 'card_form_arc';
       break;
     default:
       form = '';
