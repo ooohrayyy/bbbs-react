@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
 import arrow from '../../images/svg/arrow-right.svg';
 
@@ -9,7 +10,7 @@ import Filter from '../Landing/Filter/Filter';
 import filters from '../../assets/dev-data/filterTagsData';
 import getFilteredTags from '../../utils/filterUtils';
 
-function Rights() {
+function Rights({ onCardClick }) {
   const [selectedTags, setSelectedTags] = useState(filters.rights);
 
   function handleSlectedTag(tag) {
@@ -70,6 +71,7 @@ function Rights() {
               cardLink={item.cardLink}
               cardForm={item.cardForm}
               cardColor={item.cardColor}
+              onCardClick={onCardClick}
               key={index}
             />
           ))
@@ -96,5 +98,9 @@ function Rights() {
     </>
   );
 }
+
+Rights.propTypes = {
+  onCardClick: PropTypes.instanceOf(Function),
+};
 
 export default Rights;

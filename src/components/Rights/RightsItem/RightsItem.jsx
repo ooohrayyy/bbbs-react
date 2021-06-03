@@ -1,7 +1,8 @@
 import React from 'react';
-import arrow from '../../images/svg/arrow-right.svg';
+import PropTypes from 'prop-types';
+import arrow from '../../../images/svg/arrow-right.svg';
 
-function RightsItem() {
+function RightsItem({ title }) {
   return (
     <>
       <div className="article-lead__top-overlay" />
@@ -9,9 +10,7 @@ function RightsItem() {
       <div className="article-lead__overlay" />
       <section className="article-lead">
         <div className="article-lead__content">
-          <h1 className="chapter-title article-lead__title">
-            Пенсионное обеспечение для детей-&nbsp;сирот
-          </h1>
+          <h1 className="chapter-title article-lead__title">{title}</h1>
           <p className="section-title article-lead__text">
             Развитие детей-сирот отличается от&nbsp;развития детей, живущих
             в&nbsp;семьях. Все этапы развития у&nbsp;детей-сирот проходят
@@ -142,5 +141,9 @@ function RightsItem() {
     </>
   );
 }
+
+RightsItem.propTypes = {
+  title: PropTypes.string,
+};
 
 export default RightsItem;
