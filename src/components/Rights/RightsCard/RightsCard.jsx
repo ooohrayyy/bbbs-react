@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function RightsCard({ cardTitle, cardLink, cardForm, cardColor }) {
+function RightsCard({ cardTitle, cardLink, cardForm, cardColor, onCardClick }) {
   let form;
   let color;
 
@@ -37,10 +37,12 @@ function RightsCard({ cardTitle, cardLink, cardForm, cardColor }) {
       color = '';
   }
 
+  const handleCardClick = (e) => onCardClick(e.target.textContent);
+
   return (
     <div className="catalog-card card-pagination card-pagination_type_shapes">
       <div className={`card ${color} ${form} rights__card`}>
-        <Link className="rights__link" to={cardLink}>
+        <Link onClick={handleCardClick} className="rights__link" to={cardLink}>
           <h2 className="section-title">{cardTitle}</h2>
           <p className="rubric rights__rubric">рубрика</p>
         </Link>
@@ -54,6 +56,7 @@ RightsCard.propTypes = {
   cardLink: PropTypes.string,
   cardForm: PropTypes.string,
   cardColor: PropTypes.string,
+  onCardClick: PropTypes.instanceOf(Function),
 };
 
 export default RightsCard;

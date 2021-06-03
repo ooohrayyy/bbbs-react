@@ -21,6 +21,7 @@ import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../User/UserArea/UserArea';
 import Rights from '../Rights/Rights';
+import RightsItem from '../Rights/RightsItem/RightsItem';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';
 import Cities from '../Popups/Cities/Cities';
@@ -49,6 +50,10 @@ function App() {
 
   const [isRouteCalendar, setIsRouteCalendar] = useState(false);
 
+  const [rightsTitle, setRightsTitle] = useState(
+    'Пенсионное обеспечение для детей-сирот',
+  );
+
   const history = useHistory();
 
   const handleChangeCityClick = () => setIsChangeCityPopupOpen(true);
@@ -58,6 +63,8 @@ function App() {
   const pushToProfilePage = () => history.push('./profile');
 
   const handleAddMeeting = (meeting) => setMeetings([meeting, ...meetings]);
+
+  const handleRightsTitle = (title) => setRightsTitle(title);
 
   function openSignInModal(route) {
     setSignInModalIsOpen(true);
@@ -253,7 +260,10 @@ function App() {
                 <Places isAuthorized={isAuthorized} />
               </Route>
               <Route exact path="/rights">
-                <Rights />
+                <Rights onCardClick={handleRightsTitle} />
+              </Route>
+              <Route exact path="/rights-article">
+                <RightsItem title={rightsTitle} />
               </Route>
               <ProtectedRoute
                 exact
