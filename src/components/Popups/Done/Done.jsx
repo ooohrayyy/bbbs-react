@@ -9,7 +9,7 @@ function Done({
   handleClose,
   dayMonth,
   endTime,
-  mothGenitive,
+  monthGenitive,
   time,
 }) {
   Modal.setAppElement(document.getElementById('page'));
@@ -38,7 +38,7 @@ function Done({
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done ">
           Вы записаны на мероприятие:
           <span>{`"${title}" `}</span>
-          <span>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</span>
+          <span>{`${dayMonth} ${monthGenitive} с ${time}–${endTime}`}</span>
         </h2>
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done">
           Если у вас не получится прийти — отмените, пожалуйста, запись.

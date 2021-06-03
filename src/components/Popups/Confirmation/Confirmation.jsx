@@ -9,7 +9,7 @@ function Confirmation({
   title,
   dayMonth,
   endTime,
-  mothGenitive,
+  monthGenitive,
   time,
   isOpen,
   handleClose,
@@ -45,7 +45,7 @@ function Confirmation({
       <h2 className="section-title calendar__title_type_popup calendar__title_type_confirmation">
         Подтвердить запись на мероприятие:
         <span>{`"${title}" `}</span>
-        <span>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</span>
+        <span>{`${dayMonth} ${monthGenitive} с ${time}–${endTime}`}</span>
       </h2>
       <div className="calendar__buttons">
         <button

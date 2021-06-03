@@ -20,12 +20,19 @@ function CalendarEvent({
   onBookingEvent,
   closeMoreMadal,
 }) {
-  const { month, dayWeek, time, dayMonth, mothGenitive } = parsedDate(startAt);
+  const { month, dayWeek, time, dayMonth, monthGenitive } = parsedDate(startAt);
   const endTime = parsedDate(endAt).time;
   const numberOfFreeSeats = seats - takenSeats;
   const hasFreeSeats = numberOfFreeSeats > 0;
   function handleConfirmationMadalOpen() {
-    openConfirmationMadal({ title, dayMonth, endTime, mothGenitive, time, id });
+    openConfirmationMadal({
+      title,
+      dayMonth,
+      endTime,
+      monthGenitive,
+      time,
+      id,
+    });
   }
   function handleBookingEvent() {
     onBookingEvent(id);

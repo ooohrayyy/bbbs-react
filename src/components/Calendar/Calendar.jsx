@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import CalendarCard from './CalendarCard/CalendarCard';
 import Filter from '../Landing/Filter/Filter';
 import filters from '../../assets/dev-data/filterTagsData';
@@ -7,14 +7,24 @@ import {
   getFilteredData,
   sortEventsByDate,
   getInitialTags,
+  getParsedEventsData,
 } from '../../utils/calendarUtils';
 import getFilteredTags from '../../utils/filterUtils';
 import Meetup from '../Popups/Meetup/Meetup';
 import Confirmation from '../Popups/Confirmation/Confirmation';
 import Done from '../Popups/Done/Done';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
+import mock from '../../utils/mock';
+import api from '../../utils/api';
+
+function Calendar() {
+  mock.initializeAxiosMockAdapter(api.instance);
+
+  const currentUser = useContext(CurrentUserContext);
+
   const [selectedTags, setSelectedTags] = useState([]);
+  const [cityEvents, setCityEvents] = useState([]);
   const [filteredEventsResult, setFilteredEventsResult] = useState([]);
   const [event, setEvent] = useState({});
 
@@ -22,51 +32,77 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
   const [confirmationMadalIsOpen, setConfirmationMadalIsOpen] = useState(false);
   const [doneModalIsOpen, setDoneModalIsOpen] = useState(false);
 
-  function handleDoneModalOpen(value) {
-    setDoneModalIsOpen(value);
-  }
-
-  useEffect(() => {
-    if (selectedTags.length !== 0) {
-      handleDoneModalOpen(isRegisteredEvent); // подумать, как лучше сделать
-      const filteredEvents = getFilteredData(selectedTags, cityEvents);
-      sortEventsByDate(filteredEvents);
-      setFilteredEventsResult(filteredEvents);
-    } else {
-      const initialTagValue = getInitialTags(filters.months, cityEvents);
-      const filteredEvents = getFilteredData(initialTagValue, cityEvents);
-      sortEventsByDate(filteredEvents);
-      setFilteredEventsResult(filteredEvents);
-      setSelectedTags(initialTagValue);
-    }
-  }, [cityEvents]);
-
-  useEffect(() => {
-    const filteredEvents = getFilteredData(selectedTags, cityEvents);
-    sortEventsByDate(filteredEvents);
-    setFilteredEventsResult(filteredEvents);
-  }, [selectedTags]);
-
-  function handleSlectedTag(tag) {
-    const newTagsArray = getFilteredTags(tag, selectedTags);
-    setSelectedTags(newTagsArray);
-  }
-
   // модальные окна
+  const handleDoneModalOpen = () => {
+    setDoneModalIsOpen(true);
+  };
+
   function openMore(item) {
+    console.log(item);
     setEvent(item);
     setIsMoreOpen(true);
-  }
-  function handleAllModalClose() {
-    setIsMoreOpen(false);
-    setConfirmationMadalIsOpen(false);
-    setDoneModalIsOpen(false);
   }
 
   function handleConfirmationMadalOpen(item) {
     setEvent(item);
     setConfirmationMadalIsOpen(true);
   }
+
+  function handleAllModalClose() {
+    setIsMoreOpen(false);
+    setConfirmationMadalIsOpen(false);
+    setDoneModalIsOpen(false);
+  }
+
+  // выбор тега
+  function handleSlectedTag(tag) {
+    const newTagsArray = getFilteredTags(tag, selectedTags);
+    setSelectedTags(newTagsArray);
+  }
+
+  // фильтрация и сортировка по дате событий
+  function getFiltredAndSortedEvents(tag, events) {
+    const filteredEvents = getFilteredData(tag, events);
+    sortEventsByDate(filteredEvents); // убрать, если события будут приходить отсортированные по дате
+    setFilteredEventsResult(filteredEvents);
+  }
+
+  // запрос списка событий и установка текущего месяца в фильтре
+  async function getAllEvents() {
+    try {
+      const { data } = await api.getEvents();
+      const cityEvent = data.filter((i) => currentUser.city === i.city); // убрать, если данные будут приходить отфильтрованные по городу
+      const parseDate = getParsedEventsData(cityEvent);
+      setCityEvents(parseDate);
+      if (filteredEventsResult.length === 0) {
+        const initialTagValue = getInitialTags(filters.months, parseDate);
+        setSelectedTags(initialTagValue);
+        getFiltredAndSortedEvents(initialTagValue, parseDate);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  // запись на событие
+  async function handleBookingEventClick(eventId) {
+    const { user } = currentUser;
+    try {
+      await api.bookEvent({ id: user, event: eventId });
+      handleDoneModalOpen();
+      getAllEvents();
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  useEffect(() => {
+    getAllEvents();
+  }, []);
+
+  useEffect(() => {
+    getFiltredAndSortedEvents(selectedTags, cityEvents);
+  }, [cityEvents, selectedTags]);
 
   return (
     <>
@@ -77,7 +113,7 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
           onSelectedTag={handleSlectedTag}
           type="radio"
         />
-        <section className="calendar-container page__section">
+        <section className="calendar-container">
           {filteredEventsResult.length === 0 ? (
             <Preloader />
           ) : (
@@ -87,7 +123,7 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
                 key={item.id}
                 openMore={openMore}
                 openConfirmationMadal={handleConfirmationMadalOpen}
-                onBookingEvent={onBookingEvent}
+                onBookingEvent={handleBookingEventClick}
                 closeMoreModal={handleAllModalClose}
               />
             ))
@@ -100,10 +136,10 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
         title={event.title}
         dayMonth={event.dayMonth}
         endTime={event.endTime}
-        mothGenitive={event.mothGenitive}
+        monthGenitive={event.monthGenitive}
         time={event.time}
         id={event.id}
-        onBookingEvent={onBookingEvent}
+        onBookingEvent={handleBookingEventClick}
       />
       <Done
         isOpen={doneModalIsOpen}
@@ -111,7 +147,7 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
         title={event.title}
         dayMonth={event.dayMonth}
         endTime={event.endTime}
-        mothGenitive={event.mothGenitive}
+        monthGenitive={event.monthGenitive}
         time={event.time}
       />
       <Meetup
@@ -128,7 +164,8 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
         seats={event.seats}
         takenSeats={event.takenSeats}
         needDescription
-        onBookingEvent={onBookingEvent}
+        booked={event.booked}
+        onBookingEvent={handleBookingEventClick}
       />
     </>
   );

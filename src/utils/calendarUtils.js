@@ -10,10 +10,10 @@ export function parsedDate(date) {
   const time = format(parseDate, 'kk:mm', { locale: ru });
   const dayMonth = format(parseDate, 'dd', { locale: ru });
   const year = format(parseDate, 'yyyy', { locale: ru });
-  const mothGenitive = format(parseDate, 'MMMM', { locale: ru });
+  const monthGenitive = format(parseDate, 'MMMM', { locale: ru });
   const monthNumber = getMonth(parseDate);
 
-  return { month, dayWeek, time, dayMonth, year, mothGenitive, monthNumber };
+  return { month, dayWeek, time, dayMonth, year, monthGenitive, monthNumber };
 }
 
 export function sortEventsByDate(events) {
