@@ -24,7 +24,7 @@ function CalendarEvent({
   const endTime = parsedDate(endAt).time;
   const numberOfFreeSeats = seats - takenSeats;
   const hasFreeSeats = numberOfFreeSeats > 0;
-
+  console.log(booked);
   function handleConfirmationMadalOpen() {
     openConfirmationMadal({ title, dayMonth, endTime, mothGenitive, time, id });
   }

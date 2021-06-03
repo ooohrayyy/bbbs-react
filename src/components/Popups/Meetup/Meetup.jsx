@@ -15,6 +15,7 @@ function Meetup({
   startAt,
   endAt,
   seats,
+  booked,
   takenSeats,
   onBookingEvent,
 }) {
@@ -26,7 +27,9 @@ function Meetup({
   return (
     <Modal
       isOpen={isOpen}
-      className="popup__container popup__container_type_calendar"
+      className={`popup__container popup__container_type_calendar ${
+        booked ? 'popup__container_type_calendar_booked' : ''
+      }`}
       overlayClassName="popup popup_type_description"
       onRequestClose={closeModal}
       closeTimeoutMS={800}
@@ -49,6 +52,7 @@ function Meetup({
         startAt={startAt}
         endAt={endAt}
         seats={seats}
+        booked={booked}
         takenSeats={takenSeats}
         needDescription
         onBookingEvent={onBookingEvent}
