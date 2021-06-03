@@ -5,7 +5,7 @@ function HeaderRegularLinks({ isAuthorized, onCalendarLinkClick }) {
   function handleCalendarLinkClick(e) {
     if (!isAuthorized) {
       e.preventDefault();
-      onCalendarLinkClick();
+      onCalendarLinkClick(e.target.href);
     }
   }
 
