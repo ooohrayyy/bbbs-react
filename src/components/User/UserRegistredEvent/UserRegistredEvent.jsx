@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 
-import DelRecord from '../Popups/DelRecord/DelRecord';
+import DelRecord from '../../Popups/DelRecord/DelRecord';
 
 function UserRegistredEvent({ title, startDayMonth, startMonth }) {
   const [isDelRecPopupOpen, setIsDelRecPopupOpen] = useState(false);

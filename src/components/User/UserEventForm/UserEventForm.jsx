@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import mock from '../../utils/mock';
-import api from '../../utils/api';
+import mock from '../../../utils/mock';
+import api from '../../../utils/api';
 import UserMeetPhoto from '../UserMeetPhoto/UserMeetPhoto';
 
 function UserEventForm({ onAddMeeting, onAddMeetingClick }) {

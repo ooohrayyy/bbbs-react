@@ -1,9 +1,9 @@
 import { React, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { parsedDate } from '../../utils/calendarUtils';
+import { parsedDate } from '../../../utils/calendarUtils';
 
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../../Landing/Preloader/Preloader';
 
 function UserEvent({ meeting, isLoading }) {
   const { place, description, photo, date, rate } = meeting;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import recentResults from '../../assets/dev-data/recentSearchData'; // Временный массив с готовыми результатами поиска
+import recentResults from '../../../assets/dev-data/recentSearchData'; // Временный массив с готовыми результатами поиска
 
 function HeaderSearch({ toggleSearchMenu, searchOptionsClass }) {
   return (

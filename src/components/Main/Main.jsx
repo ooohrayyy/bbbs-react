@@ -10,9 +10,9 @@ import Video from '../Video/Video';
 import Film from '../Film/Film';
 import Question from '../Question/Question';
 import Facebook from '../Facebook/Facebook';
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../Landing/Preloader/Preloader';
 import Meetup from '../Popups/Meetup/Meetup';
-import CalendarCard from '../CalendarCard/CalendarCard';
+import CalendarCard from '../Calendar/CalendarCard/CalendarCard';
 
 function Main({ isAuthorized }) {
   const [answer, setAnswer] = useState({});
