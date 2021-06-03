@@ -1,12 +1,53 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
-
+import arrow from '../../images/svg/arrow-right.svg';
+ 
 import RightsCard from './RightsCard/RightsCard';
-import rightsCardsData from '../../assets/dev-data/rightsCardsData';
-
-import arrow from '../../images/svg/arrow-right-grey.svg';
+import rightsCardsData from '../../assets/dev-data/rightsCardsData';  
+  
+import Filter from '../Landing/Filter/Filter'; // вырезать и вставить в нужное место
+import filters from '../../assets/dev-data/filterTagsData'; // вырезать и вставить в нужное место
+import getFilteredTags from '../../utils/filterUtils'; // вырезать и вставить в нужное место
 
 function Rights() {
+  const [selectedTags, setSelectedTags] = useState(filters.rights); // вырезать и вставить в нужное место
+
+  function handleSlectedTag(tag) {
+    // вырезать и вставить в нужное место
+    const newTagsArray = getFilteredTags(tag, selectedTags);
+    setSelectedTags(newTagsArray);
+  }
+
+  // еще вырезать сам тег фильтр с пропсами,
+  console.log(selectedTags);
+
+  return (
+    <>
+      <div className="article-lead__top-overlay" />
+      <div className="article-lead__top" />
+      <div className="article-lead__overlay" />
+      <section className="article-lead">
+        <div className="article-lead__content">
+          <h1 className="chapter-title article-lead__title">
+            Пенсионное обеспечение для детей-&nbsp;сирот
+          </h1>
+          <Filter
+            tags={selectedTags}
+            onSelectedTag={handleSlectedTag}
+            type="radio"
+          />
+          <p className="section-title article-lead__text">
+            Развитие детей-сирот отличается от&nbsp;развития детей, живущих
+            в&nbsp;семьях. Все этапы развития у&nbsp;детей-сирот проходят
+            с&nbsp;искажениями и&nbsp;имеют ряд негативных особенностей:
+            замедленный темп психического развития, низкий уровень
+            интеллектуального развития, позднее формирование навыков
+            саморегуляции и&nbsp;правил поведения, бедную эмоциональную сферу
+            и&nbsp;воображение.
+          </p>
+        </div>
+      </section>
+
   const cardsTotalCount = rightsCardsData.length;
   const screenWidth = window.screen.width;
   let cardsLimit;

@@ -44,8 +44,8 @@ function Confirmation({
       </button>
       <h2 className="section-title calendar__title_type_popup calendar__title_type_confirmation">
         Подтвердить запись на мероприятие:
-        <p>{`"${title}" `}</p>
-        <p>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</p>
+        <span>{`"${title}" `}</span>
+        <span>{`${dayMonth} ${mothGenitive} с ${time}–${endTime}`}</span>
       </h2>
       <div className="calendar__buttons">
         <button

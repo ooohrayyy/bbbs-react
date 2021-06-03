@@ -19,7 +19,7 @@ import Places from '../Places/Places';
 import Answers from '../Answers/Answers';
 import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
-import UserArea from '../UserArea/UserArea';
+import UserArea from '../User/UserArea/UserArea';
 import Rights from '../Rights/Rights';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';
@@ -47,11 +47,9 @@ function App() {
   const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
   const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
+  const [isRouteCalendar, setIsRouteCalendar] = useState(false);
+
   const history = useHistory();
-
-  const openSignInModal = () => setSignInModalIsOpen(true);
-
-  const closeSignInModal = () => setSignInModalIsOpen(false);
 
   const handleChangeCityClick = () => setIsChangeCityPopupOpen(true);
 
@@ -60,6 +58,26 @@ function App() {
   const pushToProfilePage = () => history.push('./profile');
 
   const handleAddMeeting = (meeting) => setMeetings([meeting, ...meetings]);
+
+  function openSignInModal(route) {
+    setSignInModalIsOpen(true);
+
+    if (route) {
+      const state = route.includes('calendar');
+      setIsRouteCalendar(state);
+    }
+  }
+
+  function closeSignInModal() {
+    setSignInModalIsOpen(false);
+    setIsRouteCalendar(false);
+  }
+
+  function handleCalendarRoute() {
+    if (isRouteCalendar) {
+      history.push('/calendar');
+    }
+  }
 
   // Определить актуальный город пользователя
   function handleCities(currentCity) {
@@ -168,6 +186,8 @@ function App() {
       localStorage.setItem('jwt', access);
       handleCities(city);
     }
+
+    handleCalendarRoute();
   }
 
   // Обработчик выхода пользователя

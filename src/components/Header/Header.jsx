@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import HeaderLinks from '../HeaderLinks/HeaderLinks';
-import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
-import HeaderButtons from '../HeaderButtons/HeaderButtons';
+import HeaderLinks from './HeaderLinks/HeaderLinks';
+import HeaderBurgerMenu from './HeaderBurgerMenu/HeaderBurgerMenu';
+import HeaderButtons from './HeaderButtons/HeaderButtons';
 
 function Header({
   isAuthorized,

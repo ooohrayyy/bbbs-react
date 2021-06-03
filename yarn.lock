@@ -7282,6 +7282,11 @@
   dependencies:
     "js-tokens" "^3.0.0 || ^4.0.0"
 
+"lottie-web@^5.7.9":
+  "integrity" "sha512-wWqnah5YTCabVG5BzN2uI7vqOMCHaF6VlEdR99zoR8czg+YQQUtsmaKvaZo1nINshyjSDWQzVoXpMwbR5BdVZQ=="
+  "resolved" "https://registry.npmjs.org/lottie-web/-/lottie-web-5.7.9.tgz"
+  "version" "5.7.9"
+
 "loud-rejection@^1.0.0":
   "integrity" "sha1-W0b4AUft7leIcPCG0Eghz5mOVR8="
   "resolved" "https://registry.npmjs.org/loud-rejection/-/loud-rejection-1.6.0.tgz"

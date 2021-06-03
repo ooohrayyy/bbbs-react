@@ -1,14 +1,14 @@
 import { React, useEffect, useState } from 'react';
-import CalendarCard from '../CalendarCard/CalendarCard';
-import Filter from '../Filter/Filter';
+import CalendarCard from './CalendarCard/CalendarCard';
+import Filter from '../Landing/Filter/Filter';
 import filters from '../../assets/dev-data/filterTagsData';
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../Landing/Preloader/Preloader';
 import {
-  getFilteredTags,
   getFilteredData,
   sortEventsByDate,
   getInitialTags,
 } from '../../utils/calendarUtils';
+import getFilteredTags from '../../utils/filterUtils';
 import Meetup from '../Popups/Meetup/Meetup';
 import Confirmation from '../Popups/Confirmation/Confirmation';
 import Done from '../Popups/Done/Done';
@@ -72,7 +72,11 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
     <>
       <section className="lead page__section">
         <h1 className="main-title">Календарь</h1>
-        <Filter tags={selectedTags} onSelectedTag={handleSlectedTag} />
+        <Filter
+          tags={selectedTags}
+          onSelectedTag={handleSlectedTag}
+          type="radio"
+        />
         <section className="calendar-container page__section">
           {filteredEventsResult.length === 0 ? (
             <Preloader />

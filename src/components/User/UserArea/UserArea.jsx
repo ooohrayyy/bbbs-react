@@ -5,7 +5,7 @@ import UserEventForm from '../UserEventForm/UserEventForm';
 import UserEvent from '../UserEvent/UserEvent';
 import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
 
-import getRegistredEvents from '../../utils/userAreauUtils';
+import getRegistredEvents from '../../../utils/userAreauUtils';
 
 function UserArea({
   meetings = [],
