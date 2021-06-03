@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
-import CalendarEvent from '../../CalendarEvent/CalendarEvent';
+import CalendarEvent from '../../Calendar/CalendarEvent/CalendarEvent';
 
 function Meetup({
   id,

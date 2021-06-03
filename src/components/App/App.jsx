@@ -19,7 +19,7 @@ import Places from '../Places/Places';
 import Answers from '../Answers/Answers';
 import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
-import UserArea from '../UserArea/UserArea';
+import UserArea from '../User/UserArea/UserArea';
 import Rights from '../Rights/Rights';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import Filter from '../Filter/Filter';
-import Place from '../Place/Place';
-import Rubric from '../Rubric/Rubric';
+import Filter from '../Landing/Filter/Filter';
+import Place from './Place/Place';
+import Rubric from './Place/Rubric/Rubric';
 
 import filters from '../../assets/dev-data/filterTagsData';
 import placesCards from '../../assets/dev-data/placesData';
-import MakePlace from '../MakePlace/MakePlace';
+import MakePlace from './MakePlace/MakePlace';
 import Recomendation from '../Popups/Recommendation/Recommendation';
 import Sucess from '../Popups/Sucess/Sucess';
 

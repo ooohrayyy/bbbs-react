@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CalendarEvent from '../../CalendarEvent/CalendarEvent';
+import CalendarEvent from '../CalendarEvent/CalendarEvent';
 
 function CalendarCard({
   event,

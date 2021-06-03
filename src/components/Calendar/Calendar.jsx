@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from 'react';
-import CalendarCard from '../CalendarCard/CalendarCard';
-import Filter from '../Filter/Filter';
+import CalendarCard from './CalendarCard/CalendarCard';
+import Filter from '../Landing/Filter/Filter';
 import filters from '../../assets/dev-data/filterTagsData';
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../Landing/Preloader/Preloader';
 import {
   getFilteredTags,
   getFilteredData,

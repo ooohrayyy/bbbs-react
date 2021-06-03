@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import mock from '../../../utils/mock';
 import api from '../../../utils/api';
 import City from '../City/City';
-import Preloader from '../../Preloader/Preloader';
+import Preloader from '../../Landing/Preloader/Preloader';
 
 function Cities({ isOpen, handleClose, handleCities, isFromMain = false }) {
   Modal.setAppElement(document.getElementById('page'));
