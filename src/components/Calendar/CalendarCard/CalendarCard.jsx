@@ -5,7 +5,7 @@ import CalendarEvent from '../CalendarEvent/CalendarEvent';
 function CalendarCard({
   event,
   openMore,
-  openConfirmationModal,
+  openConfirmationMadal,
   onBookingEvent,
   closeMoreModal,
 }) {
@@ -41,7 +41,7 @@ function CalendarCard({
       handleMore={handleMore}
       needDescription={false}
       booked={booked}
-      openConfirmationModal={openConfirmationModal}
+      openConfirmationMadal={openConfirmationMadal}
       onBookingEvent={onBookingEvent}
       closeMoreModal={closeMoreModal}
     />

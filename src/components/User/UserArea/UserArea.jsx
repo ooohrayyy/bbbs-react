@@ -26,7 +26,7 @@ function UserArea({
   useEffect(() => {
     setBookedEvents(getRegistredEvents(allEvents));
   }, [allEvents]);
-  console.log(bookedEvents);
+
   const handleAddMeetClick = () => setIsMeetButtonClicked(true);
 
   const handleAddMeetCardClick = () => setIsMeetButtonClicked(false);
@@ -59,7 +59,6 @@ function UserArea({
           {bookedEvents.map((i) => (
             <UserRegistredEvent
               key={i.id}
-              event={i}
               title={i.title}
               startDayMonth={i.startDayMonth}
               startMonth={i.startMonth}

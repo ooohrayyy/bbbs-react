@@ -42,7 +42,7 @@ function Meetup({
         <img alt="close" src={closeImage} />
       </button>
       <CalendarEvent
-        closeMoreModal={closeModal}
+        closeMoreMadal={closeModal}
         id={id}
         type="Волонтеры"
         address={address}

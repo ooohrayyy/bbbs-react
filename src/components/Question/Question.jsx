@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Question({ question, rubric }) {
+function Question() {
   return (
     <article className="question main-questions__item">
-      <Link to="/questions" className="main-questions__link">
+      <a href="./questions.html" className="main-questions__link">
         <h2 className="section-title question__title main-questions__title">
-          {question}
+          Я боюсь, что ребёнок ко мне слишком сильно привяжется. Что делать?
         </h2>
-      </Link>
-      <p className="rubric question__rubric main-questions__rubric">{rubric}</p>
+      </a>
+      <p className="rubric question__rubric main-questions__rubric">рубрика</p>
     </article>
   );
 }
