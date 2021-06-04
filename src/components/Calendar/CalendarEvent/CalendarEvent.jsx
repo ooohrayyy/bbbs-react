@@ -16,24 +16,24 @@ function CalendarEvent({
   description,
   handleMore,
   needDescription,
-  openConfirmationMadal,
+  openConfirmationModal,
   onBookingEvent,
-  closeMoreMadal,
+  closeMoreModal,
 }) {
   const { month, dayWeek, time, dayMonth, mothGenitive } = parsedDate(startAt);
   const endTime = parsedDate(endAt).time;
   const numberOfFreeSeats = seats - takenSeats;
   const hasFreeSeats = numberOfFreeSeats > 0;
-  function handleConfirmationMadalOpen() {
-    openConfirmationMadal({ title, dayMonth, endTime, mothGenitive, time, id });
+  function handleConfirmationModalOpen() {
+    openConfirmationModal({ title, dayMonth, endTime, mothGenitive, time, id });
   }
 
   function handleDeleteBooking() {
-    closeMoreMadal();
+    closeMoreModal();
   }
   function handleBookingEvent() {
     onBookingEvent(id);
-    closeMoreMadal();
+    closeMoreModal();
   }
 
   return (
@@ -79,7 +79,7 @@ function CalendarEvent({
         ) : (
           <button
             onClick={
-              needDescription ? handleBookingEvent : handleConfirmationMadalOpen
+              needDescription ? handleBookingEvent : handleConfirmationModalOpen
             }
             className="button button_theme_light"
             type="button"

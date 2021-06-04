@@ -32,6 +32,8 @@ function Main({ isAuthorized }) {
   function openMore() {
     setIsMoreOpen(true);
   }
+  function emptyFunc() {}
+
   function handleClose() {
     setIsMoreOpen(false);
   }
@@ -43,7 +45,11 @@ function Main({ isAuthorized }) {
             (isLoading ? (
               <Preloader />
             ) : (
-              <CalendarCard event={answer.event} openMore={openMore} />
+              <CalendarCard
+                event={answer.event}
+                openMore={openMore}
+                closeMoreModal={emptyFunc}
+              />
             ))}
           {!isAuthorized && <Description />}
 
@@ -104,6 +110,7 @@ function Main({ isAuthorized }) {
           takenSeats={answer.event.takenSeats}
           booked={answer.event.booked}
           needDescription
+          closeMoreModal={emptyFunc}
         />
       )}
     </>
