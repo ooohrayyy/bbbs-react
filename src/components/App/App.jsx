@@ -114,7 +114,6 @@ function App() {
       setMeetings(meets);
       setIsLoadingMeetings(false);
 
-      // handleCityEvent(evts, city);
       handleCities(city);
     }
 
@@ -217,7 +216,6 @@ function App() {
                 path="/profile"
                 isAuthorized={isAuthorized}
                 component={UserArea}
-                allEvents={[]}
                 meetings={meetings}
                 onAddMeeting={handleAddMeeting}
                 onSignOut={handleSignOut}

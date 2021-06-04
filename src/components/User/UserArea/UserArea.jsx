@@ -6,26 +6,38 @@ import UserEvent from '../UserEvent/UserEvent';
 import UserRegistredEvent from '../UserRegistredEvent/UserRegistredEvent';
 
 import getRegistredEvents from '../../../utils/userAreauUtils';
+import { getParsedEventsData } from '../../../utils/calendarUtils';
+import mock from '../../../utils/mock';
+import api from '../../../utils/api';
 
 function UserArea({
   meetings = [],
   onAddMeeting,
-  allEvents,
   onSignOut,
   isLoading,
   userCity,
   onChooseCity,
 }) {
+  mock.initializeAxiosMockAdapter(api.instance);
   const [isAddMeetButtonClicked, setIsMeetButtonClicked] = useState(false);
   const [bookedEvents, setBookedEvents] = useState([]);
+
+  // пока нет запроса для получения карточек с записями, поменять, когда будет запрос
+  async function getBookedEvents() {
+    try {
+      const { data } = await api.getEvents();
+      const parseDate = getParsedEventsData(data);
+      const registredEvent = getRegistredEvents(parseDate);
+      setBookedEvents(registredEvent);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+  useEffect(() => getBookedEvents(), []);
 
   useEffect(() => {}, [meetings]);
 
   useEffect(() => {}, [userCity]);
-
-  useEffect(() => {
-    setBookedEvents(getRegistredEvents(allEvents));
-  }, [allEvents]);
 
   const handleAddMeetClick = () => setIsMeetButtonClicked(true);
 
@@ -102,7 +114,6 @@ function UserArea({
 UserArea.propTypes = {
   meetings: PropTypes.instanceOf(Array),
   onAddMeeting: PropTypes.instanceOf(Function),
-  allEvents: PropTypes.instanceOf(Array),
   onSignOut: PropTypes.instanceOf(Function),
   userCity: PropTypes.string,
   onChooseCity: PropTypes.instanceOf(Function),

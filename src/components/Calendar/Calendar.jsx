@@ -13,6 +13,7 @@ import getFilteredTags from '../../utils/filterUtils';
 import Meetup from '../Popups/Meetup/Meetup';
 import Confirmation from '../Popups/Confirmation/Confirmation';
 import Done from '../Popups/Done/Done';
+import Fall from '../Popups/Fall/Fall';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import mock from '../../utils/mock';
@@ -31,14 +32,18 @@ function Calendar() {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [confirmationMadalIsOpen, setConfirmationMadalIsOpen] = useState(false);
   const [doneModalIsOpen, setDoneModalIsOpen] = useState(false);
+  const [fallModalIsOpen, setFallModalIsOpen] = useState(false);
 
   // модальные окна
   const handleDoneModalOpen = () => {
     setDoneModalIsOpen(true);
   };
 
+  function handleFallMadalOpen() {
+    setFallModalIsOpen(true);
+  }
+
   function openMore(item) {
-    console.log(item);
     setEvent(item);
     setIsMoreOpen(true);
   }
@@ -52,6 +57,7 @@ function Calendar() {
     setIsMoreOpen(false);
     setConfirmationMadalIsOpen(false);
     setDoneModalIsOpen(false);
+    setFallModalIsOpen(false);
   }
 
   // выбор тега
@@ -92,6 +98,7 @@ function Calendar() {
       handleDoneModalOpen();
       getAllEvents();
     } catch (err) {
+      handleFallMadalOpen();
       console.log(err.message);
     }
   }
@@ -167,6 +174,7 @@ function Calendar() {
         booked={event.booked}
         onBookingEvent={handleBookingEventClick}
       />
+      <Fall isOpen={fallModalIsOpen} handleClose={handleAllModalClose} />
     </>
   );
 }
