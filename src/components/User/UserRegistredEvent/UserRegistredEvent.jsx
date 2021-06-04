@@ -1,8 +1,8 @@
 import { React, useState } from 'react';
 
-import Meetup from '../../Popups/Meetup/Meetup';
+import DelRecord from '../../Popups/DelRecord/DelRecord';
 
-function UserRegistredEvent({ title, startDayMonth, startMonth, event }) {
+function UserRegistredEvent({ title, startDayMonth, startMonth }) {
   const [isDelRecPopupOpen, setIsDelRecPopupOpen] = useState(false);
 
   function handleRegEventClick() {
@@ -22,19 +22,11 @@ function UserRegistredEvent({ title, startDayMonth, startMonth, event }) {
         </div>
         <p className="personal-area__reg-event-description">{title}</p>
       </li>
-      <Meetup
+      <DelRecord
         isOpen={isDelRecPopupOpen}
-        title={event.title}
-        address={event.address}
-        contact={event.contact}
-        description={event.description}
-        startAt={event.startAt}
-        endAt={event.endAt}
-        seats={event.seats}
-        booked={event.booked}
-        takenSeats={event.takenSeats}
+        title={title}
         handleClose={closeRegEventPopup}
-        onBookingEvent={closeRegEventPopup}
+        handleConfirm={closeRegEventPopup}
       />
     </>
   );

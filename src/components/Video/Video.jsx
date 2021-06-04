@@ -21,9 +21,6 @@ function Video({ video }) {
             alt="Превью видео"
             className="video__img video__img_position_main-video"
           />
-          <p className="video__duration video__duration_position_main-video paragraph">
-            59:44
-          </p>
         </a>
       </div>
     </article>

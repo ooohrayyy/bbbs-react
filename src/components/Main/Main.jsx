@@ -8,11 +8,11 @@ import Quote from '../Quote/Quote';
 import Rubric from '../Rubric/Rubric';
 import Video from '../Video/Video';
 import Film from '../Film/Film';
+import Question from '../Question/Question';
 import Facebook from '../Facebook/Facebook';
 import Preloader from '../Landing/Preloader/Preloader';
 import Meetup from '../Popups/Meetup/Meetup';
 import CalendarCard from '../Calendar/CalendarCard/CalendarCard';
-import Questions from '../Questions/Questions';
 
 function Main({ isAuthorized }) {
   const [answer, setAnswer] = useState({});
@@ -32,11 +32,10 @@ function Main({ isAuthorized }) {
   function openMore() {
     setIsMoreOpen(true);
   }
-  function emptyFunc() {}
-
   function handleClose() {
     setIsMoreOpen(false);
   }
+
   return (
     <>
       <section className="lead page__section">
@@ -45,11 +44,7 @@ function Main({ isAuthorized }) {
             (isLoading ? (
               <Preloader />
             ) : (
-              <CalendarCard
-                event={answer.event}
-                openMore={openMore}
-                closeMoreModal={emptyFunc}
-              />
+              <CalendarCard event={answer.event} openMore={openMore} />
             ))}
           {!isAuthorized && <Description />}
 
@@ -81,11 +76,9 @@ function Main({ isAuthorized }) {
         <article className="card-container card-container_type_iframe">
           <Facebook />
           <div className="main-questions">
-            {isLoading ? (
-              <Preloader />
-            ) : (
-              <Questions questions={answer.questions} />
-            )}
+            <Question />
+            <Question />
+            <Question />
           </div>
         </article>
       </section>
@@ -110,7 +103,6 @@ function Main({ isAuthorized }) {
           takenSeats={answer.event.takenSeats}
           booked={answer.event.booked}
           needDescription
-          closeMoreModal={emptyFunc}
         />
       )}
     </>

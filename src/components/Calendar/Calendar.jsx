@@ -19,7 +19,7 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
   const [event, setEvent] = useState({});
 
   const [isMoreOpen, setIsMoreOpen] = useState(false);
-  const [confirmationModalIsOpen, setConfirmationModalIsOpen] = useState(false);
+  const [confirmationMadalIsOpen, setConfirmationMadalIsOpen] = useState(false);
   const [doneModalIsOpen, setDoneModalIsOpen] = useState(false);
 
   function handleDoneModalOpen(value) {
@@ -59,13 +59,13 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
   }
   function handleAllModalClose() {
     setIsMoreOpen(false);
-    setConfirmationModalIsOpen(false);
+    setConfirmationMadalIsOpen(false);
     setDoneModalIsOpen(false);
   }
 
-  function handleConfirmationModalOpen(item) {
+  function handleConfirmationMadalOpen(item) {
     setEvent(item);
-    setConfirmationModalIsOpen(true);
+    setConfirmationMadalIsOpen(true);
   }
 
   return (
@@ -86,7 +86,7 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
                 event={item}
                 key={item.id}
                 openMore={openMore}
-                openConfirmationMadal={handleConfirmationModalOpen}
+                openConfirmationMadal={handleConfirmationMadalOpen}
                 onBookingEvent={onBookingEvent}
                 closeMoreModal={handleAllModalClose}
               />
@@ -95,7 +95,7 @@ function Calendar({ cityEvents, onBookingEvent, isRegisteredEvent }) {
         </section>
       </section>
       <Confirmation
-        isOpen={confirmationModalIsOpen}
+        isOpen={confirmationMadalIsOpen}
         handleClose={handleAllModalClose}
         title={event.title}
         dayMonth={event.dayMonth}
