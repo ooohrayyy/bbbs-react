@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Quote({ article }) {
   const cssRules = {
@@ -7,12 +8,12 @@ function Quote({ article }) {
 
   return (
     <article className="card card_content_quote" style={cssRules}>
-      <a href="./articles.html" className="card__link-wrap">
+      <Link to="/articles" className="card__link-wrap">
         <h3 className="chapter-title card__quote">{article.title}</h3>
-      </a>
-      <a href="./articles.html" className="link card__link">
+      </Link>
+      <Link to="/articles" className="link card__link">
         читать статью
-      </a>
+      </Link>
     </article>
   );
 }

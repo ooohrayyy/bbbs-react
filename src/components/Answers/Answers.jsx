@@ -67,41 +67,6 @@ function Answers({ questions }) {
                 Завершение отношений
               </button>
             </li>
-            <li className="tags__list-item">
-              <button className="button tags__button" type="button">
-                Первая встреча
-              </button>
-            </li>
-            <li className="tags__list-item">
-              <button className="button tags__button" type="button">
-                Вопросы детей
-              </button>
-            </li>
-            <li className="tags__list-item">
-              <button className="button tags__button" type="button">
-                Первая встреча
-              </button>
-            </li>
-            <li className="tags__list-item">
-              <button className="button tags__button" type="button">
-                Вопросы детей
-              </button>
-            </li>
-            <li className="tags__list-item">
-              <button className="button tags__button" type="button">
-                Воспитатели / опекуны
-              </button>
-            </li>
-            <li className="tags__list-item">
-              <button className="button tags__button" type="button">
-                Сомнения
-              </button>
-            </li>
-            <li className="tags__list-item">
-              <button className="button tags__button" type="button">
-                Сложности
-              </button>
-            </li>
           </ul>
         </div>
       </section>
