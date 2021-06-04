@@ -27,6 +27,10 @@ function CalendarEvent({
   function handleConfirmationMadalOpen() {
     openConfirmationMadal({ title, dayMonth, endTime, mothGenitive, time, id });
   }
+
+  function handleDeleteBooking() {
+    closeMoreMadal();
+  }
   function handleBookingEvent() {
     onBookingEvent(id);
     closeMoreMadal();
@@ -66,6 +70,7 @@ function CalendarEvent({
       <div className="calendar__submit">
         {booked ? (
           <button
+            onClick={handleDeleteBooking}
             className="button button_theme_light calendar__button calendar__button_selected calendar__button_action_sign-up"
             type="button"
           >
