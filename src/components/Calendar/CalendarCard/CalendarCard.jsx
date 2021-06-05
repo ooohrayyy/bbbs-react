@@ -9,38 +9,16 @@ function CalendarCard({
   onBookingEvent,
   closeMoreModal,
 }) {
-  const {
-    id,
-    address,
-    contact,
-    title,
-    startAt,
-    endAt,
-    booked,
-    seats,
-    takenSeats,
-    description,
-  } = event;
-
   function handleMore() {
     openMore(event);
   }
 
   return (
     <CalendarEvent
-      id={id}
+      event={event}
       type="Волонтеры"
-      address={address}
-      contact={contact}
-      title={title}
-      description={description}
-      startAt={startAt}
-      endAt={endAt}
-      seats={seats}
-      takenSeats={takenSeats}
       handleMore={handleMore}
       needDescription={false}
-      booked={booked}
       openConfirmationMadal={openConfirmationMadal}
       onBookingEvent={onBookingEvent}
       closeMoreModal={closeMoreModal}
@@ -59,8 +37,15 @@ CalendarCard.propTypes = {
     startTime: PropTypes.string,
     startDayMonth: PropTypes.string,
     endTime: PropTypes.string,
-    freeSeats: PropTypes.number,
+    remainSeats: PropTypes.number,
+    id: PropTypes.number,
+    description: PropTypes.string,
+    startMonthGenitive: PropTypes.string,
   }),
+  openConfirmationMadal: PropTypes.func,
+  onBookingEvent: PropTypes.func,
+  openMore: PropTypes.func,
+  closeMoreModal: PropTypes.func,
 };
 
 export default CalendarCard;

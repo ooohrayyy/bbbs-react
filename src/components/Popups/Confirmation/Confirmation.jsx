@@ -5,12 +5,7 @@ import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
 function Confirmation({
-  id,
-  title,
-  dayMonth,
-  endTime,
-  monthGenitive,
-  time,
+  event,
   isOpen,
   handleClose,
   onBookingEvent,
@@ -18,6 +13,9 @@ function Confirmation({
   butEsc = 'Отменить',
 }) {
   Modal.setAppElement(document.getElementById('page'));
+
+  const { id, title, startDayMonth, endTime, startMonthGenitive, startTime } =
+    event;
 
   function closeModal() {
     handleClose(false);
@@ -45,7 +43,7 @@ function Confirmation({
       <h2 className="section-title calendar__title_type_popup calendar__title_type_confirmation">
         Подтвердить запись на мероприятие:
         <span>{`"${title}" `}</span>
-        <span>{`${dayMonth} ${monthGenitive} с ${time}–${endTime}`}</span>
+        <span>{`${startDayMonth} ${startMonthGenitive} с ${startTime}–${endTime}`}</span>
       </h2>
       <div className="calendar__buttons">
         <button
@@ -70,9 +68,22 @@ function Confirmation({
 export default Confirmation;
 
 Confirmation.propTypes = {
-  title: PropTypes.string,
+  event: PropTypes.shape({
+    address: PropTypes.string,
+    contact: PropTypes.string,
+    title: PropTypes.string,
+    booked: PropTypes.bool,
+    startMonth: PropTypes.string,
+    startDayWeek: PropTypes.string,
+    startTime: PropTypes.string,
+    startDayMonth: PropTypes.string,
+    endTime: PropTypes.string,
+    remainSeats: PropTypes.number,
+    id: PropTypes.number,
+    description: PropTypes.string,
+    startMonthGenitive: PropTypes.string,
+  }),
+  onBookingEvent: PropTypes.func,
   isOpen: PropTypes.bool,
   handleClose: PropTypes.func,
-  butConf: PropTypes.string,
-  butEsc: PropTypes.string,
 };

@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import mock from '../../utils/mock';
 import api from '../../utils/api';
@@ -22,6 +22,7 @@ import Rights from '../Rights/Rights';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';
 import Cities from '../Popups/Cities/Cities';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -223,8 +224,8 @@ function App() {
                 userCity={userCity}
                 onChooseCity={handleChangeCityClick}
               />
-              <Route path="/">
-                <Redirect to="/" />
+              <Route path="*">
+                <PageNotFound />
               </Route>
             </Switch>
           </main>

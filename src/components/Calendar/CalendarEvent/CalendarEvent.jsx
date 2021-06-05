@@ -1,38 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { parsedDate } from '../../../utils/calendarUtils';
 
 function CalendarEvent({
-  id,
+  event,
   type,
-  address,
-  contact,
-  title,
-  startAt,
-  endAt,
-  booked,
-  seats,
-  takenSeats,
-  description,
   handleMore,
   needDescription,
   openConfirmationMadal,
   onBookingEvent,
   closeMoreMadal,
 }) {
-  const { month, dayWeek, time, dayMonth, monthGenitive } = parsedDate(startAt);
-  const endTime = parsedDate(endAt).time;
-  const numberOfFreeSeats = seats - takenSeats;
-  const hasFreeSeats = numberOfFreeSeats > 0;
+  const {
+    remainSeats,
+    startDayMonth,
+    startDayWeek,
+    startMonth,
+    startTime,
+    endTime,
+    booked,
+    id,
+    address,
+    contact,
+    title,
+    description,
+  } = event;
+
+  const hasFreeSeats = remainSeats > 0;
   function handleConfirmationMadalOpen() {
-    openConfirmationMadal({
-      title,
-      dayMonth,
-      endTime,
-      monthGenitive,
-      time,
-      id,
-    });
+    openConfirmationMadal(event);
   }
   function handleBookingEvent() {
     onBookingEvent(id);
@@ -44,18 +39,18 @@ function CalendarEvent({
       <div className="calendar__caption">
         <div className="calendar__info">
           <p className="calendar__type">{type}</p>
-          <p className="calendar__weekday">{`${month} / ${dayWeek}`}</p>
+          <p className="calendar__weekday">{`${startMonth} / ${startDayWeek}`}</p>
         </div>
         <div className="calendar__about">
           <h2 className="section-title calendar__title">{title}</h2>
-          <p className="calendar__date">{dayMonth}</p>
+          <p className="calendar__date">{startDayMonth}</p>
         </div>
       </div>
 
       <div className="calendar__meetup">
         <ul className="calendar__info-list">
           <li className="calendar__info-item">
-            <p className="calendar__time">{`${time}-${endTime}`}</p>
+            <p className="calendar__time">{`${startTime}-${endTime}`}</p>
           </li>
           <li className="calendar__info-item">
             <p className="calendar__place">{address}</p>
@@ -92,9 +87,7 @@ function CalendarEvent({
         )}
         {!booked && (
           <p className="calendar__place-left">
-            {hasFreeSeats
-              ? `Осталось ${numberOfFreeSeats} мест`
-              : 'Запись закрыта'}
+            {hasFreeSeats ? `Осталось ${remainSeats} мест` : 'Запись закрыта'}
           </p>
         )}
         {!needDescription && (
@@ -113,7 +106,6 @@ function CalendarEvent({
 
 CalendarEvent.propTypes = {
   event: PropTypes.shape({
-    type: PropTypes.string,
     address: PropTypes.string,
     contact: PropTypes.string,
     title: PropTypes.string,
@@ -123,8 +115,17 @@ CalendarEvent.propTypes = {
     startTime: PropTypes.string,
     startDayMonth: PropTypes.string,
     endTime: PropTypes.string,
-    freeSeats: PropTypes.number,
+    remainSeats: PropTypes.number,
+    id: PropTypes.number,
+    description: PropTypes.string,
+    startMonthGenitive: PropTypes.string,
   }),
+  type: PropTypes.string,
+  handleMore: PropTypes.func,
+  needDescription: PropTypes.bool,
+  openConfirmationMadal: PropTypes.func,
+  onBookingEvent: PropTypes.func,
+  closeMoreMadal: PropTypes.func,
 };
 
 export default CalendarEvent;

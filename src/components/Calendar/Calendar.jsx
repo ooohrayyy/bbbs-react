@@ -35,13 +35,8 @@ function Calendar() {
   const [fallModalIsOpen, setFallModalIsOpen] = useState(false);
 
   // модальные окна
-  const handleDoneModalOpen = () => {
-    setDoneModalIsOpen(true);
-  };
-
-  function handleFallMadalOpen() {
-    setFallModalIsOpen(true);
-  }
+  const handleDoneModalOpen = () => setDoneModalIsOpen(true);
+  const handleFallMadalOpen = () => setFallModalIsOpen(true);
 
   function openMore(item) {
     setEvent(item);
@@ -140,36 +135,19 @@ function Calendar() {
       <Confirmation
         isOpen={confirmationMadalIsOpen}
         handleClose={handleAllModalClose}
-        title={event.title}
-        dayMonth={event.dayMonth}
-        endTime={event.endTime}
-        monthGenitive={event.monthGenitive}
-        time={event.time}
-        id={event.id}
+        event={event}
         onBookingEvent={handleBookingEventClick}
       />
       <Done
         isOpen={doneModalIsOpen}
         handleClose={handleAllModalClose}
-        title={event.title}
-        dayMonth={event.dayMonth}
-        endTime={event.endTime}
-        monthGenitive={event.monthGenitive}
-        time={event.time}
+        event={event}
       />
       <Meetup
         isOpen={isMoreOpen}
         handleClose={handleAllModalClose}
         type="Волонтеры"
-        address={event.address}
-        contact={event.contact}
-        id={event.id}
-        title={event.title}
-        description={event.description}
-        startAt={event.startAt}
-        endAt={event.endAt}
-        seats={event.seats}
-        takenSeats={event.takenSeats}
+        event={event}
         needDescription
         booked={event.booked}
         onBookingEvent={handleBookingEventClick}
