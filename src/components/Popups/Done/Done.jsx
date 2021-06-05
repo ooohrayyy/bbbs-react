@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
 
-function Done({
-  title,
-  isOpen,
-  handleClose,
-  dayMonth,
-  endTime,
-  monthGenitive,
-  time,
-}) {
+function Done({ event, isOpen, handleClose }) {
   Modal.setAppElement(document.getElementById('page'));
+
+  const { title, startDayMonth, endTime, startMonthGenitive, startTime } =
+    event;
 
   function closeModal() {
     handleClose(false);
@@ -38,7 +33,7 @@ function Done({
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done ">
           Вы записаны на мероприятие:
           <span>{`"${title}" `}</span>
-          <span>{`${dayMonth} ${monthGenitive} с ${time}–${endTime}`}</span>
+          <span>{`${startDayMonth} ${startMonthGenitive} с ${startTime}–${endTime}`}</span>
         </h2>
         <h2 className="section-title calendar__title_type_popup calendar__title_type_popup-done">
           Если у вас не получится прийти — отмените, пожалуйста, запись.
@@ -58,7 +53,21 @@ function Done({
 export default Done;
 
 Done.propTypes = {
-  title: PropTypes.string,
+  event: PropTypes.shape({
+    address: PropTypes.string,
+    contact: PropTypes.string,
+    title: PropTypes.string,
+    booked: PropTypes.bool,
+    startMonth: PropTypes.string,
+    startDayWeek: PropTypes.string,
+    startTime: PropTypes.string,
+    startDayMonth: PropTypes.string,
+    endTime: PropTypes.string,
+    remainSeats: PropTypes.number,
+    id: PropTypes.number,
+    description: PropTypes.string,
+    startMonthGenitive: PropTypes.string,
+  }),
   isOpen: PropTypes.bool,
   handleClose: PropTypes.func,
 };

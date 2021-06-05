@@ -29,16 +29,25 @@ export function sortEventsByDate(events) {
   });
 }
 
+export function getParsedEvent(event) {
+  const { month, dayMonth, monthNumber, time, dayWeek, monthGenitive } =
+    parsedDate(event.startAt);
+  const endTime = parsedDate(event.endAt).time;
+  return {
+    ...event,
+    startDayMonth: dayMonth,
+    startMonth: month,
+    startDayWeek: dayWeek,
+    startMonthGenitive: monthGenitive,
+    startMonthNumber: monthNumber,
+    startTime: time,
+    endTime,
+    remainSeats: event.remainSeats || event.seats - event.takenSeats,
+  };
+}
+
 export function getParsedEventsData(data) {
-  return data.map((i) => {
-    const { month, dayMonth, monthNumber } = parsedDate(i.startAt);
-    return {
-      ...i,
-      startDayMonth: dayMonth,
-      startMonth: month,
-      startMonthNumber: monthNumber,
-    };
-  });
+  return data.map((i) => getParsedEvent(i));
 }
 
 export function getRotatedMonth(months) {
