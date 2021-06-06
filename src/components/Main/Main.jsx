@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import mock from '../../utils/mock';
 import api from '../../utils/api';
+import { getParsedEvent } from '../../utils/calendarUtils';
 
 import Description from '../Description/Description';
 import Stories from '../Stories/Stories';
@@ -24,7 +25,8 @@ function Main({ isAuthorized }) {
     api
       .getMain()
       .then((res) => {
-        setAnswer(res.data);
+        const parsedEvent = getParsedEvent(res.data.event);
+        setAnswer({ ...res.data, event: parsedEvent });
         setIsLoading(false);
       })
       .catch((err) => console.log(err.message));
@@ -93,15 +95,7 @@ function Main({ isAuthorized }) {
           isOpen={isMoreOpen}
           handleClose={handleClose}
           type="Волонтеры"
-          address={answer.event.address}
-          contact={answer.event.contact}
-          title={answer.event.title}
-          description={answer.event.description}
-          startAt={answer.event.startAt}
-          endAt={answer.event.endAt}
-          seats={answer.event.seats}
-          takenSeats={answer.event.takenSeats}
-          booked={answer.event.booked}
+          event={answer.event}
           needDescription
         />
       )}

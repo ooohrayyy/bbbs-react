@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import mock from '../../utils/mock';
 import api from '../../utils/api';
@@ -7,8 +7,6 @@ import api from '../../utils/api';
 import cities from '../../assets/mock-data/cities.json';
 
 import answersData from '../../assets/dev-data/answersData';
-
-import { getParsedEventsData } from '../../utils/calendarUtils';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -25,6 +23,7 @@ import RightsItem from '../Rights/RightsItem/RightsItem';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';
 import Cities from '../Popups/Cities/Cities';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -34,7 +33,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const [events, setEvents] = useState([]);
   const [meetings, setMeetings] = useState([]);
 
   const [scrollTop, setScrollTop] = useState(0);
@@ -44,7 +42,6 @@ function App() {
 
   const [userCity, setUserCity] = useState('');
 
-  const [isRegisteredEvent, setIsRegisteredEvent] = useState(false);
   const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
   const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
@@ -103,12 +100,6 @@ function App() {
     }
   }
 
-  function handleCityEvent(data, city) {
-    const cityEvent = data.filter((i) => city === i.city);
-    const parseDate = getParsedEventsData(cityEvent);
-    setEvents(parseDate);
-  }
-
   useEffect(() => {
     checkToken();
 
@@ -116,19 +107,14 @@ function App() {
       let results;
 
       try {
-        results = await Promise.all([
-          api.getMeetings(),
-          api.getEvents(),
-          api.updateProfile(),
-        ]);
+        results = await Promise.all([api.getMeetings(), api.updateProfile()]);
       } catch (err) {
         console.log(err.message);
       }
 
-      const [meetingsData, eventsData, userData] = results;
+      const [meetingsData, userData] = results;
 
       const { data: meets } = meetingsData;
-      const { data: evts } = eventsData;
       const {
         data: { city },
       } = userData;
@@ -136,58 +122,32 @@ function App() {
       setMeetings(meets);
       setIsLoadingMeetings(false);
 
-      handleCityEvent(evts, city);
       handleCities(city);
     }
 
     loadPage();
   }, []);
 
-  // запись на мероприятие
-  function handleBookingEventClick(eventId) {
-    const { user, city } = currentUser;
-
-    api
-      .bookEvent({ id: user, event: eventId })
-      .then(() => {
-        setIsRegisteredEvent(true);
-        api
-          .getEvents()
-          .then(({ data }) => {
-            handleCityEvent(data, city);
-          })
-          .catch((err) => err.message);
-      })
-      .catch((err) => err.message);
-  }
-
   // Обработчик входа пользователя
   async function handleSignIn() {
     let results;
 
     try {
-      results = await Promise.all([
-        api.authUser(),
-        api.updateProfile(),
-        api.getEvents(),
-      ]);
+      results = await Promise.all([api.authUser(), api.updateProfile()]);
     } catch (err) {
       console.log(err.message);
     }
 
-    const [authData, userData, eventsData] = results;
+    const [authData, userData] = results;
 
     const {
       data: { access },
     } = authData;
 
-    const { data: evts } = eventsData;
     const { data: user } = userData;
     const { city } = user;
 
     if (access) {
-      handleCityEvent(evts, city);
-
       setIsAuthorized(true);
       setCurrentUser(user);
       localStorage.setItem('jwt', access);
@@ -250,11 +210,8 @@ function App() {
               <ProtectedRoute
                 exact
                 path="/calendar"
-                cityEvents={events}
                 isAuthorized={isAuthorized}
                 component={Calendar}
-                isRegisteredEvent={isRegisteredEvent}
-                onBookingEvent={handleBookingEventClick}
               />
               <Route exact path="/to-go">
                 <Places isAuthorized={isAuthorized} />
@@ -270,7 +227,6 @@ function App() {
                 path="/profile"
                 isAuthorized={isAuthorized}
                 component={UserArea}
-                allEvents={events}
                 meetings={meetings}
                 onAddMeeting={handleAddMeeting}
                 onSignOut={handleSignOut}
@@ -278,8 +234,8 @@ function App() {
                 userCity={userCity}
                 onChooseCity={handleChangeCityClick}
               />
-              <Route path="/">
-                <Redirect to="/" />
+              <Route path="*">
+                <PageNotFound />
               </Route>
             </Switch>
           </main>

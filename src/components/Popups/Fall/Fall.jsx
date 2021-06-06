@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
-function Fall({ isOpen, handleClose, isBackToCard }) {
+function Fall({ isOpen, handleClose }) {
   Modal.setAppElement(document.getElementById('page'));
 
   function closeModal() {
@@ -26,7 +26,7 @@ function Fall({ isOpen, handleClose, isBackToCard }) {
           className="button calendar__back popup__back"
           type="button"
         >
-          {isBackToCard ? 'Вернуться к мероприятию' : 'Вернуться к календарю'}
+          Вернуться к мероприятию
         </button>
       </>
     </Modal>
@@ -38,5 +38,4 @@ export default Fall;
 Fall.propTypes = {
   isOpen: PropTypes.bool,
   handleClose: PropTypes.func,
-  isBackToCard: PropTypes.bool,
 };
