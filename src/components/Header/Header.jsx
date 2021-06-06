@@ -5,6 +5,8 @@ import HeaderLinks from './HeaderLinks/HeaderLinks';
 import HeaderBurgerMenu from './HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 
+import useCurrentWidth from '../../utils/useCurrentWidth';
+
 function Header({
   isAuthorized,
   isHidden,
@@ -13,6 +15,8 @@ function Header({
 }) {
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
+
+  const currentWidth = useCurrentWidth();
 
   const headerClass = burgerMenuisOpen
     ? `header ${isHidden} header_displayed page__section`
@@ -54,6 +58,12 @@ function Header({
       setSearchMenuIsOpen(true);
     }
   }
+
+  React.useEffect(() => {
+    if (currentWidth > 1380) {
+      setBurgerMenuIsOpen(false);
+    }
+  }, [currentWidth]);
 
   return (
     <header className={headerClass}>
