@@ -7,7 +7,12 @@ import UserMeetPhoto from '../UserMeetPhoto/UserMeetPhoto';
 function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
   mock.initializeAxiosMockAdapter(api.instance);
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
 
   const [photo, setPhoto] = useState('');
   const [isUploadFile, setIsUploadFile] = useState(false);
@@ -56,6 +61,7 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
       ...data,
     });
     onAddMeetingClick();
+    reset();
   }
 
   function handleRate(e) {
@@ -92,15 +98,30 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
         >
           <input
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...register('place', { required: true })}
+            {...register('place', {
+              required: true,
+              minLength: 2,
+              maxLength: 40,
+            })}
             id="place-input"
             type="text"
             name="place"
             placeholder="Место встречи"
             className="personal-area__form-input"
-            minLength="2"
-            maxLength="30"
           />
+          {errors.place?.type === 'required' && (
+            <span className="popup__error">Укажите место</span>
+          )}
+          {errors.place?.type === 'minLength' && (
+            <span className="popup__error">
+              Длина названия должна быть не менее двух символов
+            </span>
+          )}
+          {errors.place?.type === 'maxLength' && (
+            <span className="popup__error">
+              Длина названия должна быть не более сорока символов
+            </span>
+          )}
           <input
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('date', {
@@ -113,19 +134,24 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
             placeholder="Дата&emsp;"
             className="personal-area__form-input"
           />
+          {errors.date?.type === 'required' && (
+            <span className="popup__error">Выберите дату</span>
+          )}
+          {errors.date?.type === 'pattern' && (
+            <span className="popup__error">Неверный формат даты</span>
+          )}
           <textarea
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...register('description', { required: true })}
+            {...register('description')}
             type="text"
             name="description"
             className="personal-area__form-input personal-area__form-input_type_textarea"
             placeholder="Опишите вашу встречу, какие чувства вы испытывали, что понравилось / не понравилось"
           />
-
           <div className="personal-area__rating">
             <input
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...register('rate', { required: true })}
+              {...register('rate')}
               onClick={handleRate}
               id="rate_good"
               value="good"
@@ -137,7 +163,7 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
             />
             <input
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...register('rate', { required: true })}
+              {...register('rate')}
               onClick={handleRate}
               id="rate_neutral"
               value="neutral"
@@ -150,7 +176,7 @@ function UserEventForm({ onAddMeeting, onAddMeetingClick }) {
             />
             <input
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...register('rate', { required: true })}
+              {...register('rate')}
               onClick={handleRate}
               id="rate_bad"
               value="bad"
