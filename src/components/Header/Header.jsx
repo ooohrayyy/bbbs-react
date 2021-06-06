@@ -72,6 +72,7 @@ function Header({ isAuthorized, isHidden, openSignInModal }) {
           menuListSocialClass={menuListSocialClass}
           isAuthorized={isAuthorized}
           onCalendarLinkClick={openSignInModal}
+          setBurgerMenuIsOpen={setBurgerMenuIsOpen}
         />
         <HeaderBurgerMenu
           burgerMenuClass={burgerMenuClass}

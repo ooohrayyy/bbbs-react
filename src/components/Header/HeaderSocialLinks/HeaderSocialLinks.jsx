@@ -1,6 +1,10 @@
 import React from 'react';
 
-function HeaderSocialLinks({ menuListSocialClass }) {
+function HeaderSocialLinks({ menuListSocialClass, setBurgerMenuIsOpen }) {
+  function handleLinkClick() {
+    setBurgerMenuIsOpen(false);
+  }
+
   return (
     <ul className={menuListSocialClass}>
       <li className="menu__list-item">
@@ -9,6 +13,7 @@ function HeaderSocialLinks({ menuListSocialClass }) {
           href="https://facebook.com/BigBrothers.BigSisters.Russia"
           target="_blank"
           rel="noreferrer"
+          onClick={handleLinkClick}
         >
           facebook
         </a>
@@ -19,6 +24,7 @@ function HeaderSocialLinks({ menuListSocialClass }) {
           href="https://vk.com/big.brothers.big.sisters"
           target="_blank"
           rel="noreferrer"
+          onClick={handleLinkClick}
         >
           vkontakte
         </a>
@@ -29,6 +35,7 @@ function HeaderSocialLinks({ menuListSocialClass }) {
           href="https://instagram.com/nastavniki_org"
           target="_blank"
           rel="noreferrer"
+          onClick={handleLinkClick}
         >
           instagram
         </a>
@@ -39,6 +46,7 @@ function HeaderSocialLinks({ menuListSocialClass }) {
           href="https://youtube.com/user/Nastavniki"
           target="_blank"
           rel="noreferrer"
+          onClick={handleLinkClick}
         >
           youtube
         </a>

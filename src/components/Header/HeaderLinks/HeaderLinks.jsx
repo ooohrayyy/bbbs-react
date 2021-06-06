@@ -8,14 +8,19 @@ function HeaderLinks({
   menuListSocialClass,
   isAuthorized,
   onCalendarLinkClick,
+  setBurgerMenuIsOpen,
 }) {
   return (
     <div className={menuListsWrapClass}>
       <HeaderRegularLinks
         isAuthorized={isAuthorized}
         onCalendarLinkClick={onCalendarLinkClick}
+        setBurgerMenuIsOpen={setBurgerMenuIsOpen}
       />
-      <HeaderSocialLinks menuListSocialClass={menuListSocialClass} />
+      <HeaderSocialLinks
+        menuListSocialClass={menuListSocialClass}
+        setBurgerMenuIsOpen={setBurgerMenuIsOpen}
+      />
     </div>
   );
 }
