@@ -30,6 +30,9 @@ function Header({ isAuthorized, isHidden, openSignInModal }) {
   const searchOptionsClass = searchMenuIsOpen
     ? 'search__options search__options_visible menu__search-options'
     : 'search__options menu__search-options';
+  const logoClass = isAuthorized
+    ? 'menu__logo menu__logo_authorized'
+    : 'menu__logo';
 
   function handleSignInClick() {
     if (isAuthorized) {
@@ -64,7 +67,7 @@ function Header({ isAuthorized, isHidden, openSignInModal }) {
   return (
     <header className={headerClass}>
       <nav className={menuClass}>
-        <NavLink className="menu__logo" to="/main">
+        <NavLink className={logoClass} to="/main">
           наставники.про
         </NavLink>
         <HeaderLinks
