@@ -18,6 +18,10 @@
   &:hover {
     color: $darkBlue;
   }
+
+  &_authorized {
+    color: #2E2468;
+  }
 }
 
 .menu__list {
