@@ -67,7 +67,7 @@ function Header({ isAuthorized, isHidden, openSignInModal }) {
   return (
     <header className={headerClass}>
       <nav className={menuClass}>
-        <NavLink className={logoClass} to="/main">
+        <NavLink className={logoClass} to="/">
           наставники.про
         </NavLink>
         <HeaderLinks
