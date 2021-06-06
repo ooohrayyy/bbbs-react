@@ -1,18 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 
 import HeaderLinks from './HeaderLinks/HeaderLinks';
 import HeaderBurgerMenu from './HeaderBurgerMenu/HeaderBurgerMenu';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 
-function Header({
-  isAuthorized,
-  isHidden,
-  pushToProfilePage,
-  openSignInModal,
-}) {
+import useCurrentWidth from '../../utils/useCurrentWidth';
+
+function Header({ isAuthorized, isHidden, openSignInModal }) {
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
+
+  const currentWidth = useCurrentWidth();
+  const history = useHistory();
 
   const headerClass = burgerMenuisOpen
     ? `header ${isHidden} header_displayed page__section`
@@ -33,7 +33,7 @@ function Header({
 
   function handleSignInClick() {
     if (isAuthorized) {
-      pushToProfilePage();
+      history.push('/profile');
     } else {
       openSignInModal();
     }
@@ -54,6 +54,12 @@ function Header({
       setSearchMenuIsOpen(true);
     }
   }
+
+  React.useEffect(() => {
+    if (currentWidth > 1380) {
+      setBurgerMenuIsOpen(false);
+    }
+  }, [currentWidth]);
 
   return (
     <header className={headerClass}>
