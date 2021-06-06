@@ -10,10 +10,18 @@
   line-height: 1.4;
   font-family: $ptRootUI;
   color: $black;
+  max-height: 100%;
 
   &_selected {
     background-color: $lightBlue;
   }
+}
+
+.calendar__meetup {
+  display: flex;
+  flex-direction: column;
+  max-height: 60%;
+  overflow: auto;
 }
 
 .calendar__title {
@@ -26,17 +34,34 @@
   margin-bottom: 40px;
 }
 
+.calendar__title_type_popup-fall {
+  max-width: 60%;
+  text-align: start;
+  margin-bottom: 40px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 23px;
+  line-height: 30px;
+  color: #FF4E4E;
+}
+
 .calendar__title_type_popup-done {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .calendar__title_type_confirmation {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
+
 .calendar__title_type_delete {
   max-width: 470px;
   text-align: center;
 }
+
 .calendar_selected {
   background-color: $lightBlue;
 }
@@ -90,13 +115,14 @@
 
 .calendar__description {
   margin-top: 30px;
-  max-height: 182px;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: rgba($lightGray, .6) transparent;
+
   &::-webkit-scrollbar {
     width: 3px;
   }
+
   &::-webkit-scrollbar-thumb {
     height: 30px;
     background-color: rgba($lightGray, .6);

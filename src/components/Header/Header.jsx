@@ -1,18 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 
-import HeaderLinks from '../HeaderLinks/HeaderLinks';
-import HeaderBurgerMenu from '../HeaderBurgerMenu/HeaderBurgerMenu';
-import HeaderButtons from '../HeaderButtons/HeaderButtons';
+import HeaderLinks from './HeaderLinks/HeaderLinks';
+import HeaderBurgerMenu from './HeaderBurgerMenu/HeaderBurgerMenu';
+import HeaderButtons from './HeaderButtons/HeaderButtons';
 
-function Header({
-  isAuthorized,
-  isHidden,
-  pushToProfilePage,
-  openSignInModal,
-}) {
+import useCurrentWidth from '../../utils/useCurrentWidth';
+
+function Header({ isAuthorized, isHidden, openSignInModal }) {
   const [burgerMenuisOpen, setBurgerMenuIsOpen] = React.useState(false);
   const [searchMenuIsOpen, setSearchMenuIsOpen] = React.useState(false);
+
+  const currentWidth = useCurrentWidth();
+  const history = useHistory();
 
   const headerClass = burgerMenuisOpen
     ? `header ${isHidden} header_displayed page__section`
@@ -30,10 +30,13 @@ function Header({
   const searchOptionsClass = searchMenuIsOpen
     ? 'search__options search__options_visible menu__search-options'
     : 'search__options menu__search-options';
+  const logoClass = isAuthorized
+    ? 'menu__logo menu__logo_authorized'
+    : 'menu__logo';
 
   function handleSignInClick() {
     if (isAuthorized) {
-      pushToProfilePage();
+      history.push('/profile');
     } else {
       openSignInModal();
     }
@@ -55,10 +58,16 @@ function Header({
     }
   }
 
+  React.useEffect(() => {
+    if (currentWidth > 1380) {
+      setBurgerMenuIsOpen(false);
+    }
+  }, [currentWidth]);
+
   return (
     <header className={headerClass}>
       <nav className={menuClass}>
-        <NavLink className="menu__logo" to="/main">
+        <NavLink className={logoClass} to="/">
           наставники.про
         </NavLink>
         <HeaderLinks
@@ -66,6 +75,7 @@ function Header({
           menuListSocialClass={menuListSocialClass}
           isAuthorized={isAuthorized}
           onCalendarLinkClick={openSignInModal}
+          setBurgerMenuIsOpen={setBurgerMenuIsOpen}
         />
         <HeaderBurgerMenu
           burgerMenuClass={burgerMenuClass}

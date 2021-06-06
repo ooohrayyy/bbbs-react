@@ -2,22 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import closeImage from '../../../images/svg/popup_close.svg';
-import CalendarEvent from '../../CalendarEvent/CalendarEvent';
+import CalendarEvent from '../../Calendar/CalendarEvent/CalendarEvent';
 
-function Meetup({
-  id,
-  isOpen,
-  handleClose,
-  address,
-  contact,
-  title,
-  description,
-  startAt,
-  endAt,
-  seats,
-  takenSeats,
-  onBookingEvent,
-}) {
+function Meetup({ event, isOpen, handleClose, onBookingEvent }) {
   Modal.setAppElement(document.getElementById('page'));
 
   function closeModal() {
@@ -26,7 +13,9 @@ function Meetup({
   return (
     <Modal
       isOpen={isOpen}
-      className="popup__container popup__container_type_calendar"
+      className={`popup__container popup__container_type_calendar ${
+        event.booked ? 'popup__container_type_calendar_booked' : ''
+      }`}
       overlayClassName="popup popup_type_description"
       onRequestClose={closeModal}
       closeTimeoutMS={800}
@@ -39,17 +28,9 @@ function Meetup({
         <img alt="close" src={closeImage} />
       </button>
       <CalendarEvent
+        event={event}
         closeMoreMadal={closeModal}
-        id={id}
         type="Волонтеры"
-        address={address}
-        contact={contact}
-        title={title}
-        description={description}
-        startAt={startAt}
-        endAt={endAt}
-        seats={seats}
-        takenSeats={takenSeats}
         needDescription
         onBookingEvent={onBookingEvent}
       />
@@ -60,5 +41,22 @@ function Meetup({
 export default Meetup;
 
 Meetup.propTypes = {
+  event: PropTypes.shape({
+    address: PropTypes.string,
+    contact: PropTypes.string,
+    title: PropTypes.string,
+    booked: PropTypes.bool,
+    startMonth: PropTypes.string,
+    startDayWeek: PropTypes.string,
+    startTime: PropTypes.string,
+    startDayMonth: PropTypes.string,
+    endTime: PropTypes.string,
+    remainSeats: PropTypes.number,
+    id: PropTypes.number,
+    description: PropTypes.string,
+    startMonthGenitive: PropTypes.string,
+  }),
+  onBookingEvent: PropTypes.func,
   isOpen: PropTypes.bool,
+  handleClose: PropTypes.func,
 };

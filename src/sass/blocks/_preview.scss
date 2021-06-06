@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-.preview__bottons {
+.preview__buttons {
   position: absolute;
   right: 0;
   bottom: 20px;
@@ -31,12 +31,20 @@
     margin-left: 0;
   }
 
-  &_rigrh {
+  &_right {
     background-image: url('../../images/svg/arrow-right.svg');
+  }
+
+  &_right-grey {
+    background-image: url('../../images/svg/arrow-right-grey.svg');
   }
 
   &_left {
     background-image: url('../../images/svg/arrow-left.svg');
+  }
+
+  &_left-grey {
+    background-image: url('../../images/svg/arrow-left-grey.svg');
   }
 }
 
@@ -88,14 +96,14 @@
 
 @include atDesktop1024 {
   .preview {
-    padding-top: 50px;
+    padding-top: 127px;
   }
 
   .preview__title-wrap {
     padding-bottom: 10px;
   }
 
-  .preview__bottons {
+  .preview__buttons {
     bottom: 10px;
   }
 
@@ -117,7 +125,7 @@
 
 @include atTablet {
   .preview {
-    padding-top: 30px;
+    padding-top: 65px;
   }
 
   .preview__title-wrap {

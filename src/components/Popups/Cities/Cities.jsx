@@ -4,9 +4,9 @@ import Modal from 'react-modal';
 import mock from '../../../utils/mock';
 import api from '../../../utils/api';
 import City from '../City/City';
-import Preloader from '../../Preloader/Preloader';
+import Preloader from '../../Landing/Preloader/Preloader';
 
-function Cities({ isOpen, handleClose, handleCities }) {
+function Cities({ isOpen, handleClose, handleCities, isFromMain = false }) {
   Modal.setAppElement(document.getElementById('page'));
   const [answer, setAnswer] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,6 +41,8 @@ function Cities({ isOpen, handleClose, handleCities }) {
           overlayClassName="popup pupup_type_cities cities"
           onRequestClose={closeModal}
           closeTimeoutMS={800}
+          shouldCloseOnOverlayClick={!isFromMain}
+          shouldCloseOnEsc={!isFromMain}
         >
           <h2 className="cities__title section-title">Выберите ваш город</h2>
           <ul className="cities__capitals">

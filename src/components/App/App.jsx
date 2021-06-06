@@ -1,24 +1,29 @@
 import { React, useState, useEffect } from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import mock from '../../utils/mock';
 import api from '../../utils/api';
 
 import cities from '../../assets/mock-data/cities.json';
 
-import { getParsedEventsData } from '../../utils/calendarUtils';
+import answersData from '../../assets/dev-data/answersData';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 import Main from '../Main/Main';
 import Calendar from '../Calendar/Calendar';
-import AboutUs from '../AboutUs/AboutUs';
-import UserArea from '../UserArea/UserArea';
 import Places from '../Places/Places';
+import Answers from '../Answers/Answers';
+import Readings from '../Readings/Readings';
+import AboutUs from '../AboutUs/AboutUs';
+import UserArea from '../User/UserArea/UserArea';
+import Rights from '../Rights/Rights';
+import RightsItem from '../Rights/RightsItem/RightsItem';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Signin from '../Popups/Signin/Signin';
 import Cities from '../Popups/Cities/Cities';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -28,7 +33,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const [events, setEvents] = useState([]);
   const [meetings, setMeetings] = useState([]);
 
   const [scrollTop, setScrollTop] = useState(0);
@@ -38,91 +42,131 @@ function App() {
 
   const [userCity, setUserCity] = useState('');
 
-  const [isRegisteredEvent, setIsRegisteredEvent] = useState(false);
   const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
   const [isChangeCityPopupOpen, setIsChangeCityPopupOpen] = useState(false);
 
+  const [isRouteCalendar, setIsRouteCalendar] = useState(false);
+
+  const [rightsTitle, setRightsTitle] = useState(
+    'Пенсионное обеспечение для детей-сирот',
+  );
+
   const history = useHistory();
 
-  // Проверка токена
-  function checkToken() {
-    const jwt = localStorage.getItem('jwt');
-    if (!jwt) {
-      setIsAuthorized(false);
-    } else {
-      setIsAuthorized(true);
+  const handleChangeCityClick = () => setIsChangeCityPopupOpen(true);
+
+  const closeChangeCityPopup = () => setIsChangeCityPopupOpen(false);
+
+  const handleAddMeeting = (meeting) => setMeetings([meeting, ...meetings]);
+
+  const handleRightsTitle = (title) => setRightsTitle(title);
+
+  function openSignInModal(route) {
+    setSignInModalIsOpen(true);
+
+    if (route) {
+      const state = route.includes('calendar');
+      setIsRouteCalendar(state);
+    }
+  }
+
+  function closeSignInModal() {
+    setSignInModalIsOpen(false);
+    setIsRouteCalendar(false);
+  }
+
+  function handleCalendarRoute() {
+    if (isRouteCalendar) {
+      history.push('/calendar');
     }
   }
 
   // Определить актуальный город пользователя
   function handleCities(currentCity) {
     currentUser.city = currentCity;
-    const cityName = cities.filter((el) => el.id === currentCity)[0].name;
-    setUserCity(cityName);
+
+    localStorage.setItem('cityId', currentCity);
+
+    const { name } = cities.find(({ id }) => id === currentCity);
+    setUserCity(name);
   }
 
-  function openSignInModal() {
-    setSignInModalIsOpen(true);
-  }
-
-  function closeSignInModal() {
-    setSignInModalIsOpen(false);
-  }
-
-  function handleChangeCityClick() {
-    setIsChangeCityPopupOpen(true);
-  }
-
-  function closeChangeCityPopup() {
-    setIsChangeCityPopupOpen(false);
-  }
-
-  // Предложить выбрать город неавторизованному пользователю
-  function offerChoiceOfCity() {
-    if (!isAuthorized) {
-      handleChangeCityClick();
+  // Проверка токена
+  function checkToken() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      setIsAuthorized(true);
     }
   }
 
-  // Проверка при загрузке страницы, авторизован ли пользователь
+  // Проверка города в localStorage
+  function checkCity() {
+    if (!localStorage.cityId) {
+      handleChangeCityClick();
+    } else {
+      currentUser.city = +localStorage.cityId;
+
+      const { name } = cities.find(({ id }) => id === +localStorage.cityId);
+      setUserCity(name);
+    }
+  }
+
   useEffect(() => {
     checkToken();
-    offerChoiceOfCity();
-    Promise.all([api.getMeetings(), api.getEvents(), api.updateProfile()])
-      .then(([meetingsData, eventsData, userData]) => {
-        const cityEvent = eventsData.data.filter(
-          (i) => userData.data.city === i.city,
-        );
-        const parseDate = getParsedEventsData(cityEvent);
-        setMeetings(meetingsData.data);
-        setIsLoadingMeetings(false);
-        setEvents(parseDate);
-        handleCities(userData.data.city);
-      })
-      .catch((err) => err.message);
+    checkCity();
+
+    async function loadPage() {
+      let results;
+
+      try {
+        results = await Promise.all([api.getMeetings(), api.updateProfile()]);
+      } catch (err) {
+        console.log(err.message);
+      }
+
+      const [meetingsData, userData] = results;
+
+      const { data: meets } = meetingsData;
+      const {
+        data: { city },
+      } = userData;
+
+      setMeetings(meets);
+      setIsLoadingMeetings(false);
+
+      handleCities(city);
+    }
+
+    loadPage();
   }, []);
 
   // Обработчик входа пользователя
-  function handleSignIn() {
-    Promise.all([api.authUser(), api.updateProfile(), api.getEvents()])
-      .then(([authData, userData, eventsData]) => {
-        if (authData.data.access) {
-          const cityEvent = eventsData.data.filter(
-            (i) => userData.data.city === i.city,
-          );
-          const parseDate = getParsedEventsData(cityEvent);
-          setEvents(parseDate);
-          setIsAuthorized(true);
-          setCurrentUser(userData.data);
-          localStorage.setItem('jwt', authData.data.access);
-          handleCities(userData.data.city);
-        }
-      })
-      .catch((err) => err.message);
-  }
+  async function handleSignIn() {
+    let results;
 
-  function pushToProfilePage() {
-    history.push('./profile');
+    try {
+      results = await Promise.all([api.authUser(), api.updateProfile()]);
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    const [authData, userData] = results;
+
+    const {
+      data: { access },
+    } = authData;
+
+    const { data: user } = userData;
+    const { city } = user;
+
+    if (access) {
+      setIsAuthorized(true);
+      setCurrentUser(user);
+      localStorage.setItem('jwt', access);
+      handleCities(city);
+    }
+
+    handleCalendarRoute();
   }
 
   // Обработчик выхода пользователя
@@ -137,6 +181,8 @@ function App() {
     const currentPosition = window.pageYOffset;
     if (currentPosition > scrollTop && currentPosition > 20) {
       setHiddenMenuClass('header_hidden');
+    } else if (currentPosition > 20) {
+      setHiddenMenuClass('header_attached');
     } else {
       setHiddenMenuClass('');
     }
@@ -148,28 +194,6 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
 
-  function handleAddMeeting(meeting) {
-    setMeetings([meeting, ...meetings]);
-  }
-
-  // запись на мероприятие
-  function handleBookingEventClick(eventId) {
-    api
-      .bookEvent({ id: currentUser.user, event: eventId })
-      .then(() => {
-        setIsRegisteredEvent(true);
-        api
-          .getEvents()
-          .then(({ data }) => {
-            const cityEvent = data.filter((i) => currentUser.city === i.city);
-            const parseDate = getParsedEventsData(cityEvent);
-            setEvents(parseDate);
-          })
-          .catch((err) => err.message);
-      })
-      .catch((err) => err.message);
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__container">
@@ -177,8 +201,6 @@ function App() {
           <Header
             isAuthorized={isAuthorized}
             isHidden={hiddenMenuClass}
-            pushToProfilePage={pushToProfilePage}
-            signInModalIsOpen={signInModalIsOpen}
             openSignInModal={openSignInModal}
           />
           <main className="main">
@@ -189,24 +211,32 @@ function App() {
               <Route exact path="/about">
                 <AboutUs />
               </Route>
+              <Route exact path="/questions">
+                <Answers questions={answersData} />
+              </Route>
+              <Route exact path="/readings">
+                <Readings />
+              </Route>
               <ProtectedRoute
                 exact
                 path="/calendar"
-                cityEvents={events}
                 isAuthorized={isAuthorized}
                 component={Calendar}
-                isRegisteredEvent={isRegisteredEvent}
-                onBookingEvent={handleBookingEventClick}
               />
               <Route exact path="/to-go">
                 <Places isAuthorized={isAuthorized} />
+              </Route>
+              <Route exact path="/rights">
+                <Rights onCardClick={handleRightsTitle} />
+              </Route>
+              <Route exact path="/rights-article">
+                <RightsItem title={rightsTitle} />
               </Route>
               <ProtectedRoute
                 exact
                 path="/profile"
                 isAuthorized={isAuthorized}
                 component={UserArea}
-                allEvents={events}
                 meetings={meetings}
                 onAddMeeting={handleAddMeeting}
                 onSignOut={handleSignOut}
@@ -214,8 +244,8 @@ function App() {
                 userCity={userCity}
                 onChooseCity={handleChangeCityClick}
               />
-              <Route path="/">
-                <Redirect to="/" />
+              <Route path="*">
+                <PageNotFound />
               </Route>
             </Switch>
           </main>
