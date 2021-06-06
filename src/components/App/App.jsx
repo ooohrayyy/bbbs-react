@@ -84,6 +84,9 @@ function App() {
   // Определить актуальный город пользователя
   function handleCities(currentCity) {
     currentUser.city = currentCity;
+
+    localStorage.setItem('cityId', currentCity);
+
     const { name } = cities.find(({ id }) => id === currentCity);
     setUserCity(name);
   }
@@ -93,13 +96,24 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       setIsAuthorized(true);
-    } else {
+    }
+  }
+
+  // Проверка города в localStorage
+  function checkCity() {
+    if (!localStorage.cityId) {
       handleChangeCityClick();
+    } else {
+      currentUser.city = +localStorage.cityId;
+
+      const { name } = cities.find(({ id }) => id === +localStorage.cityId);
+      setUserCity(name);
     }
   }
 
   useEffect(() => {
     checkToken();
+    checkCity();
 
     async function loadPage() {
       let results;
