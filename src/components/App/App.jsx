@@ -57,8 +57,6 @@ function App() {
 
   const closeChangeCityPopup = () => setIsChangeCityPopupOpen(false);
 
-  const pushToProfilePage = () => history.push('./profile');
-
   const handleAddMeeting = (meeting) => setMeetings([meeting, ...meetings]);
 
   const handleRightsTitle = (title) => setRightsTitle(title);
@@ -189,8 +187,6 @@ function App() {
           <Header
             isAuthorized={isAuthorized}
             isHidden={hiddenMenuClass}
-            pushToProfilePage={pushToProfilePage}
-            signInModalIsOpen={signInModalIsOpen}
             openSignInModal={openSignInModal}
           />
           <main className="main">
