@@ -6,6 +6,10 @@
 
 На этом этапе представлена реализация функциональности сайта на React. Над ней работали мы — [Юлия Зизенко](https://github.com/Yulya-Ziz), [Евгения Зубова](https://github.com/EvgeniiaZu8ova), [Сергей Криворучко](https://github.com/SergeyK2004) и [Борис Никиташов](https://github.com/ooohrayyy).
 
+## GitHub Pages
+
+[Ссылка на страницу проекта на GitHub Pages](https://ooohrayyy.github.io/bbbs-react)
+
 ## Как запустить проект
 
 Репозиторий создан с использованием утилиты create-react-app.
