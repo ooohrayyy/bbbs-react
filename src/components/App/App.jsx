@@ -15,6 +15,7 @@ import Main from '../Main/Main';
 import Calendar from '../Calendar/Calendar';
 import Places from '../Places/Places';
 import Answers from '../Answers/Answers';
+import Histories from '../Histories/Histories';
 import Readings from '../Readings/Readings';
 import AboutUs from '../AboutUs/AboutUs';
 import UserArea from '../User/UserArea/UserArea';
@@ -231,6 +232,9 @@ function App() {
               </Route>
               <Route exact path="/rights-article">
                 <RightsItem title={rightsTitle} />
+              </Route>
+              <Route exact path="/stories">
+                <Histories />
               </Route>
               <ProtectedRoute
                 exact
