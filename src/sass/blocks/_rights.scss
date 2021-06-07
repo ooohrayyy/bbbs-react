@@ -10,6 +10,7 @@
   align-items: unset;
   padding: 0;
   overflow: hidden;
+  justify-content: center;
 }
 
 .rights__rubric {
@@ -35,6 +36,17 @@
 }
 
 .rights__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: auto;
+  text-align: center;
+  flex: 1;
+  text-decoration: none;
+  max-width: 310px;
+}
+
+.rights__link_image {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,7 +84,11 @@
 
   .rights__card {
     margin: 0 auto;
-    max-width: 290px;
+    width: 290px;
+  }
+
+  .rights__link {
+    max-width: 250px;
   }
 }
 
