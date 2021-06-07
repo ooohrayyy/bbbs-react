@@ -10,6 +10,7 @@
   align-items: unset;
   padding: 0;
   overflow: hidden;
+  justify-content: center;
 }
 
 .rights__rubric {
@@ -42,6 +43,7 @@
   text-align: center;
   flex: 1;
   text-decoration: none;
+  max-width: 310px;
 }
 
 @include atDesktop1440 {
@@ -72,7 +74,11 @@
 
   .rights__card {
     margin: 0 auto;
-    max-width: 290px;
+    width: 290px;
+  }
+
+  .rights__link {
+    max-width: 250px;
   }
 }
 

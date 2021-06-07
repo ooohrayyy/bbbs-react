@@ -42,10 +42,16 @@ function RightsCard({ cardTitle, cardLink, cardForm, cardColor, onCardClick }) {
   return (
     <div className="catalog-card card-pagination card-pagination_type_shapes">
       <div className={`card ${color} ${form} rights__card`}>
-        <Link onClick={handleCardClick} className="rights__link" to={cardLink}>
-          <h2 className="section-title">{cardTitle}</h2>
+        <div className="rights__link">
+          <Link
+            onClick={handleCardClick}
+            to={cardLink}
+            style={{ textDecoration: 'none' }}
+          >
+            <h2 className="section-title">{cardTitle}</h2>
+          </Link>
           <p className="rubric rights__rubric">рубрика</p>
-        </Link>
+        </div>
       </div>
     </div>
   );
