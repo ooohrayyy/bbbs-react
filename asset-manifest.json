@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/bbbs-react/static/css/main.70ae6961.chunk.css",
-    "main.js": "/bbbs-react/static/js/main.05ace14b.chunk.js",
-    "main.js.map": "/bbbs-react/static/js/main.05ace14b.chunk.js.map",
+    "main.css": "/bbbs-react/static/css/main.98e99680.chunk.css",
+    "main.js": "/bbbs-react/static/js/main.688cc911.chunk.js",
+    "main.js.map": "/bbbs-react/static/js/main.688cc911.chunk.js.map",
     "runtime-main.js": "/bbbs-react/static/js/runtime-main.c297e7fe.js",
     "runtime-main.js.map": "/bbbs-react/static/js/runtime-main.c297e7fe.js.map",
     "static/js/2.6d393d4f.chunk.js": "/bbbs-react/static/js/2.6d393d4f.chunk.js",
     "static/js/2.6d393d4f.chunk.js.map": "/bbbs-react/static/js/2.6d393d4f.chunk.js.map",
     "index.html": "/bbbs-react/index.html",
-    "static/css/main.70ae6961.chunk.css.map": "/bbbs-react/static/css/main.70ae6961.chunk.css.map",
+    "static/css/main.98e99680.chunk.css.map": "/bbbs-react/static/css/main.98e99680.chunk.css.map",
     "static/js/2.6d393d4f.chunk.js.LICENSE.txt": "/bbbs-react/static/js/2.6d393d4f.chunk.js.LICENSE.txt",
+    "static/media/DG7B0561(1).841ec5ed.jpg": "/bbbs-react/static/media/DG7B0561(1).841ec5ed.jpg",
     "static/media/style.scss": "/bbbs-react/static/media/user.748545e7.svg",
     "static/media/calendar_logo.35cca11c.svg": "/bbbs-react/static/media/calendar_logo.35cca11c.svg",
     "static/media/catalog-beach.18fbb4aa.jpg": "/bbbs-react/static/media/catalog-beach.18fbb4aa.jpg",
@@ -18,6 +19,7 @@
     "static/media/catalog-hulk-boys.513a0e41.jpg": "/bbbs-react/static/media/catalog-hulk-boys.513a0e41.jpg",
     "static/media/catalog-spear.0fa35823.jpg": "/bbbs-react/static/media/catalog-spear.0fa35823.jpg",
     "static/media/footer-logo.476770b8.svg": "/bbbs-react/static/media/footer-logo.476770b8.svg",
+    "static/media/gallery.399a50d8.jpg": "/bbbs-react/static/media/gallery.399a50d8.jpg",
     "static/media/movie-prev.05b7542d.png": "/bbbs-react/static/media/movie-prev.05b7542d.png",
     "static/media/video-ex-1.e22e9f98.png": "/bbbs-react/static/media/video-ex-1.e22e9f98.png",
     "static/media/video-ex-2.5de2a2ff.png": "/bbbs-react/static/media/video-ex-2.5de2a2ff.png",
@@ -27,7 +29,7 @@
   "entrypoints": [
     "static/js/runtime-main.c297e7fe.js",
     "static/js/2.6d393d4f.chunk.js",
-    "static/css/main.70ae6961.chunk.css",
-    "static/js/main.05ace14b.chunk.js"
+    "static/css/main.98e99680.chunk.css",
+    "static/js/main.688cc911.chunk.js"
   ]
 }
