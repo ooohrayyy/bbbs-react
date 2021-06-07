@@ -27,7 +27,7 @@ function ReadingsHandbookCard({
   return (
     <article className="preview__card catalog-card">
       <div className={`card ${cardModificator} rights__card`}>
-        <Link className="rights__link" to={cardLink}>
+        <Link className="rights__link_image" to={cardLink}>
           <img
             src={cardImage}
             alt={cardAlt || cardTitle}

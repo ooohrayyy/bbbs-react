@@ -46,6 +46,16 @@
   max-width: 310px;
 }
 
+.rights__link_image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: auto;
+  text-align: center;
+  flex: 1;
+  text-decoration: none;
+}
+
 @include atDesktop1440 {
   .rights {
     grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
